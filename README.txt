@@ -1,6 +1,6 @@
 === Plugin Name ===
 Contributors: (this should be a list of wordpress.org userid's)
-Donate link: https://www.linkedin.com/in/piotr-gumu%C5%82ka-ab329176/
+Donate link: https://www.linkedin.com/in/piotr-jacek-gumulka/
 Tags: comments, spam
 Requires at least: 3.0.1
 Tested up to: 3.4

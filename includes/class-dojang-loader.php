@@ -3,7 +3,7 @@
 /**
  * Register all actions and filters for the plugin
  *
- * @link       https://www.linkedin.com/in/piotr-gumu%C5%82ka-ab329176/
+ * @link       https://www.linkedin.com/in/piotr-jacek-gumulka/
  * @since      1.0.0
  *
  * @package    Dojang

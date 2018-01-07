@@ -19,7 +19,7 @@
  * For more information, see the following discussion:
  * https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate/pull/123#issuecomment-28541913
  *
- * @link       https://www.linkedin.com/in/piotr-gumu%C5%82ka-ab329176/
+ * @link       https://www.linkedin.com/in/piotr-jacek-gumulka/
  * @since      1.0.0
  *
  * @package    Dojang

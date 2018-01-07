@@ -6,7 +6,7 @@
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * @link       https://www.linkedin.com/in/piotr-gumu%C5%82ka-ab329176/
+ * @link       https://www.linkedin.com/in/piotr-jacek-gumulka/
  * @since      1.0.0
  *
  * @package    Dojang
