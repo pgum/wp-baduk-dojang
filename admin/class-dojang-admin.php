@@ -39,6 +39,14 @@ class Dojang_Admin {
 	 * @var      string    $version    The current version of this plugin.
 	 */
 	private $version;
+/**
+	 * The options name to be used in this plugin
+	 *
+	 * @since  	1.0.0
+	 * @access 	private
+	 * @var  	string 		$option_name 	Option name of this plugin
+	 */
+	private $option_name = 'dojang';
 
 	/**
 	 * Initialize the class and set its properties.
@@ -99,5 +107,46 @@ class Dojang_Admin {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/dojang-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
-
+/**
+	 * Add an options page under the Settings submenu
+	 *
+	 * @since  1.0.0
+	 */
+	public function add_options_page() {
+	/*Generated Menu on own tab on the left in admin page*/
+		$this->plugin_screen_hook_suffix_menu = add_menu_page(
+			__( 'Baduk Dojang Settings', 'baduk-dojang' ),
+			__( 'Baduk Dojang', 'baduk-dojang' ),
+			'manage_options',
+			$this->plugin_name,
+			array( $this, 'display_options_page' )
+		);
+/*	
+		Generates Menu under Settings
+		$this->plugin_screen_hook_suffix = add_options_page(
+			__( 'Dojang Settings Window Title I guess', 'baduk-dojang' ),
+			__( 'Dojang Settings Menu Text', 'baduk-dojang' ),
+			'manage_options',
+			$this->plugin_name,
+			array( $this, 'display_options_page' )
+		);
+	*/
+	}
+/**
+	 * Render the options page for plugin
+	 *
+	 * @since  1.0.0
+	 */
+	public function display_options_page() {
+		include_once 'partials/dojang-admin-display.php';
+	}
+	public function register_setting(){
+	// Add a General section
+	add_settings_section(
+		$this->option_name . '_general',
+		__( 'General', 'outdated-notice' ),
+		array( $this, $this->option_name . '_general_cb' ),
+		$this->plugin_name
+	);
+	}
 }
