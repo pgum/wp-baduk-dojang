@@ -163,13 +163,13 @@ class Dojang_Admin {
 		include_once 'partials/dojang-admin-display-main.php';
 	}
 	public function display_options_page_players() {
-		include_once 'partials/dojang-admin-display.php';
+		include_once 'partials/dojang-admin-display-players.php';
 	}
 	public function display_options_page_leagues() {
-		include_once 'partials/dojang-admin-display.php';
+		include_once 'partials/dojang-admin-display-leagues.php';
 	}
 	public function display_options_page_newleague() {
-		include_once 'partials/dojang-admin-display.php';
+		include_once 'partials/dojang-admin-display-newleague.php';
 	}
 
 	public function register_setting(){
