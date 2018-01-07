@@ -3,7 +3,7 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link       https://www.linkedin.com/in/piotr-gumu%C5%82ka-ab329176/
+ * @link       https://www.linkedin.com/in/piotr-jacek-gumulka/
  * @since      1.0.0
  *
  * @package    Dojang
@@ -113,33 +113,65 @@ class Dojang_Admin {
 	 * @since  1.0.0
 	 */
 	public function add_options_page() {
-	/*Generated Menu on own tab on the left in admin page*/
-		$this->plugin_screen_hook_suffix_menu = add_menu_page(
+		//Top level settings page
+		$this->plugin_screen_hook_suffix = add_menu_page(
 			__( 'Baduk Dojang Settings', 'baduk-dojang' ),
 			__( 'Baduk Dojang', 'baduk-dojang' ),
 			'manage_options',
 			$this->plugin_name,
-			array( $this, 'display_options_page' )
+			array( $this, 'display_options_page_main' ),
+			'dashicons-welcome-learn-more',
+			7
 		);
-/*	
-		Generates Menu under Settings
-		$this->plugin_screen_hook_suffix = add_options_page(
-			__( 'Dojang Settings Window Title I guess', 'baduk-dojang' ),
-			__( 'Dojang Settings Menu Text', 'baduk-dojang' ),
-			'manage_options',
-			$this->plugin_name,
-			array( $this, 'display_options_page' )
+		//Sub-menus: Players Mgmt, Leagues Mgmt, New League
+		$this->plugin_screen_hook_suffix_submenu = add_submenu_page(
+		$this->plugin_name,
+		"Players Management",
+		"Players Mgmt",
+		'manage_options',
+		$this->plugin_name.'players',
+		array( $this, 'display_options_page_players' ),
+		'dashicons-groups'
+			);
+		
+		$this->plugin_screen_hook_suffix_submenu = add_submenu_page(
+		$this->plugin_name,
+		"Previous Leagues Management",
+		"Leagues Mgmt",
+		'manage_options',
+		$this->plugin_name.'leagues',
+		array( $this, 'display_options_page_leagues' ),
+		'dashicons-forms'
 		);
-	*/
+		
+		$this->plugin_screen_hook_suffix_submenu = add_submenu_page(
+		$this->plugin_name,
+		"Create New League",
+		"New League",
+		'manage_options',
+		$this->plugin_name.'newleague',
+		array( $this, 'display_options_page_newleague' ),
+		'dashicons-plus-alt'
+		);
 	}
 /**
 	 * Render the options page for plugin
 	 *
 	 * @since  1.0.0
 	 */
-	public function display_options_page() {
+	public function display_options_page_main() {
+		include_once 'partials/dojang-admin-display-main.php';
+	}
+	public function display_options_page_players() {
 		include_once 'partials/dojang-admin-display.php';
 	}
+	public function display_options_page_leagues() {
+		include_once 'partials/dojang-admin-display.php';
+	}
+	public function display_options_page_newleague() {
+		include_once 'partials/dojang-admin-display.php';
+	}
+
 	public function register_setting(){
 	// Add a General section
 	add_settings_section(
