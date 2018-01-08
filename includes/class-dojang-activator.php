@@ -14,6 +14,7 @@
  * Fired during plugin activation.
  *
  * This class defines all code necessary to run during the plugin's activation.
+ * Main responsibility is to create database schema to put data of dojang players groups and results.
  *
  * @since      1.0.0
  * @package    Dojang
@@ -23,10 +24,15 @@
 class Dojang_Activator {
 
 	/**
-	 * Short Description. (use period)
+	 * Activate creates databases schema.
 	 *
-	 * Long Description.
-	 *
+	 * Five tables created:
+	 * > league - holds information about leagues
+	 * > players - player information such as name, rank, etc.
+	 * > groups - groups information - one league can consist of many groups
+	 * > groupplayers - connects player data with group to avoid data duplication
+	 * > results - holds results of players (connected via groupplayers.id) in given group
+	 * 
 	 * @since    1.0.0
 	 */
 	public static function activate() {
