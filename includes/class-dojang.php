@@ -214,4 +214,24 @@ class Dojang {
 		return $this->version;
 	}
 
+	/**
+	 * Get current League details.
+	 *
+	 * @since     1.0.0
+	 * @return    array    array(leagueId, playersTable, results).
+	 */
+	public function get_current_league_details() {
+		return array(9, array(1,2,3,4), array(array(1,2,1),array(2,3,3),array(2,4,2),array(1,4,1)));
+	}
+	
+	/**
+	 * Get league details.
+	 *
+	 * @since     1.0.0
+	 * @return    array    array(leagueId, playersTable, results).
+	 */
+	public function get_league_details($leagueId) {
+		return array($leagueId, array(1,2,3,4), array(array(1,2,1),array(2,3,3),array(2,4,2),array(1,4,1)));
+	}
+	
 }
