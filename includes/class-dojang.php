@@ -221,9 +221,35 @@ class Dojang {
 	 * @return    array    array(leagueId, playersTable, results).
 	 */
 	public function get_current_league_details() {
-		return array(9, array(1,2,3,4), array(array(1,2,1),array(2,3,3),array(2,4,2),array(1,4,1)));
+		return array($this->get_current_league_id(),
+			     $this->get_current-league_name(),
+			     array(1,2,3,4), 
+			     array(array(1,2,1),array(2,3,3),array(2,4,2),array(1,4,1))
+			    );
 	}
-	
+	public function get_current_league_id(){
+		return 9;
+	}
+	public function get_current_league_name(){
+		return "league Name";
+	}
+	public function get_current_league_groups(){
+		return array(
+			array("group A",array(1,2,3)),
+			array("group B",array(4,5,6)),
+			array("group C",array(7,8,9)),
+			array("group D",array(10,11,12))
+			     );
+	}
+	public function calculate_points_from_results($groupId){}
+	public get_match_results($player, $opponent, $results_table){}
+	public get_group_results_table($groupId){}
+	public get_players_to_approve(){}
+	public get_all_leagues_results(){}
+	public get_player_from_groupPlayer($groupPlayerId){}
+	public get_all_players(){}
+	public get_group_name_by_id(){}
+	public get_league_from_group_id(){}
 	/**
 	 * Get league details.
 	 *
