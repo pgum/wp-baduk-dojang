@@ -181,7 +181,11 @@ class Dojang_Admin {
 		$this->plugin_name
 	);
 	}
-	
+	public function test_2(){
+	include_once '../includes/class-dojang.php';
+	$dojang= new Dojang;
+		return $dojang->get_current_league_details();
+	}
 	public function test_function_from_admin(){
 		return array(1, array(1,2,3,4));
 	}
