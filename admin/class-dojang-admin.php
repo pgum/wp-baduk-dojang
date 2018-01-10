@@ -181,4 +181,8 @@ class Dojang_Admin {
 		$this->plugin_name
 	);
 	}
+	
+	public function test_function_from_admin(){
+		return array(1, array(1,2,3,4));
+	}
 }
