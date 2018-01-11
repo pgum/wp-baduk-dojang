@@ -119,6 +119,13 @@ class Dojang {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-dojang-public.php';
 
+
+		/**
+		 * My classes to include
+		 *
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-dojang-league.php';
+		
 		$this->loader = new Dojang_Loader();
 
 	}
