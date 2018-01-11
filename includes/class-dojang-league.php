@@ -32,4 +32,5 @@ class Dojang_League {
   global $wpdb;
   return $wpdb->get_var('SELECT MAX(id) AS currentLeague FROM `nleagues`');
   }
+
 }
