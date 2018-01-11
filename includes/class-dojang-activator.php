@@ -32,7 +32,7 @@ class Dojang_Activator {
 	 * > groups - groups information - one league can consist of many groups
 	 * > groupplayers - connects player data with group to avoid data duplication
 	 * > results - holds results of players (connected via groupplayers.id) in given group
-	 * 
+	 *
 	 * @since    1.0.0
 	 */
 	public static function activate() {
@@ -53,7 +53,7 @@ class Dojang_Activator {
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=267;
 		";
 		dbDelta($sql);
-		
+
 		$table_name= $prefix.'groups';
 		$sql = "
 		CREATE TABLE IF NOT EXISTS $table_name (
@@ -67,7 +67,7 @@ class Dojang_Activator {
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=42;
 		";
 		dbDelta($sql);
-		
+
 		$table_name= $prefix.'leagues';
 		$sql = "
 		CREATE TABLE IF NOT EXISTS $table_name (
@@ -77,10 +77,10 @@ class Dojang_Activator {
   		  closed tinyint(1) NOT NULL,
   		  pointsDistributed int(11) NOT NULL COMMENT 'if > 0 then points were distributed to players and league is completed',
     		  PRIMARY KEY  (id)
-		) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=12; 
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=12;
 		";
 		dbDelta($sql);
-		
+
 		$table_name= $prefix.'players';
 		$sql = "
 			CREATE TABLE IF NOT EXISTS $table_name (
@@ -94,15 +94,14 @@ class Dojang_Activator {
 			  playerTimezone text NOT NULL COMMENT 'timezone i.e. +2 or -6 in relation to GMT',
 			  playerApproved int(11) NOT NULL COMMENT 'approval means that player will be visible in creation of new league group',
 			  PRIMARY KEY  (playerId)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=398;		
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=398;
 		";
 		dbDelta($sql);
-	
-	
+
+
 		$table_name= $prefix.'results';
 		$sql = "
 			CREATE TABLE IF NOT EXISTS $table_name (
-			  REATE TABLE nresults (
 			  id int(11) NOT NULL,
 			  groupId int(11) NOT NULL,
 			  playerIdBlack int(11) NOT NULL,
@@ -115,7 +114,8 @@ class Dojang_Activator {
 			  isApproved tinyint(4) NOT NULL,
 			  result text NOT NULL,
 			  link mediumtext NOT NULL,
-			  oldResultId int(11) NOT NULL
+			  oldResultId int(11) NOT NULL,
+			  PRIMARY KEY  (id)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=652;
 		";
 		dbDelta($sql);
