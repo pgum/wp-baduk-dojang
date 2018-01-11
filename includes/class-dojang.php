@@ -249,14 +249,14 @@ class Dojang {
 			     );
 	}
 	public function calculate_points_from_results($groupId){}
-	public get_match_results($player, $opponent, $results_table){}
-	public get_group_results_table($groupId){}
-	public get_players_to_approve(){}
-	public get_all_leagues_results(){}
-	public get_player_from_groupPlayer($groupPlayerId){}
-	public get_all_players(){}
-	public get_group_name_by_id(){}
-	public get_league_from_group_id(){}
+	public function get_match_results($player, $opponent, $results_table){}
+	public function get_group_results_table($groupId){}
+	public function get_players_to_approve(){}
+	public function get_all_leagues_results(){}
+	public function get_player_from_groupPlayer($groupPlayerId){}
+	public function get_all_players(){}
+	public function get_group_name_by_id(){}
+	public function get_league_from_group_id(){}
 	/**
 	 * Get league details.
 	 *

@@ -30,7 +30,12 @@
 class Dojang_League {
   public function getCurrentLeagueId(){
   global $wpdb;
-  return $wpdb->get_var('SELECT MAX(id) AS currentLeague FROM `nleagues`');
+	return $wpdb->get_var("SELECT MAX(id) AS currentLeague FROM {$wpdb->prefix}leagues");
+  }
+  public function getCurrentLeagueInfo(){
+  global $wpdb;
+  $currentLeagueId= $this->getCurrentLeagueId();
+  return $wpdb->get_results("SELECT * FROM {$wpdb->prefix}leagues WHERE id= $currentLeagueId");
   }
 
 }

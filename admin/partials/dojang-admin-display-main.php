@@ -20,6 +20,7 @@
 <?
 $league = new Dojang_League();
 print_r($league->getCurrentLeagueId());	
-
+echo "<br/>";
+print_r($league->getCurrentLeagueInfo());
 ?>    
 </div>
