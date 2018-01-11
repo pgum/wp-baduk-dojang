@@ -50,7 +50,7 @@ class Dojang_Activator {
 		  wonAgainstTeacher smallint(6) NOT NULL,
 		  isPaidMember int(11) NOT NULL,
 		  PRIMARY KEY  (id)
-		) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=267;
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 		";
 		dbDelta($sql);
 
@@ -64,7 +64,7 @@ class Dojang_Activator {
   		  groupOrder int(11) NOT NULL,
   		  isGroupLocked int(11) NOT NULL,
   		  PRIMARY KEY  (id)
-		) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=42;
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 		";
 		dbDelta($sql);
 
@@ -77,7 +77,7 @@ class Dojang_Activator {
   		  closed tinyint(1) NOT NULL,
   		  pointsDistributed int(11) NOT NULL COMMENT 'if > 0 then points were distributed to players and league is completed',
     		  PRIMARY KEY  (id)
-		) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=12;
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 		";
 		dbDelta($sql);
 
@@ -94,10 +94,9 @@ class Dojang_Activator {
 			  playerTimezone text NOT NULL COMMENT 'timezone i.e. +2 or -6 in relation to GMT',
 			  playerApproved int(11) NOT NULL COMMENT 'approval means that player will be visible in creation of new league group',
 			  PRIMARY KEY  (playerId)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=398;
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 		";
 		dbDelta($sql);
-
 
 		$table_name= $prefix.'results';
 		$sql = "
@@ -116,7 +115,7 @@ class Dojang_Activator {
 			  link mediumtext NOT NULL,
 			  oldResultId int(11) NOT NULL,
 			  PRIMARY KEY  (id)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=652;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 		";
 		dbDelta($sql);
 	}
