@@ -124,8 +124,8 @@ class Dojang {
 		 * My classes to include
 		 *
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-dojang-league.php';
-		
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-league.php';
+
 		$this->loader = new Dojang_Loader();
 
 	}
@@ -160,7 +160,7 @@ class Dojang {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-		
+
 		$this->loader->add_action('admin_menu', $plugin_admin, 'add_options_page');
 
 	}
@@ -230,7 +230,7 @@ class Dojang {
 	public function get_current_league_details() {
 		return array($this->get_current_league_id(),
 			     $this->get_current-league_name(),
-			     array(1,2,3,4), 
+			     array(1,2,3,4),
 			     array(array(1,2,1),array(2,3,3),array(2,4,2),array(1,4,1))
 			    );
 	}
@@ -266,5 +266,5 @@ class Dojang {
 	public function get_league_details($leagueId) {
 		return array($leagueId, array(1,2,3,4), array(array(1,2,1),array(2,3,3),array(2,4,2),array(1,4,1)));
 	}
-	
+
 }
