@@ -24,10 +24,18 @@ class Dojang_League {
   global $wpdb;
 	return $wpdb->get_var("SELECT MAX(id) AS currentLeague FROM {$wpdb->prefix}leagues");
   }
+  private function getGroupsDetails(){
+    global $wpdb;
+    $currentLeagueId= $this->getCurrentLeagueId();
+    $groupIds= $wpdb->get_results("SELECT id FROM {$wpdb->prefix}groups WHERE groupLeagueId= $currentLeagueId");
+    return $groupIds;
+  }
   public function getCurrentLeagueInfo(){
-  global $wpdb;
-  $currentLeagueId= $this->getCurrentLeagueId();
-  return $wpdb->get_results("SELECT * FROM {$wpdb->prefix}leagues WHERE id= $currentLeagueId");
+    global $wpdb;
+    $currentLeagueId= $this->getCurrentLeagueId();
+    $r= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}leagues WHERE id= $currentLeagueId");
+    $r.= getGroupsDetails();
+    return $r;
   }
 
 }
