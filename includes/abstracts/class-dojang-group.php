@@ -23,6 +23,6 @@ class Dojang_Group {
   public $groupDetails;
   public function __construct($groupId){
   global $wpdb;
-	$this->$groupDetails= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}groups WHERE id = $groupId");
+	$this->groupDetails= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}groups WHERE id = $groupId");
   }
 }
