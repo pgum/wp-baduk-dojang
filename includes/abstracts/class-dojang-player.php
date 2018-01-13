@@ -25,3 +25,4 @@ class Dojang_Player {
     global $wpdb;
     $this->playerDetails= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}players WHERE id = $playerId")[0];
   }
+}
