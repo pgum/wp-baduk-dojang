@@ -16,13 +16,15 @@
  *
  * @since      2.1.1
  * @package    Dojang
- * @subpackage Dojang/includes
+ * @subpackage Dojang/includes/abstracts
  * @author     Piotr Jacek Gumulka <pjgumulka@gmail.com>
  */
 class Dojang_Group {
   public $groupDetails;
+  public $groupPlayers;
   public function __construct($groupId){
   global $wpdb;
-	$this->groupDetails= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}groups WHERE id = $groupId");
+	$this->groupDetails= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}groups WHERE id = $groupId")[0];
+  $this->groupPlayers= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}groupplayers WHERE playerGroupId = {$this->groupDetails->playerGroupId}");
   }
 }
