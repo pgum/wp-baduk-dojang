@@ -19,6 +19,7 @@
  * @subpackage Dojang/includes
  * @author     Piotr Jacek Gumulka <pjgumulka@gmail.com>
  */
+require_once('class-dojang-group.php');
 class Dojang_League {
   public function getCurrentLeagueId(){
   global $wpdb;
@@ -27,15 +28,21 @@ class Dojang_League {
   private function getGroupsDetails(){
     global $wpdb;
     $currentLeagueId= $this->getCurrentLeagueId();
-    $groupIds= $wpdb->get_results("SELECT id FROM {$wpdb->prefix}groups WHERE groupLeagueId= $currentLeagueId");
-    return $groupIds;
+    $groupIds= $wpdb->get_results("SELECT id FROM {$wpdb->prefix}groups WHERE groupLeagueId= $currentLeagueId", ARRAY_N);
+    $groups= array();
+    $groupss=array();
+    foreach($groupIds as $gid){
+      $groupss[]=$gid;
+      $groups[]= new Dojang_Group($gid);
+    }
+    return array($groupIds, $groupss, $groups);
   }
   public function getCurrentLeagueInfo(){
     global $wpdb;
     $currentLeagueId= $this->getCurrentLeagueId();
     $r= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}leagues WHERE id= $currentLeagueId");
-    $r.= getGroupsDetails();
-    return $r;
+    $rr= $this->getGroupsDetails();
+    return array($r,$rr);
   }
 
 }
