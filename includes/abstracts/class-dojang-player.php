@@ -20,9 +20,11 @@
  * @author     Piotr Jacek Gumulka <pjgumulka@gmail.com>
  */
 class Dojang_Player {
+  public $query;
   public $playerDetails;
   public function __construct($playerId){
     global $wpdb;
-    $this->playerDetails= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}players WHERE id = $playerId")[0];
+    $this->query= "SELECT * FROM {$wpdb->prefix}players WHERE id = $playerId";
+    $this->playerDetails= $wpdb->get_results($this->query);
   }
 }
