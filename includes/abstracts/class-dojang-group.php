@@ -3,7 +3,7 @@
 /**
  * Class responsible for High Level League management
  *
- * Class responsible for High Level League management
+ * It contains methods to get group details and as such works with groups and groupplayers tables in database
  *
  * @link       https://www.linkedin.com/in/piotr-jacek-gumulka/
  * @since      2.1.1
