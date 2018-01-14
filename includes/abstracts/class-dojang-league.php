@@ -43,5 +43,6 @@ class Dojang_League {
     $rr= $this->getGroupsDetails();
     return array($r,$rr);
   }
-
+  public function getGamesToApprove(){return "placeholder";}
+  public function getGroupResults(){return "placeholder2";}
 }
