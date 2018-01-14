@@ -23,7 +23,7 @@ echo "<h2>Games to Approve</h2>";
 echo $league->getGamesToApprove();
 echo "</br>";
 echo "<h2>Current league standings</h2>";
-echo $league->getGroupResults()";
+echo $league->getGroupResults();
 echo "<br/>";
 echo "<h2>Debug Information</h2>";
 print_r($league->getCurrentLeagueInfo());
