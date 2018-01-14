@@ -30,7 +30,7 @@ class Dojang_Group {
      $this->groupPlayers= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}groupplayers WHERE playerGroupId = {$this->groupDetails->playerGroupId}");
      $this->groupPlayerDetails=array();
      foreach($this->groupPlayers as $p){
-       $p->groupPlayerDetails = new Dojang_Player($p->id);
+       $p->groupPlayerDetails = new Dojang_Player($p->playerId);
      }
   }
 }
