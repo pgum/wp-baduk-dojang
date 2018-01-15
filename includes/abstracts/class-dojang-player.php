@@ -21,8 +21,10 @@
  */
 class Dojang_Player {
   public $playerDetails;
+  private $query;
   public function __construct($playerId){
     global $wpdb;
+    $this->query= "SELECT * FROM {$wpdb->prefix}players WHERE id = $playerId";
     $this->playerDetails= $wpdb->get_results($this->query);
   }
 }

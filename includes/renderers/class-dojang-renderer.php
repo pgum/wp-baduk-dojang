@@ -1,15 +1,15 @@
 <?php
 class Dojang_Renderer{
   public function renderLeagueDetails($leagueObject){
-    $leagueInfo=$leagueObject[0][0];
+    $leagueInfo=$leagueObject[0];
     $html='<h3>'.$leagueInfo['leagueName'].'</h3>';
     $html.='<span>League Properties: hidden:'.$leagueInfo['hidden'].' closed:'.$leagueInfo['closed'].'</br></span>';
     $html.='<span>League Id:'.$leagueInfo['id'].' pointsDistributed:'.$leagueInfo['pointsDistributed'].'</br></span>';
     return $html;
   }
   public function renderGroupTable($groupObject){
-    $groupDetails= $groupObject['groupDetails'];
-    $groupPlayers= $groupObject['groupPlayers'];
+    $groupDetails= $groupObject->groupDetails;
+    $groupPlayers= $groupObject->groupPlayers;
     return print_r(array($groupDetails,$groupPlayers));
   }
   public function renderGroupsTable($groupsArray){
