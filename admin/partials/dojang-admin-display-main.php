@@ -19,13 +19,16 @@
 	<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 <?
 $league = new Dojang_League();
+$leagueDetails= $league->getCurrentLeagueInfo();
+$leagueGroups= $leagueDetails[1][0];
 $renderer = new Dojang_Renderer();
+echo '<h2>League Details</h2>';
+echo $renderer->renderLeagueDetails($leagueDetails);
 echo "<h2>Games to Approve</h2>";
 echo $league->getGamesToApprove();
 echo "</br>";
 echo "<h2>Current league standings</h2>";
-echo $league->getGroupResults();
+echo $renderer->renderGroupsTable($leagueGroups);
 echo "<br/>";
-$renderer->render($league->getCurrentLeagueInfo());
 ?>
 </div>
