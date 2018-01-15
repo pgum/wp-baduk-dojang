@@ -16,16 +16,16 @@
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 
 <div class="wrap">
-	    <h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
+	<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 <?
 $league = new Dojang_League();
+$renderer = new Dojang_Renderer();
 echo "<h2>Games to Approve</h2>";
 echo $league->getGamesToApprove();
 echo "</br>";
 echo "<h2>Current league standings</h2>";
 echo $league->getGroupResults();
 echo "<br/>";
-echo "<h2>Debug Information</h2>";
-print_r($league->getCurrentLeagueInfo());
+$renderer->render($league->getCurrentLeagueInfo());
 ?>
 </div>

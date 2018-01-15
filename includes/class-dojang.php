@@ -125,6 +125,7 @@ class Dojang {
 		 *
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-league.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/renderers/class-dojang-renderer.php';
 
 		$this->loader = new Dojang_Loader();
 

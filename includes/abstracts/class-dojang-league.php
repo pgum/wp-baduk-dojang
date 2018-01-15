@@ -30,11 +30,10 @@ class Dojang_League {
     $currentLeagueId= $this->getCurrentLeagueId();
     $groupIds= $wpdb->get_results("SELECT id FROM {$wpdb->prefix}groups WHERE groupLeagueId= $currentLeagueId");
     $groups= array();
-    $groupss=array();
     foreach($groupIds as $gid){
       $groups[]= new Dojang_Group($gid->id);
     }
-    return array($groupIds, $groups);
+    return array($groups);
   }
   public function getCurrentLeagueInfo(){
     global $wpdb;
