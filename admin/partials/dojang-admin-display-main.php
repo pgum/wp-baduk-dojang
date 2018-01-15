@@ -20,7 +20,7 @@
 <?
 $league = new Dojang_League();
 $leagueDetails= $league->getCurrentLeagueInfo();
-$leagueGroups= $leagueDetails[1][0];
+$leagueGroups= $league->getGroupsDetails();
 $renderer = new Dojang_Renderer();
 echo '<h2>League Details</h2>';
 echo $renderer->renderLeagueDetails($leagueDetails);

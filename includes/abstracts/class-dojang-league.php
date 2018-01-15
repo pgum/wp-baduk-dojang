@@ -33,14 +33,13 @@ class Dojang_League {
     foreach($groupIds as $gid){
       $groups[]= new Dojang_Group($gid->id);
     }
-    return array($groups);
+    return $groups;
   }
   public function getCurrentLeagueInfo(){
     global $wpdb;
     $currentLeagueId= $this->getCurrentLeagueId();
     $r= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}leagues WHERE id= $currentLeagueId");
-    $rr= $this->getGroupsDetails();
-    return array($r,$rr);
+    return $r;
   }
   public function getGamesToApprove(){return "placeholder";}
   public function getGroupResults(){return "placeholder2";}
