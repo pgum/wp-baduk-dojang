@@ -23,12 +23,10 @@ require_once('class-dojang-player.php');
 class Dojang_Group {
   public $groupDetails;
   public $groupPlayers;
-  public $groupPlayersDetails;
   public function __construct($groupId){
     global $wpdb;
 	   $this->groupDetails= $wpdb->get_row("SELECT * FROM {$wpdb->prefix}groups WHERE id = $groupId");
-     $this->groupPlayers= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}groupplayers WHERE playerGroupId = {$this->groupDetails->playerGroupId}", ARRAY_A);
-     $this->groupPlayerDetails=array();
+     $this->groupPlayers= $wpdb->get_results("SELECT id, playerId, tableOrder, playedWithTeacher, wonAgainstTeacher, isPaidMember FROM {$wpdb->prefix}groupplayers WHERE playerGroupId = {$this->groupDetails->playerGroupId}");
      foreach($this->groupPlayers as $p){
        $p->groupPlayerDetails = new Dojang_Player($p->playerId);
      }

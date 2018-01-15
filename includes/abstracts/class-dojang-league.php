@@ -28,7 +28,7 @@ class Dojang_League {
   public function getGroupsDetails(){
     global $wpdb;
     $currentLeagueId= $this->getCurrentLeagueId();
-    $groupIds= $wpdb->get_results("SELECT id FROM {$wpdb->prefix}groups WHERE groupLeagueId= $currentLeagueId");
+    $groupIds= $wpdb->get_results("SELECT id FROM {$wpdb->prefix}groups WHERE groupLeagueId= $currentLeagueId ORDER BY playerGroupId ASC");
     $groups= array();
     foreach($groupIds as $gid){
       $groups[]= new Dojang_Group($gid->id);
@@ -38,7 +38,7 @@ class Dojang_League {
   public function getCurrentLeagueInfo(){
     global $wpdb;
     $currentLeagueId= $this->getCurrentLeagueId();
-    $r= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}leagues WHERE id= $currentLeagueId", ARRAY_A);
+    $r= $wpdb->get_row("SELECT * FROM {$wpdb->prefix}leagues WHERE id= $currentLeagueId");
     return $r;
   }
   public function getGamesToApprove(){return "placeholder";}
