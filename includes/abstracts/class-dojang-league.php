@@ -25,7 +25,7 @@ class Dojang_League {
   global $wpdb;
 	return $wpdb->get_var("SELECT MAX(id) AS currentLeague FROM {$wpdb->prefix}leagues");
   }
-  private function getGroupsDetails(){
+  public function getGroupsDetails(){
     global $wpdb;
     $currentLeagueId= $this->getCurrentLeagueId();
     $groupIds= $wpdb->get_results("SELECT id FROM {$wpdb->prefix}groups WHERE groupLeagueId= $currentLeagueId");
@@ -38,7 +38,7 @@ class Dojang_League {
   public function getCurrentLeagueInfo(){
     global $wpdb;
     $currentLeagueId= $this->getCurrentLeagueId();
-    $r= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}leagues WHERE id= $currentLeagueId");
+    $r= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}leagues WHERE id= $currentLeagueId", ARRAY_A);
     return $r;
   }
   public function getGamesToApprove(){return "placeholder";}

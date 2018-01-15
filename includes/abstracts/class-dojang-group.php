@@ -26,8 +26,8 @@ class Dojang_Group {
   public $groupPlayersDetails;
   public function __construct($groupId){
     global $wpdb;
-	   $this->groupDetails= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}groups WHERE id = $groupId")[0];
-     $this->groupPlayers= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}groupplayers WHERE playerGroupId = {$this->groupDetails->playerGroupId}");
+	   $this->groupDetails= $wpdb->get_row("SELECT * FROM {$wpdb->prefix}groups WHERE id = $groupId");
+     $this->groupPlayers= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}groupplayers WHERE playerGroupId = {$this->groupDetails->playerGroupId}", ARRAY_A);
      $this->groupPlayerDetails=array();
      foreach($this->groupPlayers as $p){
        $p->groupPlayerDetails = new Dojang_Player($p->playerId);

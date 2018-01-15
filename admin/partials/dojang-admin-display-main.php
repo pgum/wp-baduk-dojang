@@ -30,5 +30,14 @@ echo "</br>";
 echo "<h2>Current league standings</h2>";
 echo $renderer->renderGroupsTable($leagueGroups);
 echo "<br/>";
+echo "<br/>";
+echo "<br/>";
+echo "<br/>";
+print_r($leagueDetails);
+echo "<br/>";
+echo "<br/>";
+print_r($leagueGroups);
+echo "<br/>";
+echo "<br/>";
 ?>
 </div>
