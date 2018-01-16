@@ -23,22 +23,12 @@ $leagueInfo= $league->getCurrentLeagueInfo();
 $leagueGroups= $league->getGroupsDetails();
 $renderer = new Dojang_Renderer();
 echo '<h2>Current League Information</h2>';
-print_r($leagueInfo);
 echo $renderer->renderLeagueInfo($leagueInfo);
 echo "<h2>Games to Approve</h2>";
 echo $league->getGamesToApprove();
 echo "</br>";
 echo "<h2>Current League standings</h2>";
 echo $renderer->renderGroupsTable($leagueGroups);
-echo "<br/>";
-echo "<br/>";
-echo "<br/>";
-echo "<br/>";
-//print_r($leagueDetails);
-echo "<br/>";
-echo "<br/>";
-//print_r($leagueGroups);
-echo "<br/>";
 echo "<br/>";
 ?>
 </div>
