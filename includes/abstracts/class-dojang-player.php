@@ -24,5 +24,8 @@ class Dojang_Player {
   public function __construct($playerId){
     global $wpdb;
     $this->playerDetails= $wpdb->get_row("SELECT studentId, playerName, playerEmail, playerKgs, playerRank, playerCountry, playerApproved FROM {$wpdb->prefix}players WHERE playerId = $playerId");
-  }
+    foreach(explode(' ', $this->playerDetails->playerName) as $word) $initials .= mb_substr($word, 0, 1, 'utf-8');
+    $this->playerDetails->{"playerInitials"} = $initials;
+
+}
 }

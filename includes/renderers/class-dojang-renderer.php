@@ -7,25 +7,17 @@ class Dojang_Renderer{
     return $html;
   }
   public function renderGroupTable($groupObject){
-    $groupDetails= $groupObject->groupDetails;
-    $groupPlayers= $groupObject->groupPlayers;
-    return print_r($groupObject);
-  }
-  public function renderGroupsTable($groupsArray){
-    $html='<h3>Groups Table Renderer</h3>';
-    foreach ($groupsArray as $group){
-      $html.= '<h4>'.$group->groupDetails->groupName.'</h4>';
-      $html.= '<p>Players list<ol>';
-      foreach($group->groupPlayers as $p){
-        $html.='<li>'.$p->playerId.' - '.$p->groupPlayerDetails->playerDetails->playerName.' - '.$p->groupPlayerDetails->playerDetails->playerRank.'</li>';
-      }
-      $html.= '</ol></p>';
-      $html.= print_r($group, true);
-    }
     return $html;
   }
-  public function debugData($leagueObject){
-    return print_r($leagueObject,true);
+  public function renderGroupsTable($groupsArray){
+    $html='<h3>Groups Renderer</h3>';
+    foreach ($groupsArray as $group){
+      $gR = new Dojang_Renderer_Group($group);
+      $html.= $gR->renderGroupInfo();
+      $html.= $gR->renderGroupTable();
+      $html.='<br/>';
+    }
+    return $html;
   }
 }
 ?>
