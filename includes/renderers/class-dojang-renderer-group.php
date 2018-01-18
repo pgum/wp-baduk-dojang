@@ -30,23 +30,39 @@ class Dojang_Renderer_Results{
         $count++;
     return '<td>'.$count.'</td>';
   }
+
+  private function htmlResultWon(){
+    $html='<span class="dashicons dashicons-marker"></span>';
+    return '<td>'.$html.'</td>';
+  }
+  private function htmlResultLost(){
+    $html='<span class="dashicons dashicons-no"></span>';
+    return '<td>'.$html.'</td>';
+  }
+  private function htmlResultGray(){
+    return '<td style="background:gray"></td>';
+  }
+  private function htmlResultNone(){
+    return '<td style=""></td>';
+  }
+
   public function getResultBetween($player, $opponent){
-    $html=' ';
+    $html=$this->htmlResultNone();
     if($player->playerId == $opponent->playerId)
-      $html='X';
+      $html=$this->htmlResultGray();
     else
       foreach($this->r as $r)
         if($this->ifPlayerPlayedOpponent($player, $opponent, $r)){
           if($this->ifPlayerWonGame($player, $r)){
-            $html='W';
+            $html=$this->htmlResultWon();
             break;
           }
           else{
-            $html='L';
+            $html=$this->htmlResultLost();
             break;
           }
         }
-    return '<td>'.$html.'</td>';
+    return $html;
   }
 }
 
@@ -67,13 +83,14 @@ class Dojang_Renderer_Group{
   public function renderGroupTable(){
     $html.= $this->renderResultsHeader();
     $html.= $this->renderPlayersResults();
-    return '<table>'.$html.'</table>';//.print_r($this->groupResults,true);
+    return '<table class="dojang-group-table">'.$html.'</table>';//.print_r($this->groupResults,true);
   }
   private function renderResultsHeader(){
-    $html.= '<tr><td>#</td><td>Name</td><td>Nick</td> ';
+    $html.= '<tr><th>#</th><th>Name</th><th>Nick</th> ';
     foreach($this->groupPlayers as $p)
-      $html.= '<td class="dojang-resultColumn">'.$p->playerDetails->playerInitials.'</td>';
-    $html.= ' <td>Win</td><td>Loss</td><td>Score</td><td>WwT?</td></tr>';
+      $html.= '<th class="dojang-resultColumn">'.$p->playerDetails->playerInitials.'</th>';
+    $html.= ' <th><span class="dashicons dashicons-thumbs-up"></span></th><th><span class="dashicons dashicons-thumbs-down"></span></th>';
+    $html.= ' <th>Score</th><th><span class="dashicons dashicons-awards"></span></th></tr>';
     return '<thead>'.$html.'</thead>';
   }
   private function renderPlayerDetailsCells($player){
