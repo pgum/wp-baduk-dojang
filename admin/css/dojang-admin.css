@@ -2,3 +2,15 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+.dojang-group-table{
+  border-collapse: collapse;
+}
+ .dojang-group-table tbody td{
+    border: 1px black solid;
+    min-width: 30px;
+}
+.dojang-group-table thead th{
+    border: 1px black solid;
+    min-width: 30px;
+    background: lightgray;
+}
