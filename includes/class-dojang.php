@@ -186,7 +186,8 @@ class Dojang {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-
+		//this should be moved to somewhere more proper
+		add_shortcode('dojang-league-current', array($this,'get_current_league_name'));
 	}
 
 	/**
@@ -246,7 +247,7 @@ class Dojang {
 		return 9;
 	}
 	public function get_current_league_name(){
-		return "league Name";
+		return "Current League Name";
 	}
 	public function get_current_league_groups(){
 		return array(
