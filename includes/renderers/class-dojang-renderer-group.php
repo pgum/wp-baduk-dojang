@@ -31,19 +31,26 @@ class Dojang_Renderer_Results{
     return '<td>'.$count.'</td>';
   }
 
+  private function htmlOpenTdResultTag($result){
+    $classResultNotApproved= 'dojang-result-not-approved';
+    $classResultApproved= 'dojang-result-approved';
+    if($result->isApproved)
+      $returnClass= $classResultApproved;
+    else
+      $returnClass= $classResultNotApproved;
+    return '<td class="'.$returnClass.'" x-result-id="'.$result->id.'">';
+  }
   private function htmlResultWon(){
-    $html='<span class="dashicons dashicons-marker"></span>';
-    return '<td>'.$html.'</td>';
+    return '<span class="dashicons dashicons-marker"></span>';
   }
   private function htmlResultLost(){
-    $html='<span class="dashicons dashicons-no"></span>';
-    return '<td>'.$html.'</td>';
+    return '<span class="dashicons dashicons-no"></span>';
   }
   private function htmlResultGray(){
-    return '<td style="background:gray"></td>';
+    return '<td class="dojang-result-own" style="background:gray"></td>';
   }
   private function htmlResultNone(){
-    return '<td style=""></td>';
+    return '<td class="dojang-result-none"></td>';
   }
 
   public function getResultBetween($player, $opponent){
@@ -53,12 +60,13 @@ class Dojang_Renderer_Results{
     else
       foreach($this->r as $r)
         if($this->ifPlayerPlayedOpponent($player, $opponent, $r)){
+          $html= $this->htmlOpenTdResultTag($r);
           if($this->ifPlayerWonGame($player, $r)){
-            $html=$this->htmlResultWon();
+            $html.=$this->htmlResultWon().'</td>';
             break;
           }
           else{
-            $html=$this->htmlResultLost();
+            $html.=$this->htmlResultLost().'</td>';
             break;
           }
         }
