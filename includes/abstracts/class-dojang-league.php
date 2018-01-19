@@ -53,11 +53,12 @@ class Dojang_League {
   public function getGamesToApprove(){
     global $wpdb;
     $gamesToApprove=array();
-    foreach($this->groupIds as $gid){
-      $query= "SELECT * FROM {$wpdb->prefix}results WHERE groupId= $gid->playerGroupId AND isApproved = 0";
-      $gamesToApprove[]= $wpdb->get_results($query);
-    }
+    foreach($this->groupIds as $gid)
+      $gamesToApprove[]= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}results WHERE groupId= $gid->playerGroupId AND isApproved = 0");
+    foreach($gamesToApprove as $game)
+      $game->playerDetails= $wpdb->get_results("SELECT playerId, playerName FROM {$wpdb->prefix}players WHERE playerId IN ({$game->playerIdWhite}, {$game->playerIdBlack})");
     return print_r($gamesToApprove, true);
+
     }
   public function getGroupResults(){return "placeholder2";}
 }
