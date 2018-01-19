@@ -102,7 +102,7 @@ class Dojang_Renderer_Group{
     return '<thead>'.$html.'</thead>';
   }
   private function renderPlayerDetailsCells($player){
-    $html.='<td>'.($player->playerDetails->tableOrder+1).'</td>';
+    $html.='<td>'.($player->tableOrder+1).'</td>';
     $html.='<td>'.($player->playerDetails->playerName).'</td>';
     $html.='<td>'.($player->playerDetails->playerKgs).'</td>';
     return $html;
