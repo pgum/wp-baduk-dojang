@@ -23,9 +23,8 @@
 .dojang-result-own{
   background: gray;
 }
-}
 .dojang-result-highlight {
-  background-color: #0073aa;
+  background: #00b9eb !important;
 }
 
 /*Games to Approve Table*/
