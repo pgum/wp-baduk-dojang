@@ -2,15 +2,44 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
-.dojang-group-table{
+.dojang-group-table, .dojang-games-to-approve{
   border-collapse: collapse;
 }
  .dojang-group-table tbody td{
-    border: 1px black solid;
-    min-width: 30px;
+  border: 1px black solid;
+  min-width: 30px;
+  padding: 3px;
 }
 .dojang-group-table thead th{
-    border: 1px black solid;
-    min-width: 30px;
-    background: lightgray;
+  border: 1px black solid;
+  min-width: 30px;
+  background: lightgray;
+  padding: 3px;
+}
+/*Result Table Cell Styles*/
+.dojang-result-not-approved{
+  background: yellow;
+}
+.dojang-result-own{
+  background: gray;
+}
+}
+.dojang-result-highlight {
+  background-color: #0073aa;
+}
+
+/*Games to Approve Table*/
+.dojang-games-to-approve tbody td{
+  border: 1px black solid;
+  min-width: 30px;
+  padding: 3px;
+}
+.dojang-games-to-approve thead th{
+  border: 1px black solid;
+  min-width: 30px;
+  background: lightgray;
+  padding: 3px;
+}
+.dojang-result-to-approve-winner {
+  font-weight: bold;
 }
