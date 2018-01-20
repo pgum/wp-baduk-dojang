@@ -50,15 +50,24 @@ class Dojang_League {
     $r= $wpdb->get_row("SELECT * FROM {$wpdb->prefix}leagues WHERE id= $this->leagueId");
     return $r;
   }
+  private function fillGamePlayerDetails($game){
+    global $wpdb;
+    $gamePlayers= $wpdb->get_results("SELECT playerId, playerName FROM {$wpdb->prefix}players WHERE playerId IN ({$game->playerIdWhite}, {$game->playerIdBlack})", OBJECT_K);
+    $game->playerIdWhite=$gamePlayers[$game->playerIdWhite]->playerName;
+    $game->playerIdBlack=$gamePlayers[$game->playerIdBlack]->playerName;
+    $game->playerIdWinner=$gamePlayers[$game->playerIdWinner]->playerName;
+    return $game;
+  }
   public function getGamesToApprove(){
     global $wpdb;
     $gamesToApprove=array();
     foreach($this->groupIds as $gid)
       $gamesToApprove[]= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}results WHERE groupId= $gid->playerGroupId AND isApproved = 0");
-    foreach($gamesToApprove as $game)
-      $game->playerDetails= $wpdb->get_results("SELECT playerId, playerName FROM {$wpdb->prefix}players WHERE playerId IN ({$game->playerIdWhite}, {$game->playerIdBlack})");
-    return print_r($gamesToApprove, true);
-
+    $merged= call_user_func_array('array_merge', $gamesToApprove);
+      if(count($merged)>0)
+        foreach($merged as $game)
+          $game= $this->fillGamePlayerDetails($game);
+    return $merged;
     }
-  public function getGroupResults(){return "placeholder2";}
+
 }

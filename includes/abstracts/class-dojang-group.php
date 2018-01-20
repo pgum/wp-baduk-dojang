@@ -31,8 +31,8 @@ class Dojang_Group {
   public function __construct($groupId){
     global $wpdb;
 	  $this->groupDetails= $wpdb->get_row("SELECT * FROM {$wpdb->prefix}groups WHERE id = $groupId");
-    $this->groupPlayers= $wpdb->get_results("SELECT id, playerId, tableOrder, playedWithTeacher, wonAgainstTeacher, isPaidMember FROM {$wpdb->prefix}groupplayers WHERE playerGroupId = {$this->groupDetails->playerGroupId} ORDER BY tableOrder ASC");
-    $this->groupResults= $wpdb->get_results("SELECT playerIdBlack, playerIdWhite, playerIdWinner, isApproved FROM {$wpdb->prefix}results WHERE groupId = {$this->groupDetails->playerGroupId}");
+    $this->groupPlayers= $wpdb->get_results("SELECT playerId, tableOrder, playedWithTeacher, wonAgainstTeacher, isPaidMember FROM {$wpdb->prefix}groupplayers WHERE playerGroupId = {$this->groupDetails->playerGroupId} ORDER BY tableOrder ASC");
+    $this->groupResults= $wpdb->get_results("SELECT id, playerIdBlack, playerIdWhite, playerIdWinner, isApproved FROM {$wpdb->prefix}results WHERE groupId = {$this->groupDetails->playerGroupId}");
     foreach($this->groupPlayers as $p){
         $p->playerDetails = $wpdb->get_row("SELECT studentId, playerName, playerEmail, playerKgs, playerRank, playerCountry, playerApproved FROM {$wpdb->prefix}players WHERE playerId = {$p->playerId}");
         $p->playerDetails->{"playerInitials"} = $this->getInitials($p->playerDetails->playerName);
