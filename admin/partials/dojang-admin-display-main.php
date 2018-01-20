@@ -19,16 +19,11 @@
 	<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 <?
 $league = new Dojang_League();
-$leagueInfo= $league->getLeagueInfo();
-$leagueGroups= $league->getGroupsDetails();
 $renderer = new Dojang_Renderer($league);
-echo '<h2>Current League Information</h2>';
 echo $renderer->renderLeagueInfo();
-echo "<h2>Games to Approve</h2>";
-echo $league->getGamesToApprove();
-echo "</br>";
-echo "<h2>Current League standings</h2>";
-echo $renderer->renderGroupsTable($leagueGroups);
+echo $renderer->renderGamesToApproveTable();
+echo $renderer->renderGroupsTable();
 echo "<br/>";
 ?>
+<span class="">Made with <span class="dashicons dashicons-heart" style="background-color: red"></span> by Piotr</span>
 </div>
