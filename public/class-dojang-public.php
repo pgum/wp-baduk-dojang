@@ -99,7 +99,20 @@ class Dojang_Public {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/dojang-public.js', array( 'jquery' ), $this->version, false );
 
 	}
-	public function get_current_league_info(){
-		return "Bila bongo!";
+	/*Shortcodes callbacks*/
+	public function renderRegisterForm(){
+		include_once('partials/dojang-public-register-form.php');
+	}
+	public function renderCurrentLeague(){
+		include_once('partials/dojang-public-current-league.php');
+	}
+	public function renderCurrentPlayers(){
+		include_once('partials/dojang-public-current-players.php');
+	}
+	public function renderScoreboard(){
+		include_once('partials/dojang-public-scoreboard.php');
+	}
+	public function renderSubmitResultForm(){
+		include_once('partials/dojang-public-submit-result-form.php');
 	}
 }
