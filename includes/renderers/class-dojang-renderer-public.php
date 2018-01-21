@@ -1,7 +1,45 @@
 <?php
 class Dojang_Renderer_Public{
+  private function renderOptionForDans(){
+    for($i=9; $i>1; $i--){
+        $html.='<option value="'.$i.'d">'.$i.' Dan</option>';
+    }
+    return $html.'<option value="1d" selected>1 Dan</option>';
+  }
+  private function renderOptionForKyus(){
+    for($i=1; $i<26; $i++){
+        $html.='<option value="'.$i.'k">'.$i.' Kyu</option>';
+    }
+    return $html;
+  }
+
   public function renderRegisterForm(){
-    return "<h2>Registration Form</h2>";
+    $html = "<h2>Registration Form</h2>";
+    $html.='<form class="dojang-register-form" action="#" method="post">
+      <fieldset>
+      <input type="hidden" name="action" value="register">
+        <div class="dojang-form-label"><label for="dojang-player-name">Player Name<span class="required">*</span></label></div>
+        <div class="dojang-form-input"><input name="dojang-player-name" value="" placeholder="Name that will be visible in Players List"></div>
+
+        <div class="dojang-form-label"><label for="dojang-player-email">Valid Email ()<span class="required">*</span></label></div>
+        <div class="dojang-form-input"><input name="dojang-player-email" type="text" value="" placeholder="E-mail that will be used to contact"></div>
+
+        <div class="dojang-form-label"><label for="dojang-player-kgs-account">KGS Account <span class="required">*</span></label></div>
+        <div class="dojang-form-input"><input name="dojang-KGS-account" value="" placeholder="KGS that will be used in league games"></div>
+
+        <div class="dojang-form-label"><label for="dojang-player-rank">Rank <span class="required">*</span></label></div>
+        <div class="dojang-form-input"><select name="dojang-player-rank">'.$this->renderOptionForDans().$this->renderOptionForKuys().'</select></div>
+
+        <div class="dojang-form-label"><label for="dojang-player-country">Country <span class="required">*</span></label></div>
+        <div class="dojang-form-input"><input name="dojang-player-country" value="" placeholder="What country are you from"></div>
+      </fieldset>
+      <fieldset>
+        <div class="dojang-form-submit">
+          <input type="submit" name="submit" class="button" value="Register for On-Line Teaching!">
+        </div>
+      </fieldset>
+    </form>';
+    return $html;
   }
   public function renderCurrentLeague(){
     $html='<h2><span class="dashicons dashicons-forms"></span> Group Standings</h2>';
