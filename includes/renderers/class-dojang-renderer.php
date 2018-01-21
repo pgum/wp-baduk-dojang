@@ -26,8 +26,8 @@ class Dojang_Renderer{
       <td>'.$i.'</td>'.
       $this->renderResultToApprovePlayers($game->playerIdBlack, $game->playerIdWhite, $game->playerIdWinner).
       '<td>'.$game->addDate.'</td>
-      <td>'.'<a href="#" class="button secondary">Approve Game</a>'.'</td>
-      <td>'.'<a href="#" class="button button-red">Reject Game</a>'.'</td>
+      <td>'.'<a href="#" class="button secondary dojang-approve-result" x-result-id="'.$game->id.'">Approve Game</a>'.'</td>
+      <td>'.'<a href="#" class="button button-red dojang-remove-result" x-result-id="'.$game->id.'">Reject Game</a>'.'</td>
       </tr>';
       $i++;
     }

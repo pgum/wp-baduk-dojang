@@ -133,7 +133,7 @@ class Dojang_Admin {
 		array( $this, 'display_options_page_players' ),
 		'dashicons-groups'
 			);
-		
+
 		$this->plugin_screen_hook_suffix_submenu = add_submenu_page(
 		$this->plugin_name,
 		"Previous Leagues Management",
@@ -143,7 +143,7 @@ class Dojang_Admin {
 		array( $this, 'display_options_page_leagues' ),
 		'dashicons-forms'
 		);
-		
+
 		$this->plugin_screen_hook_suffix_submenu = add_submenu_page(
 		$this->plugin_name,
 		"Create New League",
@@ -180,5 +180,21 @@ class Dojang_Admin {
 		array( $this, $this->option_name . '_general_cb' ),
 		$this->plugin_name
 	);
+	}
+	public function ajax_approve_result(){
+		echo 'Ajax Approve Result Id= '.$_POST['result_id'];
+		wp_die(); //this is required to terminate immediately and return proper response
+	}
+	public function ajax_remove_result(){
+		echo 'Ajax Remove Result Id= '.$_POST['result_id'];
+		wp_die(); //this is required to terminate immediately and return proper response
+	}
+	public function ajax_approve_player(){
+		echo 'Ajax Approve Player Id= '.$_POST['player_id'];
+		wp_die(); //this is required to terminate immediately and return proper response
+	}
+	public function ajax_remove_player(){
+		echo 'Ajax Remove Player Id= '.$_POST['player_id'];
+		wp_die(); //this is required to terminate immediately and return proper response
 	}
 }

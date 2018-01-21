@@ -11,14 +11,39 @@
 				var result_id= $(this).attr('x-result-id');
 	     	$('td[x-result-id='+result_id+']').removeClass('dojang-result-highlight');
 	  	});
-		$(".dojang-approve").on("click", function(){
-			console.log('APPROVE CLICKED!');
-			$.ajax({
+ 	});
+  /*AJAX on click events to approve and remove pending result*/
+	$(function(){
+		$(".dojang-approve-result").on("click", function(){
+			$.post({
 				url: ajaxurl,
-				success: function(data){
-					console.log(data);
-				}
+				data: {'action': 'dojang_approve_result', 'result_id': $(this).attr('x-result-id')},
+				success: function(data){ console.log(data); }
 			});
 		});
- 	});
+		$(".dojang-remove-result").on("click", function(){
+			$.post({
+				url: ajaxurl,
+				data: {'action': 'dojang_remove_result', 'result_id': $(this).attr('x-result-id')},
+				success: function(data){ console.log(data); }
+			});
+		});
+	});
+  /*AJAX on click events to approve and remove pending players*/
+	$(function(){
+		$(".dojang-approve-player").on("click", function(){
+			$.post({
+				url: ajaxurl,
+				data: {'action': 'dojang_approve_player', 'player_id': $(this).attr('x-player-id')},
+				success: function(data){ console.log(data); }
+			});
+		});
+		$(".dojang-remove-player").on("click", function(){
+			$.post({
+				url: ajaxurl,
+				data: {'action': 'dojang_remove_player', 'player_id': $(this).attr('x-player-id')},
+				success: function(data){ console.log(data); }
+			});
+		});
+	});
 })( jQuery );
