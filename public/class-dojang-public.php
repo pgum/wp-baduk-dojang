@@ -74,6 +74,7 @@ class Dojang_Public {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/dojang-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( 'dashicons' );
 
 	}
 
@@ -100,12 +101,13 @@ class Dojang_Public {
 
 	}
 	/*Shortcodes callbacks*/
+
 	public function renderRegisterForm(){
 		$renderer= new Dojang_Renderer_Public();
 		return $renderer->renderRegisterForm();
 	}
 	public function renderCurrentLeague(){
-//		$league= new Dojang_League();
+		//$league= new Dojang_League();
 		$renderer= new Dojang_Renderer_Public();
 		return $renderer->renderCurrentLeague();
 	}
@@ -121,4 +123,5 @@ class Dojang_Public {
 		$renderer= new Dojang_Renderer_Public();
 		return $renderer->renderSubmitResultForm();
 	}
+
 }

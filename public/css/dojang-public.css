@@ -2,3 +2,8 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+h2.dojang-register:before {font-family: 'dashicons'; content: '\f118';}
+h2.dojang-results:before {font-family: 'dashicons'; content: '\f314';}
+h2.dojang-players:before {font-family: 'dashicons'; content: '\f307';}
+h2.dojang-scoreboard:before {font-family: 'dashicons'; content: '\f154';}
+h2.dojang-submit:before {font-family: 'dashicons'; content: '\f157';}

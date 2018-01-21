@@ -14,7 +14,7 @@ class Dojang_Renderer_Public{
   }
 
   public function renderRegisterForm(){
-    $html = "<h2>Registration Form</h2>";
+    $html = '<h2 class="dojang-register">Registration Form</h2>';
     $html.='<form class="dojang-register-form" action="#" method="post">
       <fieldset>
       <input type="hidden" name="action" value="register">
@@ -28,7 +28,7 @@ class Dojang_Renderer_Public{
         <div class="dojang-form-input"><input name="dojang-KGS-account" value="" placeholder="KGS that will be used in league games"></div>
 
         <div class="dojang-form-label"><label for="dojang-player-rank">Rank <span class="required">*</span></label></div>
-        <div class="dojang-form-input"><select name="dojang-player-rank">'.$this->renderOptionForDans().$this->renderOptionForKuys().'</select></div>
+        <div class="dojang-form-input"><select name="dojang-player-rank">'.$this->renderOptionForDans().$this->renderOptionForKyus().'</select></div>
 
         <div class="dojang-form-label"><label for="dojang-player-country">Country <span class="required">*</span></label></div>
         <div class="dojang-form-input"><input name="dojang-player-country" value="" placeholder="What country are you from"></div>
@@ -42,7 +42,7 @@ class Dojang_Renderer_Public{
     return $html;
   }
   public function renderCurrentLeague(){
-    $html='<h2><span class="dashicons dashicons-forms"></span> Group Standings</h2>';
+    $html='<h2 class="dojang-results"> Group Standings</h2>';
     /*$groupArray= $league->getGroupsDetails();
     foreach ($groupArray as $group){
       $gR = new Dojang_Renderer_Group_Public($group);
@@ -53,13 +53,13 @@ class Dojang_Renderer_Public{
     return $html;
   }
   public function renderCurrentPlayers(){
-    return "<h2>Current League Players List</h2>";
+    return '<h2 class="dojang-players">Current League Players List</h2>';
   }
   public function renderScoreboard(){
-    return "<h2>Players Scoreboard</h2>";
+    return '<h2 class="dojang-scoreboard">Players Scoreboard</h2>';
   }
   public function renderSubmitResultForm(){
-    return "<h2>Submit League game result</h2>";
+    return '<h2 class="dojang-submit">Submit League game result</h2>';
   }
 }
  ?>
