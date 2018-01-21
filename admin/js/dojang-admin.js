@@ -11,5 +11,14 @@
 				var result_id= $(this).attr('x-result-id');
 	     	$('td[x-result-id='+result_id+']').removeClass('dojang-result-highlight');
 	  	});
- 	  });
+		$(".dojang-approve").on("click", function(){
+			console.log('APPROVE CLICKED!');
+			$.ajax({
+				url: ajaxurl,
+				success: function(data){
+					console.log(data);
+				}
+			});
+		});
+ 	});
 })( jQuery );
