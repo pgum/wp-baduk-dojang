@@ -14,14 +14,14 @@
  	});
   /*AJAX on click events to approve and remove pending result*/
 	$(function(){
-		$(".dojang-approve-result").on("click", function(){
+		$('.dojang-approve-result').on('click', function(){
 			$.post({
 				url: ajaxurl,
 				data: {'action': 'dojang_approve_result', 'result_id': $(this).attr('x-result-id')},
 				success: function(data){ console.log(data); }
 			});
 		});
-		$(".dojang-remove-result").on("click", function(){
+		$('.dojang-remove-result').on('click', function(){
 			$.post({
 				url: ajaxurl,
 				data: {'action': 'dojang_remove_result', 'result_id': $(this).attr('x-result-id')},
@@ -31,14 +31,14 @@
 	});
   /*AJAX on click events to approve and remove pending players*/
 	$(function(){
-		$(".dojang-approve-player").on("click", function(){
+		$('.dojang-approve-player').on('click', function(){
 			$.post({
 				url: ajaxurl,
 				data: {'action': 'dojang_approve_player', 'player_id': $(this).attr('x-player-id')},
 				success: function(data){ console.log(data); }
 			});
 		});
-		$(".dojang-remove-player").on("click", function(){
+		$('.dojang-remove-player').on('click', function(){
 			$.post({
 				url: ajaxurl,
 				data: {'action': 'dojang_remove_player', 'player_id': $(this).attr('x-player-id')},
