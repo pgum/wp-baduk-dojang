@@ -122,7 +122,6 @@ class Dojang {
 
 		/**
 		 * My classes to include
-		 *
 		 */
 		//Helpers
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-result-helper.php';
@@ -130,9 +129,10 @@ class Dojang {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-league.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-group.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-player.php';
-		//Renderer
+		//Renderers
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/renderers/class-dojang-renderer-group.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/renderers/class-dojang-renderer.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/renderers/class-dojang-renderer-public.php';
 
 		$this->loader = new Dojang_Loader();
 

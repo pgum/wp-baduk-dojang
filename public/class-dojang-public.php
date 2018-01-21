@@ -101,18 +101,23 @@ class Dojang_Public {
 	}
 	/*Shortcodes callbacks*/
 	public function renderRegisterForm(){
-		include_once('partials/dojang-public-register-form.php');
+		$renderer= new Dojang_Public_Renderer();
+		return $renderer->renderRegisterForm();
 	}
 	public function renderCurrentLeague(){
-		include_once('partials/dojang-public-current-league.php');
+		$renderer= new Dojang_Public_Renderer();
+		return $renderer->renderCurrentLeague();
 	}
 	public function renderCurrentPlayers(){
-		include_once('partials/dojang-public-current-players.php');
+		$renderer= new Dojang_Public_Renderer();
+		return $renderer->renderCurrentPlayers();
 	}
 	public function renderScoreboard(){
-		include_once('partials/dojang-public-scoreboard.php');
+		$renderer= new Dojang_Public_Renderer();
+		return $renderer->renderScoreboard();
 	}
 	public function renderSubmitResultForm(){
-		include_once('partials/dojang-public-submit-result-form.php');
+		$renderer= new Dojang_Public_Renderer();
+		return $renderer->renderSubmitResultForm();
 	}
 }
