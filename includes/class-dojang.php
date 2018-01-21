@@ -198,11 +198,11 @@ class Dojang {
 	private function define_shortcodes(){
 		//TODO: add shortcodes for player registration form, current league standings, player scores, submit results
 		$plugin_public = new Dojang_Public( $this->get_plugin_name(), $this->get_version() );
-		add_shortcode('dojang-league-register-form', array($plugin_public, 'renderRegisterForm'));
-		add_shortcode('dojang-league-current-league', array($plugin_public, 'renderCurrentLeague'));
-		add_shortcode('dojang-league-current-players', array($plugin_public, 'renderCurrentPlayers'));
-		add_shortcode('dojang-league-scoreboard', array($plugin_public, 'renderScoreboard'));
-		add_shortcode('dojang-league-submit-result', array($plugin_public, 'renderSubmitResultForm'));
+		add_shortcode('dojang-register-form', array($plugin_public, 'renderRegisterForm'));
+		add_shortcode('dojang-current-league', array($plugin_public, 'renderCurrentLeague'));
+		add_shortcode('dojang-current-players', array($plugin_public, 'renderCurrentPlayers'));
+		add_shortcode('dojang-scoreboard', array($plugin_public, 'renderScoreboard'));
+		add_shortcode('dojang-submit-result', array($plugin_public, 'renderSubmitResultForm'));
 	}
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
