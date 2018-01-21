@@ -173,9 +173,11 @@ class Dojang {
 
 		//AJAX hooks for dynamic actions
 		$this->loader->add_action('wp_ajax_dojang_approve_result', $plugin_admin, 'ajax_approve_result' );
-		$this->loader->add_action('wp_ajax_dojang_remove_result', $plugin_admin, 'ajax_approve_result' );
+		$this->loader->add_action('wp_ajax_dojang_remove_result', $plugin_admin, 'ajax_remove_result' );
 		$this->loader->add_action('wp_ajax_dojang_approve_player', $plugin_admin, 'ajax_approve_player' );
 		$this->loader->add_action('wp_ajax_dojang_remove_player', $plugin_admin, 'ajax_remove_player' );
+		$this->loader->add_action('wp_ajax_dojang_update_played_with_teacher', $plugin_admin, 'ajax_update_played_with_teacher' );
+
 	}
 
 	/**

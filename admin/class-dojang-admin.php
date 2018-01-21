@@ -181,20 +181,26 @@ class Dojang_Admin {
 		$this->plugin_name
 	);
 	}
+	//AJAX callbacks
+	//wp_die(); ir required to terminate immediately and return proper response
 	public function ajax_approve_result(){
 		echo 'Ajax Approve Result Id= '.$_POST['result_id'];
-		wp_die(); //this is required to terminate immediately and return proper response
+		wp_die();
 	}
 	public function ajax_remove_result(){
 		echo 'Ajax Remove Result Id= '.$_POST['result_id'];
-		wp_die(); //this is required to terminate immediately and return proper response
+		wp_die();
 	}
 	public function ajax_approve_player(){
 		echo 'Ajax Approve Player Id= '.$_POST['player_id'];
-		wp_die(); //this is required to terminate immediately and return proper response
+		wp_die();
 	}
 	public function ajax_remove_player(){
 		echo 'Ajax Remove Player Id= '.$_POST['player_id'];
-		wp_die(); //this is required to terminate immediately and return proper response
+		wp_die();
+	}
+	public function ajax_update_played_with_teacher(){
+		echo 'Im gunna update played with teacher in groupplayer table for id='.$_POST['groupplayer_id'].'into value='.$_POST['wonWithTeacher'];
+		wp_die();
 	}
 }
