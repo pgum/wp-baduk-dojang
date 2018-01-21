@@ -123,5 +123,8 @@ class Dojang_Public {
 		$renderer= new Dojang_Renderer_Public();
 		return $renderer->renderSubmitResultForm();
 	}
-
+  /*POST DATA handlers*/
+	public function post_register_data(){
+		return print_r($_POST,true);
+	}
 }

@@ -15,23 +15,24 @@ class Dojang_Renderer_Public{
 
   public function renderRegisterForm(){
     $html = '<h2 class="dojang-register">Registration Form</h2>';
-    $html.='<form class="dojang-register-form" action="#" method="post">
+    $html.='<form class="dojang-register-form" action="'.get_admin_url().'admin-post.php" method="post">
+      <input type="hidden" name="action" value="dojang_register" />
       <fieldset>
       <input type="hidden" name="action" value="register">
         <div class="dojang-form-label"><label for="dojang-player-name">Player Name<span class="required">*</span></label></div>
-        <div class="dojang-form-input"><input name="dojang-player-name" value="" placeholder="Name that will be visible in Players List"></div>
+        <div class="dojang-form-input"><input name="dojang-player-name" type="text" value="" placeholder="Name that will be visible in Players List"></div>
 
         <div class="dojang-form-label"><label for="dojang-player-email">Valid Email ()<span class="required">*</span></label></div>
         <div class="dojang-form-input"><input name="dojang-player-email" type="text" value="" placeholder="E-mail that will be used to contact"></div>
 
         <div class="dojang-form-label"><label for="dojang-player-kgs-account">KGS Account <span class="required">*</span></label></div>
-        <div class="dojang-form-input"><input name="dojang-KGS-account" value="" placeholder="KGS that will be used in league games"></div>
+        <div class="dojang-form-input"><input name="dojang-KGS-account" type="text" value="" placeholder="KGS that will be used in league games"></div>
 
         <div class="dojang-form-label"><label for="dojang-player-rank">Rank <span class="required">*</span></label></div>
         <div class="dojang-form-input"><select name="dojang-player-rank">'.$this->renderOptionForDans().$this->renderOptionForKyus().'</select></div>
 
         <div class="dojang-form-label"><label for="dojang-player-country">Country <span class="required">*</span></label></div>
-        <div class="dojang-form-input"><input name="dojang-player-country" value="" placeholder="What country are you from"></div>
+        <div class="dojang-form-input"><input name="dojang-player-country" type="text" value="" placeholder="What country are you from"></div>
       </fieldset>
       <fieldset>
         <div class="dojang-form-submit">

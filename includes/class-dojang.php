@@ -196,6 +196,10 @@ class Dojang {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+
+		$this->loader->add_action('admin_post_nopriv_dojang_register', $plugin_public, 'post_register_data' );
+		$this->loader->add_action('admin_post_dojang_register', $plugin_public, 'post_register_data' );
+
 	}
 
 	private function define_shortcodes(){
