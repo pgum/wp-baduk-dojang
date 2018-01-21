@@ -6,20 +6,11 @@
  * @link       https://www.linkedin.com/in/piotr-jacek-gumulka/
  * @since      1.0.0
  *
+ * @author     Piotr Jacek Gumulka <pjgumulka@gmail.com>
  * @package    Dojang
  * @subpackage Dojang/admin
  */
 
-/**
- * The admin-specific functionality of the plugin.
- *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the admin-specific stylesheet and JavaScript.
- *
- * @package    Dojang
- * @subpackage Dojang/admin
- * @author     Piotr Jacek Gumulka <pjgumulka@gmail.com>
- */
 class Dojang_Admin {
 
 	/**
@@ -68,21 +59,7 @@ class Dojang_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Dojang_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Dojang_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/dojang-admin.css', array(), $this->version, 'all' );
-
 	}
 
 	/**
@@ -91,21 +68,7 @@ class Dojang_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Dojang_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Dojang_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/dojang-admin.js', array( 'jquery' ), $this->version, false );
-
 	}
 /**
 	 * Add an options page under the Settings submenu
