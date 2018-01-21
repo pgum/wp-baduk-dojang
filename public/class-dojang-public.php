@@ -105,6 +105,7 @@ class Dojang_Public {
 		return $renderer->renderRegisterForm();
 	}
 	public function renderCurrentLeague(){
+//		$league= new Dojang_League();
 		$renderer= new Dojang_Renderer_Public();
 		return $renderer->renderCurrentLeague();
 	}
