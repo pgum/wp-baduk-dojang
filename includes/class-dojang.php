@@ -75,7 +75,7 @@ class Dojang {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
+		$this->define_shortcodes();
 	}
 
 	/**
@@ -193,10 +193,13 @@ class Dojang {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+	}
+
+	private function define_shortcodes(){
+		//TODO: add shortcodes for player registration form, current league standings, player scores, submit results
 		//this should be moved to somewhere more proper
 		add_shortcode('dojang-league-current', array($this,'get_current_league_name'));
 	}
-
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
 	 *
