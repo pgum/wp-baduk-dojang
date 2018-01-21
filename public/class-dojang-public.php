@@ -99,5 +99,7 @@ class Dojang_Public {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/dojang-public.js', array( 'jquery' ), $this->version, false );
 
 	}
-
+	public function get_current_league_info(){
+		return "Bila bongo!";
+	}
 }
