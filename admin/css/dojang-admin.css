@@ -29,6 +29,12 @@
   -moz-animation:highlight-pulse-animation 2s infinite; /* Firefox */
   -webkit-animation:highlight-pulse-animation 2s infinite; /* Safari and Chrome */
 }
+.dojang-cell-updated{
+  animation:update-pulse-animation 2s;
+  -moz-animation:update-pulse-animation 2s; /* Firefox */
+  -webkit-animation:update-pulse-animation 2s; /* Safari and Chrome */
+
+}
 /*Animations*/
 @-moz-keyframes highlight-pulse-animation /* Firefox */
 {
@@ -42,6 +48,20 @@
 0%   {background: yellow;}
 50%  {background: #00b9eb;}
 100% {background: yellow;}
+}
+
+@-moz-keyframes update-pulse-animation /* Firefox */
+{
+0%   {background: chartreuse;}
+50%  {background: green;}
+100% {background: lightgray;}
+}
+
+@-webkit-keyframes update-pulse-animation /* Safari and Chrome */
+{
+0%   {background: chartreuse;}
+50%  {background: green;}
+100% {background: lightgray;}
 }
 
 /*Games to Approve Table*/

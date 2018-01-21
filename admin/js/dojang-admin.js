@@ -22,11 +22,14 @@
 			});
 		});
 		$('.dojang-remove-result').on('click', function(){
-			$.post({
-				url: ajaxurl,
-				data: {'action': 'dojang_remove_result', 'result_id': $(this).attr('x-result-id')},
-				success: function(data){ console.log(data); }
-			});
+			var choice= confirm("Are you sure you want to remove pending result?\n(Players will have to submit result again)");
+			if(choice){
+				$.post({
+					url: ajaxurl,
+					data: {'action': 'dojang_remove_result', 'result_id': $(this).attr('x-result-id')},
+					success: function(data){ console.log(data); }
+				});
+			}
 		});
 	});
   /*AJAX on click events to approve and remove pending players*/
@@ -39,11 +42,14 @@
 			});
 		});
 		$('.dojang-remove-player').on('click', function(){
-			$.post({
-				url: ajaxurl,
-				data: {'action': 'dojang_remove_player', 'player_id': $(this).attr('x-player-id')},
-				success: function(data){ console.log(data); }
-			});
+			var choice= confirm("Are you sure you want to remove pending player?\n(Player will have to register again)");
+			if(choice){
+				$.post({
+					url: ajaxurl,
+					data: {'action': 'dojang_remove_player', 'player_id': $(this).attr('x-player-id')},
+					success: function(data){ console.log(data); }
+				});
+			}
 		});
 	});
 	/*AJAX on click checkbox to update if player played with teacher and won*/
@@ -51,16 +57,14 @@
 		$('.dojang-player-won-against-teacher').on('click', function(){
 			var groupPlayerIdToChange= $(this).attr('x-groupplayer-id');
 			var wonWithTeacher= Boolean($(this).attr('checked')); //Boolean(string) gives true if string is not empty
-			if($(this).is(':checked')){
-				console.log('wlasnie zaznaczono x-groupplayer-id='+groupPlayerIdToChange);
-
-			}else{
-				console.log('wlasnie odznaczono x-groupplayer-id='+groupPlayerIdToChange);
-			}
 			$.post({
 				url: ajaxurl,
 				data: {'action': 'dojang_update_played_with_teacher', 'groupplayer_id': groupPlayerIdToChange, 'wonWithTeacher': wonWithTeacher},
-				success: function(data){ console.log(data); }
+				success: function(data){
+					$('.won-with-teacher-cell[x-groupplayer-id='+groupPlayerIdToChange+']').addClass('dojang-cell-updated').delay(2000).queue(function(){
+					    $(this).removeClass('dojang-cell-updated').dequeue();
+					});
+					console.log(data); }
 			});
 		});
 	});
