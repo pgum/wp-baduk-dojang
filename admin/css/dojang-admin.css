@@ -25,6 +25,23 @@
 }
 .dojang-result-highlight {
   background: #00b9eb !important;
+  animation:highlight-pulse-animation 2s;
+  -moz-animation:highlight-pulse-animation 2s infinite; /* Firefox */
+  -webkit-animation:highlight-pulse-animation 2s infinite; /* Safari and Chrome */
+}
+/*Animations*/
+@-moz-keyframes highlight-pulse-animation /* Firefox */
+{
+0%   {background: yellow;}
+50%  {background: #00b9eb;}
+100% {background: yellow;}
+}
+
+@-webkit-keyframes highlight-pulse-animation /* Safari and Chrome */
+{
+0%   {background: yellow;}
+50%  {background: #00b9eb;}
+100% {background: yellow;}
 }
 
 /*Games to Approve Table*/
