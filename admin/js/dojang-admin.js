@@ -46,4 +46,22 @@
 			});
 		});
 	});
+	/*AJAX on click checkbox to update if player played with teacher and won*/
+	$(function(){
+		$('.dojang-player-won-against-teacher').on('click', function(){
+			var groupPlayerIdToChange= $(this).attr('x-groupplayer-id');
+			var wonWithTeacher= Boolean($(this).attr('checked')); //Boolean(string) gives true if string is not empty
+			if($(this).is(':checked')){
+				console.log('wlasnie zaznaczono x-groupplayer-id='+groupPlayerIdToChange);
+
+			}else{
+				console.log('wlasnie odznaczono x-groupplayer-id='+groupPlayerIdToChange);
+			}
+			$.post({
+				url: ajaxurl,
+				data: {'action': 'dojang_update_played_with_teacher', 'groupplayer_id': groupPlayerIdToChange, 'wonWithTeacher': wonWithTeacher},
+				success: function(data){ console.log(data); }
+			});
+		});
+	});
 })( jQuery );
