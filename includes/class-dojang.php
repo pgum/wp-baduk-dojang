@@ -130,8 +130,11 @@ class Dojang {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-group.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-player.php';
 		//Renderers
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/renderers/class-dojang-renderer-results.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/renderers/class-dojang-renderer-group.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/renderers/class-dojang-renderer.php';
+		//public renderers
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/renderers/class-dojang-renderer-group-public.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/renderers/class-dojang-renderer-public.php';
 
 		$this->loader = new Dojang_Loader();
