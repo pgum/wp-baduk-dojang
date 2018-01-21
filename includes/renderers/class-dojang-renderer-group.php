@@ -98,7 +98,7 @@ class Dojang_Renderer_Group{
     foreach($this->groupPlayers as $p)
       $html.= '<th class="dojang-resultColumn">'.$p->playerDetails->playerInitials.'</th>';
     $html.= ' <th><span class="dashicons dashicons-thumbs-up"></span></th><th><span class="dashicons dashicons-thumbs-down"></span></th>';
-    $html.= ' <th>Score</th><th><span class="dashicons dashicons-awards"></span></th></tr>';
+    $html.= ' <th><span class="dashicons dashicons-awards"></span></th><th><span class="dashicons dashicons-welcome-learn-more"></span></th><th>Score</th></tr>';
     return '<thead>'.$html.'</thead>';
   }
   private function renderPlayerDetailsCells($player){
@@ -107,10 +107,17 @@ class Dojang_Renderer_Group{
     $html.='<td>'.($player->playerDetails->playerKgs).'</td>';
     return $html;
   }
+  private function renderCheckboxChecked($flag){
+    $html='';
+    if($flag)
+      $html='checked ';
+    return $html;
+  }
   private function renderPlayerResultsCells($player){
     foreach($this->groupPlayers as $p)
       $html.= $this->groupResultsRenderer->getResultBetween($player, $p);
-    $html.= $this->groupResultsRenderer->getWinCount($player).$this->groupResultsRenderer->getLossCount($player).'<td>Sc</td><td>WT</td>';
+    $html.= $this->groupResultsRenderer->getWinCount($player).$this->groupResultsRenderer->getLossCount($player);
+    $html.= '<td>#'.$player->place.'</td><td><input type="checkbox" class="dojang-player-won-against-teacher" '.$this->renderCheckboxChecked($player->wonAgainstTeacher).'x-groupplayer-id="'.$player->id.'"/></td><td>'.$player->leaguePoints.'</td>';
     return $html;
   }
   private function renderPlayerRow($player){
