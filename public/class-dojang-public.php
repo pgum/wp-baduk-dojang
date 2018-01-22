@@ -110,11 +110,11 @@ class Dojang_Public {
 			$html.= $renderer->renderPlayerRegisteredNotice();
 		}
 		if(isset($_GET['suc']) && $_GET['suc'] == 0){
-			$msg.=  isset($_GET['name'])   ? $_GET['prev-name']." is not valid!<br/>"    : "";
-			$msg.=  isset($_GET['email'])  ? $_GET['prev-email']." is not valid!<br/>"   : "";
-			$msg.=  isset($_GET['kgs'])    ? $_GET['prev-kgs']." is not valid!<br/>"     : "";
-			$msg.=  isset($_GET['country'])? $_GET['prev-country']." is not valid!<br/>" : "";
-			$msg.=  isset($_GET['rank'])   ? $_GET['prev-rank']." is not valid!<br/>"    : "";
+			$msg.=  isset($_GET['name'])   ? '"'.$_GET['prev-name'].'" is not valid NAME!<br/>'    : "";
+			$msg.=  isset($_GET['email'])  ? '"'.$_GET['prev-email'].'" is not valid E-MAIL!<br/>'   : "";
+			$msg.=  isset($_GET['kgs'])    ? '"'.$_GET['prev-kgs'].'" is not valid KGS ACCOUNT!<br/>'     : "";
+			$msg.=  isset($_GET['country'])? '"'.$_GET['prev-country'].'" is not valid COUNTRY!<br/>' : "";
+			$msg.=  isset($_GET['rank'])   ? '"'.$_GET['prev-rank'].'" is not valid RANK!<br/>'    : "";
 			$html.= $renderer->renderPlayerNotRegisteredNotice($msg);
 		}
 		$html.= $renderer->renderRegisterForm();
