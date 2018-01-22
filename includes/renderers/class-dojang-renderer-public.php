@@ -18,7 +18,6 @@ class Dojang_Renderer_Public{
     $html.='<form class="dojang-register-form" action="'.get_admin_url().'admin-post.php" method="post">
       <input type="hidden" name="action" value="dojang_register" />
       <fieldset>
-      <input type="hidden" name="action" value="register">
         <div class="dojang-form-label"><label for="dojang-player-name">Player Name<span class="required">*</span></label></div>
         <div class="dojang-form-input"><input name="dojang-player-name" type="text" value="" placeholder="Name that will be visible in Players List"></div>
 

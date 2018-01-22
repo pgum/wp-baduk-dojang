@@ -103,6 +103,11 @@ class Dojang_Public {
 	/*Shortcodes callbacks*/
 
 	public function renderRegisterForm(){
+		print_r($_GET);
+
+		if(isset($_GET['suc'])){
+			echo "THX 4 registration. Waiting for approval!";
+		}
 		$renderer= new Dojang_Renderer_Public();
 		return $renderer->renderRegisterForm();
 	}
@@ -125,6 +130,7 @@ class Dojang_Public {
 	}
   /*POST DATA handlers*/
 	public function post_register_data(){
-		return print_r($_POST,true);
+		wp_safe_redirect(add_query_arg( 'suc', '1', home_url('/register-to-online-teaching')));
+		exit;
 	}
 }
