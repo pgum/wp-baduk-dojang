@@ -1,7 +1,7 @@
 <?php
 class Dojang_Renderer_Public{
   private function renderRankOptions($selected = '1d'){
-    if($selected="")
+    if($selected=="")
       $selected='1d';
     for($i=9; $i>0; $i--){
         $rank=$i.'d';
