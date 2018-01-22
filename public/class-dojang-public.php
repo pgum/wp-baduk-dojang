@@ -158,10 +158,10 @@ class Dojang_Public {
 			$returnArray['prev-country'] = $data['dojang-player-country'];
 		}
 		if(count($returnArray)>0){
-			$returnResult=0
-			$returnArray['prev-rank'] = $data['dojang-player-rank']
+			$returnResult=0;
+			$returnArray['prev-rank'] = $data['dojang-player-rank'];
 		}
-		$returnArray['suc'] = $returnResult
+		$returnArray['suc'] = $returnResult;
 		return $returnArray;
 	}
 	public function post_register_data(){
