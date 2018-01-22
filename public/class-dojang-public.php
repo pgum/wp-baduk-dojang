@@ -143,19 +143,19 @@ class Dojang_Public {
 		$returnResult=1;
 		if(strlen($data['dojang-player-name'])== 0){
 			$returnArray['name']= 1;
-			$returnArray['prev-name'] = $data['dojang-player-name'];
+			//$returnArray['prev-name'] = '"'.$data['dojang-player-name'].'"';
 		}
 		if(is_email($data['dojang-player-email'])== false){
 			$returnArray['email']= 1;
-			$returnArray['prev-email'] = $data['dojang-player-email'];
+			$returnArray['prev-email'] = '"'.$data['dojang-player-email'].'"';
 		}
-		if(strlen($data['dojang-player-kgs-account'])== 0){
+		if(strlen($data['dojang-player-KGS-account'])== 0){
 			$returnArray['kgs']= 1;
-			$returnArray['prev-kgs'] = $data['dojang-player-kgs-account'];
+			//$returnArray['prev-kgs'] = '"'.$data['dojang-player-KGS-account'].'"';
 		}
 		if(strlen($data['dojang-player-country'])== 0){
 			$returnArray['country']= 1;
-			$returnArray['prev-country'] = $data['dojang-player-country'];
+			//$returnArray['prev-country'] = '"'.$data['dojang-player-country'].'"';
 		}
 		if(count($returnArray)>0){
 			$returnResult=0;
