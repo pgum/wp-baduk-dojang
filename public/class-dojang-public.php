@@ -104,12 +104,21 @@ class Dojang_Public {
 
 	public function renderRegisterForm(){
 		print_r($_GET);
-
-		if(isset($_GET['suc'])){
-			echo "THX 4 registration. Waiting for approval!";
-		}
 		$renderer= new Dojang_Renderer_Public();
-		return $renderer->renderRegisterForm();
+		$html='';
+		if(isset($_GET['suc']) && $_GET['suc'] == 1){
+			$html.= $renderer->renderPlayerRegisteredNotice();
+		}
+		if(isset($_GET['suc']) && $_GET['suc'] == 0){
+			$msg.=  isset($_GET['name'])   ? $_GET['prev-name']." is not valid!<br/>"    : "";
+			$msg.=  isset($_GET['email'])  ? $_GET['prev-email']." is not valid!<br/>"   : "";
+			$msg.=  isset($_GET['kgs'])    ? $_GET['prev-kgs']." is not valid!<br/>"     : "";
+			$msg.=  isset($_GET['country'])? $_GET['prev-country']." is not valid!<br/>" : "";
+			$msg.=  isset($_GET['rank'])   ? $_GET['prev-rank']." is not valid!<br/>"    : "";
+			$html.= $renderer->renderPlayerNotRegisteredNotice($msg);
+		}
+		$html.= $renderer->renderRegisterForm();
+		return $html;
 	}
 	public function renderCurrentLeague(){
 		//$league= new Dojang_League();
@@ -129,8 +138,35 @@ class Dojang_Public {
 		return $renderer->renderSubmitResultForm();
 	}
   /*POST DATA handlers*/
+	private function validate_post_data($data){
+		$returnArray=array();
+		$returnResult=1;
+		if(strlen($data['dojang-player-name'])== 0){
+			$returnArray['name']= 1;
+			$returnArray['prev-name'] = $data['dojang-player-name'];
+		}
+		if(is_email($data['dojang-player-email'])== false){
+			$returnArray['email']= 1;
+			$returnArray['prev-email'] = $data['dojang-player-email'];
+		}
+		if(strlen($data['dojang-player-kgs-account'])== 0){
+			$returnArray['kgs']= 1;
+			$returnArray['prev-kgs'] = $data['dojang-player-kgs-account'];
+		}
+		if(strlen($data['dojang-player-country'])== 0){
+			$returnArray['country']= 1;
+			$returnArray['prev-country'] = $data['dojang-player-country'];
+		}
+		if(count($returnArray)>0){
+			$returnResult=0
+			$returnArray['prev-rank'] = $data['dojang-player-rank']
+		}
+		$returnArray['suc'] = $returnResult
+		return $returnArray;
+	}
 	public function post_register_data(){
-		wp_safe_redirect(add_query_arg( 'suc', '1', home_url('/register-to-online-teaching')));
+		$validation_result= $this->validate_post_data($_POST);
+		wp_safe_redirect(add_query_arg( $validation_result, home_url('/register-to-online-teaching')));
 		exit;
 	}
 }
