@@ -42,8 +42,8 @@ class Dojang_Renderer_Public{
     return $html;
   }
   public function renderCurrentLeague(){
-    $html='<h2 class="dojang-results"> Group Standings</h2>';
-    /*$groupArray= $league->getGroupsDetails();
+    $html='<h2 class="dojang-results"> Group Standings</h2>';/*
+    $groupArray= $league->getGroupsDetails();
     foreach ($groupArray as $group){
       $gR = new Dojang_Renderer_Group_Public($group);
       $html.= $gR->renderGroupInfo();
