@@ -53,6 +53,5 @@ class Dojang_Group {
         $p->{"leaguePoints"}= $leaguePointsArray[$p->playerId];
         $p->{"place"}= $playersPlaceArray[$p->playerId];
       }
-      //new Dojang_Player($p->playerId);
   }
 }
