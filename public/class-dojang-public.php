@@ -147,7 +147,7 @@ class Dojang_Public {
 			$returnArray['demail']= 1;
 			$returnResult=0;
 		}
-		if(strlen($data['dojang-player-KGS-account'])== 0){
+		if(strlen($data['dojang-player-kgs-account'])== 0){
 			$returnArray['dkgs']= 1;
 			$returnResult=0;
 		}
@@ -157,7 +157,7 @@ class Dojang_Public {
 		}
 		if($returnResult == 0){
 			if(isset($data['dojang-player-name'])) $returnArray['prev-name'] = '"'.$data['dojang-player-name'].'"';
-			if(isset($data['dojang-player-KGS-account'])) $returnArray['prev-kgs'] = '"'.$data['dojang-player-KGS-account'].'"';
+			if(isset($data['dojang-player-kgs-account'])) $returnArray['prev-kgs'] = '"'.$data['dojang-player-kgs-account'].'"';
 			if(isset($data['dojang-player-email'])) $returnArray['prev-email'] = '"'.$data['dojang-player-email'].'"';
 			if(isset($data['dojang-player-country'])) $returnArray['prev-country'] = '"'.$data['dojang-player-country'].'"';
 			$returnArray['prev-rank'] = $data['dojang-player-rank'];

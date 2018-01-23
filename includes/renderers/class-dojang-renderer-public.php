@@ -49,7 +49,7 @@ class Dojang_Renderer_Public{
         <div class="dojang-form-input"><input name="dojang-player-email" type="text" value="'.$prev_email.'" placeholder="E-mail that will be used to contact"></div>
 
         <div class="dojang-form-label"><label for="dojang-player-kgs-account">KGS Account <span class="dojang-required">*</span></label></div>
-        <div class="dojang-form-input"><input name="dojang-KGS-account" type="text" value="'.$prev_kgs.'" placeholder="KGS that will be used in league games"></div>
+        <div class="dojang-form-input"><input name="dojang-player-kgs-account" type="text" value="'.$prev_kgs.'" placeholder="KGS that will be used in league games"></div>
 
         <div class="dojang-form-label"><label for="dojang-player-rank">Rank <span class="dojang-required">*</span></label></div>
         <div class="dojang-form-input"><select name="dojang-player-rank">'.$this->renderRankOptions($prev_rank).'</select></div>
