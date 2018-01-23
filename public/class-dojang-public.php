@@ -143,6 +143,7 @@ class Dojang_Public {
 			$renderer= new Dojang_Renderer_Public();
 			$html.=$renderer->renderLeague($league).'<br/>';
 		}
+		return $html;
 	}
   /*POST DATA handlers*/
 	private function validate_post_data($data){
