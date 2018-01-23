@@ -38,7 +38,7 @@ class Dojang_Renderer_Public{
     $prev_rank=   isset($_GET['prev-rank'])   ? $_GET['prev-rank']    : "";
 
     $html = '<h2 class="dojang-register">Registration Form</h2>';
-    $html.= '<p>Please fill out form below. All fields marked with <span class="dojang-required">*</span> are required for your form to be submitted.</p>'
+    $html.= '<p>Please fill out form below. All fields marked with <span class="dojang-required">*</span> are required for your form to be submitted.</p>';
     $html.='<form class="dojang-register-form" action="'.get_admin_url().'admin-post.php" method="post">
       <input type="hidden" name="action" value="dojang_register" />
       <fieldset>
