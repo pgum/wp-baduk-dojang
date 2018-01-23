@@ -1,4 +1,4 @@
-<?php/*
+<?php
 class Dojang_Renderer_Group_Public{
   public $groupDetails;
   public $groupPlayers;
@@ -55,5 +55,5 @@ class Dojang_Renderer_Group_Public{
       $html.= $this->renderPlayerRow($p);
     return '<tbody>'.$html.'</tbody>';
   }
-}*/
+}
 ?>
