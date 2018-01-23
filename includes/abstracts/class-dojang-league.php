@@ -19,7 +19,7 @@
  * @subpackage Dojang/includes
  * @author     Piotr Jacek Gumulka <pjgumulka@gmail.com>
  */
-require_once('class-dojang-group.php');
+//require_once('class-dojang-group.php');
 class Dojang_League {
   public $groupIds;
   public $leagueId;
