@@ -136,7 +136,7 @@ class Dojang_Public {
 	}
 	public function renderArchive(){
 		global $wpdb;
-		$archiveLeaguesIds= $wpdb->get_col("SELECT id AS pastLeagues FROM {$wpdb->prefix}leagues WHERE closed = 1");
+		$archiveLeaguesIds= $wpdb->get_col("SELECT id AS pastLeagues FROM {$wpdb->prefix}leagues WHERE closed = 1 ORDER BY pastLeagues");
 		$html='';
 		foreach($archiveLeaguesIds as $leagueId){
 			$league= new Dojang_League($leagueId);
