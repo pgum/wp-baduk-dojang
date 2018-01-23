@@ -105,9 +105,8 @@ class Dojang_Public {
 	public function renderRegisterForm(){
 		$renderer= new Dojang_Renderer_Public();
 		$html='';
-		if(isset($_GET['suc']) && $_GET['suc'] == 1){
+		if(isset($_GET['suc']) && $_GET['suc'] == 1)
 			$html.= $renderer->renderPlayerRegisteredNotice();
-		}
 		if(isset($_GET['suc']) && $_GET['suc'] == 0){
 			$msg.=  isset($_GET['dname'])   ? 'NAME cannot be empty!<br/>'    : "";
 			$msg.=  isset($_GET['demail'])  ? '"'.$_GET['prev-email'].'" is not valid E-MAIL!<br/>'   : "";
