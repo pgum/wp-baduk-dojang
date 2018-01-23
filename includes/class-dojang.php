@@ -211,6 +211,7 @@ class Dojang {
 		add_shortcode('dojang-current-league', array($plugin_public, 'renderCurrentLeague'));
 		add_shortcode('dojang-current-players', array($plugin_public, 'renderCurrentPlayers'));
 		add_shortcode('dojang-scoreboard', array($plugin_public, 'renderScoreboard'));
+		add_shortcode('dojang-archive', array($plugin_public, 'renderArchive'));
 		add_shortcode('dojang-submit-result', array($plugin_public, 'renderSubmitResultForm'));
 	}
 	/**

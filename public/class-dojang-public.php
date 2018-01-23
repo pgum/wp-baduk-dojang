@@ -134,6 +134,16 @@ class Dojang_Public {
 		$renderer= new Dojang_Renderer_Public();
 		return $renderer->renderSubmitResultForm();
 	}
+	public function renderArchive(){
+		global $wpdb;
+		$archiveLeaguesIds= $wpdb->get_col("SELECT id AS pastLeagues FROM {$wpdb->prefix}leagues WHERE closed = 1");
+		$html='';
+		foreach($archiveLeaguesIds as $leagueId){
+			$league= new Dojang_League($leagueId);
+			$renderer= new Dojang_Renderer_Public();
+			$html.=$renderer->renderLeague($league).'<br/>';
+		}
+	}
   /*POST DATA handlers*/
 	private function validate_post_data($data){
 		$returnArray=array();
