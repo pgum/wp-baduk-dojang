@@ -15,7 +15,8 @@ class Dojang_Renderer_Public{
   }
   public function renderLeague($league){
     $groupArray= $league->getGroupsDetails();
-    $html='<h2 class="dojang-results"> Group Standings</h2>';
+    $leagueName= $league->getLeagueInfo()->leagueName;
+    $html='<h2 class="dojang-results">'.$leagueName.' Groups Standings</h2>';
     foreach ($groupArray as $group){
       $gR = new Dojang_Renderer_Group_Public($group);
       $html.= $gR->renderGroupInfo();
@@ -26,15 +27,7 @@ class Dojang_Renderer_Public{
   }
   public function renderCurrentLeague(){
     $league= new Dojang_League();
-    $groupArray= $league->getGroupsDetails();
-    $html='<h2 class="dojang-results"> Group Standings</h2>';
-    foreach ($groupArray as $group){
-      $gR = new Dojang_Renderer_Group_Public($group);
-      $html.= $gR->renderGroupInfo();
-      $html.= $gR->renderGroupTable();
-      $html.='<br/>';
-    }
-    return $html;
+    return $this->renderLeague($league);
   }
   public function renderCurrentPlayers(){
     return '<h2 class="dojang-players">Current League Players List</h2>';
