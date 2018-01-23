@@ -2,20 +2,20 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
-h2.dojang-register:before {font-family: 'dashicons'; content: '\f118';}
-h2.dojang-results:before {font-family: 'dashicons'; content: '\f314';}
-h2.dojang-players:before {font-family: 'dashicons'; content: '\f307';}
-h2.dojang-scoreboard:before {font-family: 'dashicons'; content: '\f154';}
-h2.dojang-submit:before {font-family: 'dashicons'; content: '\f157';}
+h3.dojang-register:before {font-family: 'dashicons'; content: '\f118';}
+h3.dojang-results:before {font-family: 'dashicons'; content: '\f314';}
+h3.dojang-players:before {font-family: 'dashicons'; content: '\f307';}
+h3.dojang-scoreboard:before {font-family: 'dashicons'; content: '\f154';}
+h3.dojang-submit:before {font-family: 'dashicons'; content: '\f157';}
 
 /*Registration Notices*/
 .dojang-notice {border: 1px solid black}
 .dojang-notice div {margin: 5px;}
 .dojang-required {color: red;}
-h2.dojang-ok:before {font-family: 'dashicons'; content: '\f147';}
-h2.dojang-nok:before {font-family: 'dashicons'; content: '\f158';}
-h2.dojang-ok {color: green;}
-h2.dojang-nok {color: red;}
-h2.dojang-collapse:after {font-family: 'dashicons'; content: '\f506'; margin-left:10px;}
-h2.dojang-expand:after {font-family: 'dashicons'; content: '\f211'; margin-left:10px;}
+h3.dojang-ok:before {font-family: 'dashicons'; content: '\f147';}
+h3.dojang-nok:before {font-family: 'dashicons'; content: '\f158';}
+h3.dojang-ok {color: green;}
+h3.dojang-nok {color: red;}
+h3.dojang-collapse:after {font-family: 'dashicons'; content: '\f506'; margin-left:10px;}
+h3.dojang-expand:after {font-family: 'dashicons'; content: '\f211'; margin-left:10px;}
 .dojang-hidden {display:none;}

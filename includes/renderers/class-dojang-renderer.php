@@ -6,7 +6,7 @@ class Dojang_Renderer{
   }
   public function renderLeagueInfo(){
     $leagueInfo= $this->league->getLeagueInfo();
-    $html='<h2><span class="dashicons dashicons-sticky"></span>'.$leagueInfo->leagueName.' - League Details</h2>';
+    $html='<h3><span class="dashicons dashicons-sticky"></span>'.$leagueInfo->leagueName.' - League Details</h3>';
     $html.='<span>League Properties: hidden:'.$leagueInfo->hidden.' closed:'.$leagueInfo->closed.'</br></span>';
     $html.='<span>League Id:'.$leagueInfo->id.' pointsDistributed:'.$leagueInfo->pointsDistributed.'</br></span>';
     return $html;
@@ -18,7 +18,7 @@ class Dojang_Renderer{
   }
   public function renderGamesToApproveTable(){
     $gamesToApproveArray= $this->league->getGamesToApprove();
-    $html='<h2><span class="dashicons dashicons-flag"></span>Games to approve</h2>';
+    $html='<h3><span class="dashicons dashicons-flag"></span>Games to approve</h3>';
     $html.='<table class="dojang-games-to-approve"><thead><th>#</th><th>Black</th><th>White</th><th>Add Date</th><th>Approve</th><th>Remove</th></thead><tbody>';
     $i=1;
     foreach($gamesToApproveArray as $game){
@@ -35,7 +35,7 @@ class Dojang_Renderer{
     return $html;
   }
   public function renderGroupsTable(){
-    $html='<h2><span class="dashicons dashicons-forms"></span> Group Standings</h2>';
+    $html='<h3><span class="dashicons dashicons-forms"></span> Group Standings</h3>';
     $groupArray= $this->league->getGroupsDetails();
     foreach ($groupArray as $group){
       $gR = new Dojang_Renderer_Group($group);

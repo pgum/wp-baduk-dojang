@@ -25,7 +25,7 @@ class Dojang_Renderer_Registration{
 
   public function renderPlayerRegisteredNotice(){
     $html='<div class="dojang-notice"><div>';
-    $html.='<h2 class="dojang-ok">Your registration is saved and waiting for approval!</h2>';
+    $html.='<h3 class="dojang-ok">Your registration is saved and waiting for approval!</h2>';
     $html.='<p>We will write to e-mail address you provided. When your registration is approved account details will be send there too!</p>';
     $html.='</div></div>';
     return $html;
