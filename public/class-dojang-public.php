@@ -103,18 +103,16 @@ class Dojang_Public {
 	/*Shortcodes callbacks*/
 
 	public function renderRegisterForm(){
-		print_r($_GET);
 		$renderer= new Dojang_Renderer_Public();
 		$html='';
 		if(isset($_GET['suc']) && $_GET['suc'] == 1){
 			$html.= $renderer->renderPlayerRegisteredNotice();
 		}
 		if(isset($_GET['suc']) && $_GET['suc'] == 0){
-			$msg.=  isset($_GET['name'])   ? '"'.$_GET['prev-name'].'" is not valid NAME!<br/>'    : "";
-			$msg.=  isset($_GET['email'])  ? '"'.$_GET['prev-email'].'" is not valid E-MAIL!<br/>'   : "";
-			$msg.=  isset($_GET['kgs'])    ? '"'.$_GET['prev-kgs'].'" is not valid KGS ACCOUNT!<br/>'     : "";
-			$msg.=  isset($_GET['country'])? '"'.$_GET['prev-country'].'" is not valid COUNTRY!<br/>' : "";
-			$msg.=  isset($_GET['rank'])   ? '"'.$_GET['prev-rank'].'" is not valid RANK!<br/>'    : "";
+			$msg.=  isset($_GET['dname'])   ? 'NAME cannot be empty!<br/>'    : "";
+			$msg.=  isset($_GET['demail'])  ? '"'.$_GET['prev-email'].'" is not valid E-MAIL!<br/>'   : "";
+			$msg.=  isset($_GET['dkgs'])    ? 'KGS ACCOUNT cannot be empty!<br/>'     : "";
+			$msg.=  isset($_GET['dcountry'])? 'COUNTRY cannot be empty!<br/>' : "";
 			$html.= $renderer->renderPlayerNotRegisteredNotice($msg);
 		}
 		$html.= $renderer->renderRegisterForm();
@@ -142,23 +140,26 @@ class Dojang_Public {
 		$returnArray=array();
 		$returnResult=1;
 		if(strlen($data['dojang-player-name'])== 0){
-			$returnArray['name']= 1;
-			//$returnArray['prev-name'] = '"'.$data['dojang-player-name'].'"';
+			$returnArray['dname']= 1;
+			$returnResult=0;
 		}
 		if(is_email($data['dojang-player-email'])== false){
-			$returnArray['email']= 1;
-			$returnArray['prev-email'] = '"'.$data['dojang-player-email'].'"';
+			$returnArray['demail']= 1;
+			$returnResult=0;
 		}
 		if(strlen($data['dojang-player-KGS-account'])== 0){
-			$returnArray['kgs']= 1;
-			//$returnArray['prev-kgs'] = '"'.$data['dojang-player-KGS-account'].'"';
+			$returnArray['dkgs']= 1;
+			$returnResult=0;
 		}
 		if(strlen($data['dojang-player-country'])== 0){
-			$returnArray['country']= 1;
-			//$returnArray['prev-country'] = '"'.$data['dojang-player-country'].'"';
-		}
-		if(count($returnArray)>0){
+			$returnArray['dcountry']= 1;
 			$returnResult=0;
+		}
+		if($returnResult == 0){
+			if(isset($data['dojang-player-name'])) $returnArray['prev-name'] = '"'.$data['dojang-player-name'].'"';
+			if(isset($data['dojang-player-KGS-account'])) $returnArray['prev-kgs'] = '"'.$data['dojang-player-KGS-account'].'"';
+			if(isset($data['dojang-player-email'])) $returnArray['prev-email'] = '"'.$data['dojang-player-email'].'"';
+			if(isset($data['dojang-player-country'])) $returnArray['prev-country'] = '"'.$data['dojang-player-country'].'"';
 			$returnArray['prev-rank'] = $data['dojang-player-rank'];
 		}
 		$returnArray['suc'] = $returnResult;
