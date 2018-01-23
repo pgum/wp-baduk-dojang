@@ -28,5 +28,19 @@
 	 * Although scripts in the WordPress core, Plugins and Themes may be
 	 * practising this, we should strive to set a better example in our own work.
 	 */
-
+	 $(function(){
+		 $('.dojang-results-archive').each(function(){
+			 $(this).on('click',function(){
+				 var leagueId= $(this).attr('x-league-id');
+				 if($(this).hasClass('dojang-collapse')){
+					 $(this).removeClass('dojang-collapse').addClass('dojang-expand');
+					 $('.dojang-league-groups-results-tables-archive[x-league-id='+leagueId+']').addClass('dojang-hidden');
+				 }
+				 else if($(this).hasClass('dojang-expand')){
+					 $(this).removeClass('dojang-expand').addClass('dojang-collapse');
+					 $('.dojang-league-groups-results-tables-archive[x-league-id='+leagueId+']').removeClass('dojang-hidden');
+				 }
+			 });
+		 });
+	 });
 })( jQuery );

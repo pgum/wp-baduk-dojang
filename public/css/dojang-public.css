@@ -16,3 +16,6 @@ h2.dojang-ok:before {font-family: 'dashicons'; content: '\f147';}
 h2.dojang-nok:before {font-family: 'dashicons'; content: '\f158';}
 h2.dojang-ok {color: green;}
 h2.dojang-nok {color: red;}
+h2.dojang-collapse:after {font-family: 'dashicons'; content: '\f506'; margin-left:10px;}
+h2.dojang-expand:after {font-family: 'dashicons'; content: '\f211'; margin-left:10px;}
+.dojang-hidden {display:none;}
