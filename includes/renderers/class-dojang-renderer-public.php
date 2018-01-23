@@ -16,12 +16,14 @@ class Dojang_Renderer_Public{
   public function renderLeague($league){
     $groupArray= $league->getGroupsDetails();
     $leagueName= $league->getLeagueInfo()->leagueName;
-    $html='<h2 class="dojang-results">'.$leagueName.' Groups Standings</h2>';
+    $html='<div class="dojang-league-results-wrapper">';
+    $html.='<h2 class="dojang-results">'.$leagueName.' Groups Standings</h2>';
+    $html= '<div class="dojang-league-groups-results-tables">';
     foreach ($groupArray as $group){
       $gR = new Dojang_Renderer_Group_Public($group);
       $html.= $gR->renderGroupInfo();
       $html.= $gR->renderGroupTable();
-      $html.='<br/>';
+      $html.='</div></div><br/>';
     }
     return $html;
   }
