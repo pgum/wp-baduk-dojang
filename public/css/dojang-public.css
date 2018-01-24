@@ -3,6 +3,7 @@
  * included in this file.
  */
 h3.dojang-register:before {font-family: 'dashicons'; content: '\f118';}
+h3.dojang-results-archive:before {font-family: 'dashicons'; content: '\f314';}
 h3.dojang-results:before {font-family: 'dashicons'; content: '\f314';}
 h3.dojang-players:before {font-family: 'dashicons'; content: '\f307';}
 h3.dojang-scoreboard:before {font-family: 'dashicons'; content: '\f154';}

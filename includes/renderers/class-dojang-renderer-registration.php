@@ -16,7 +16,7 @@ class Dojang_Renderer_Registration{
   }
   public function renderPlayerNotRegisteredNotice($msg){
     $html='<div class="dojang-notice"><div>';
-    $html.='<h2 class="dojang-nok">Your registration had errors!</h2>';
+    $html.='<h3 class="dojang-nok">Your registration had errors!</h3>';
     $html.='<p>Please try again, and remember that all fields are required!</p>';
     $html.='<p>'.$msg.'</p>';
     $html.='</div></div>';
@@ -25,7 +25,7 @@ class Dojang_Renderer_Registration{
 
   public function renderPlayerRegisteredNotice(){
     $html='<div class="dojang-notice"><div>';
-    $html.='<h3 class="dojang-ok">Your registration is saved and waiting for approval!</h2>';
+    $html.='<h3 class="dojang-ok">Your registration is saved and waiting for approval!</h3>';
     $html.='<p>We will write to e-mail address you provided. When your registration is approved account details will be send there too!</p>';
     $html.='</div></div>';
     return $html;
@@ -37,7 +37,7 @@ class Dojang_Renderer_Registration{
     $prev_country=isset($_GET['prev-country'])? $_GET['prev-country'] : "";
     $prev_rank=   isset($_GET['prev-rank'])   ? $_GET['prev-rank']    : "";
 
-    $html = '<h2 class="dojang-register">Registration Form</h2>';
+    $html = '<h3 class="dojang-register">Registration Form</h3>';
     $html.= '<p>Please fill out form below. All fields marked with <span class="dojang-required">*</span> are required for your form to be submitted.</p>';
     $html.='<form class="dojang-register-form" action="'.get_admin_url().'admin-post.php" method="post">
       <input type="hidden" name="action" value="dojang_register" />
