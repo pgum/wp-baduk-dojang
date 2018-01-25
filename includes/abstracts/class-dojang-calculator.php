@@ -2,6 +2,7 @@
   class Dojang_Calculator{
     public $results;
     public $players;
+
     public function __construct($players, $results){
       $this->results= $results;
       $this->players= $players;
@@ -18,7 +19,7 @@
               ($r->playerIdBlack == $p->playerId and $r->playerIdWhite == $o->playerId));
     }
     private function isSameResult($resultsOne, $resultsTwo){
-      return ($resultsOne['win'] == $resultsTwo['win'] and $resultsOne['loss'] == $resultsTwo['loss'])
+      return (($resultsOne['win'] == $resultsTwo['win']) and ($resultsOne['loss'] == $resultsTwo['loss']));
     }
     private function playerResultsComparator($playerOneResults, $playerTwoResults){
       $players_have_equal_results= 0;
@@ -70,9 +71,9 @@
       $playersPlace= array();
       $playersResults= $this->groupPlayersResults();
       uasort($playersResults, array($this, 'playerResultsComparator'));
-      $rank= 1
+      $rank= 1;
       $tie_rank= 0;
-      $lastResult= array('win' => -1; 'loss' => -1);
+      $lastResult= array('win' => -1, 'loss' => -1);
       foreach($playersResults as $playerId => $playerResult){
         if(!$this->isSameResult($playerResult, $lastResult)){
           $count= 0;
