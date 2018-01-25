@@ -23,8 +23,8 @@
     }
     private function playerResultsComparator($playerOneResults, $playerTwoResults){
       $players_have_equal_results= 0;
-      $playerOne_has_better_results= 1;
-      $playerTwo_has_better_results=-1;
+      $playerTwo_has_better_results= 1;
+      $playerOne_has_better_results=-1;
       if($playerOneResults['win'] == $playerTwoResults['win'])
         if($playerOneResults['loss'] < $playerTwoResults['loss'])
           return $players_have_equal_results;
