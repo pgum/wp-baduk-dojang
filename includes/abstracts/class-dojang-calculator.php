@@ -112,8 +112,8 @@
           $playersPoints[$p->playerId]+= $bonusForWinWithTeacher;
         $playersPoints[$p->playerId]*= $leagueMultiplier;
       }
-
-
+      return $playersPoints;
     }
+
   }
 ?>
