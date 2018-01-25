@@ -16,7 +16,7 @@ class Dojang_Renderer_Group_Public{
   public function renderGroupTable(){
     $html.= $this->renderResultsHeader();
     $html.= $this->renderPlayersResults();
-    return '<table class="dojang-group-table">'.$html.'</table>';//.print_r($this->groupResults,true);
+    return '<table class="dojang-table dojang-group-table">'.$html.'</table>';
   }
   private function renderResultsHeader(){
     $html.= '<tr><th>#</th><th>Name</th><th>Nick</th> ';

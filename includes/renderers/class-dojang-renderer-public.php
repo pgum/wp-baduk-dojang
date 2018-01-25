@@ -36,7 +36,27 @@ class Dojang_Renderer_Public{
     return $this->renderLeague($league);
   }
   public function renderCurrentPlayers(){
-    return '<h3 class="dojang-players">Current League Players List</h3>';
+    $league= new Dojang_League();
+    $groupArray= $league->getGroupsDetails();
+    $leagueName= $league->getLeagueInfo()->leagueName;
+    $html.='<h3 class="dojang-players">'.$leagueName.' League Players List</h3>';
+    $html.='<table class="dojang-table dojang-player-list">';
+    $html.='<thead><tr><th>#</th><th>Player Name</th><th>Country</th><th>Nickname</th><th>Rank</th><th>Group</th></tr></thead><tbody>';
+    $i=1;
+    foreach ($groupArray as $group){
+      $players= $group->groupPlayers;
+      foreach($players as $player){
+        $playerName= $player->playerDetails->playerName;
+        $playerCountry= $player->playerDetails->playerCountry;
+        $playerKgs= $player->playerDetails->playerKgs;
+        $playerRank= $player->playerDetails->playerRank;
+        $playerGroup= $group->groupDetails->groupName;
+        $html.='<tr><td>'.$i++.'</td><td>'.$playerName.'</td><td>'.$playerCountry.'</td><td>'.$playerKgs.'</td><td>'.$playerRank.'</td><td>'.$playerGroup.'</td></tr>';
+      }
+    }
+    $html.='</tbody></table>';
+    return $html;
+
   }
   public function renderScoreboard(){
     return '<h3 class="dojang-scoreboard">Players Scoreboard</h3>';
