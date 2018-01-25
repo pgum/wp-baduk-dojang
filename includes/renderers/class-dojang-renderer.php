@@ -9,6 +9,7 @@ class Dojang_Renderer{
     $html='<h3><span class="dashicons dashicons-sticky"></span>'.$leagueInfo->leagueName.' - League Details</h3>';
     $html.='<span>League Properties: hidden:'.$leagueInfo->hidden.' closed:'.$leagueInfo->closed.'</br></span>';
     $html.='<span>League Id:'.$leagueInfo->id.' pointsDistributed:'.$leagueInfo->pointsDistributed.'</br></span>';
+    $html.='<span>League Points Multiplier:'.$leagueInfo->multiplier.'</br></span>';
     return $html;
   }
   private function renderResultToApprovePlayers($black, $white, $winner){

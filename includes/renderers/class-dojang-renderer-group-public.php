@@ -41,7 +41,8 @@ class Dojang_Renderer_Group_Public{
   private function renderPlayerResultsCells($player){
     foreach($this->groupPlayers as $p)
       $html.= $this->groupResultsRenderer->getResultBetween($player, $p);
-    $html.= $this->groupResultsRenderer->getWinCount($player).$this->groupResultsRenderer->getLossCount($player);
+    $html.= '<td>'.$player->win.'</td><td>'.$player->loss.'</td>';
+//    $html.= $this->groupResultsRenderer->getWinCount($player).$this->groupResultsRenderer->getLossCount($player);
     $html.= '<td>#'.$player->place.'</td>';
     return $html;
   }

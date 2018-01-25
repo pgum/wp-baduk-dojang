@@ -75,6 +75,7 @@ class Dojang_Activator {
   		  leagueName text NOT NULL,
   		  hidden tinyint(1) NOT NULL,
   		  closed tinyint(1) NOT NULL,
+  		  multiplier int(11) DEFAULT 1,
   		  pointsDistributed int(11) NOT NULL COMMENT 'if > 0 then points were distributed to players and league is completed',
     		  PRIMARY KEY  (id)
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8;

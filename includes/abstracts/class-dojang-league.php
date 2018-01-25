@@ -23,12 +23,18 @@
 class Dojang_League {
   public $groupIds;
   public $leagueId;
+  public $pointsMultiplier;
   public function __construct($leagueId = NULL){
     if($leagueId == NULL)
       $this->leagueId= $this->getCurrentLeagueId();
     else
       $this->leagueId= $leagueId;
     $this->groupIds= $this->getLeagueGroupIds();
+    $this->pointsMultiplier= $this->getLeagueMultiplier();
+  }
+  public function getLeagueMultiplier(){
+  global $wpdb;
+	return $wpdb->get_var("SELECT multiplier FROM {$wpdb->prefix}leagues WHERE id= $this->leagueId");
   }
   public function getCurrentLeagueId(){
   global $wpdb;
@@ -42,7 +48,7 @@ class Dojang_League {
   public function getGroupsDetails(){
     $groups= array();
     foreach($this->groupIds as $gid)
-      $groups[]= new Dojang_Group($gid->id);
+      $groups[]= new Dojang_Group($gid->id, $this->pointsMultiplier);
     return $groups;
   }
   public function getLeagueInfo(){

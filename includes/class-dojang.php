@@ -126,6 +126,7 @@ class Dojang {
 		//Helpers
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-result-helper.php';
 		//Abstracts
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-calculator.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-league.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-group.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-player.php';
