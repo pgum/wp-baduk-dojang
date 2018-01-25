@@ -43,7 +43,7 @@ class Dojang_Renderer_Group_Public{
       $html.= $this->groupResultsRenderer->getResultBetween($player, $p);
     $html.= '<td>'.$player->win.'</td><td>'.$player->loss.'</td>';
 //    $html.= $this->groupResultsRenderer->getWinCount($player).$this->groupResultsRenderer->getLossCount($player);
-    $html.= '<td class="dojang-place-'.$player->place.'>#'.$player->place.'</td>';
+    $html.= '<td class="dojang-place-'.$player->place.'">#'.$player->place.'</td>';
     return $html;
   }
   private function renderPlayerRow($player){
