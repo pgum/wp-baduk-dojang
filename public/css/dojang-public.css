@@ -25,3 +25,15 @@ h3.dojang-nok {color: red;}
 h3.dojang-collapse:after {font-family: 'dashicons'; content: '\f506'; margin-left:10px;}
 h3.dojang-expand:after {font-family: 'dashicons'; content: '\f211'; margin-left:10px;}
 .dojang-hidden {display:none;}
+/*Results table place highlight*/
+.dojang-place-1 {
+  background: #ffd700;
+}
+
+.dojang-place-2 {
+  background: #c0c0c0;
+}
+
+.dojang-place-3 {
+  background: #cd7f32;
+}
