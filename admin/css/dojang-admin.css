@@ -35,6 +35,13 @@
   -webkit-animation:update-pulse-animation 2s; /* Safari and Chrome */
 
 }
+a.dojang-anchor{
+  display: block;
+  position: relative;
+  /*TODO: set this to proper value by hand later*/
+  top: -250px;
+  visibility: hidden;
+}
 /*Animations*/
 @-moz-keyframes highlight-pulse-animation /* Firefox */
 {

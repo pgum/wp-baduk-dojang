@@ -11,7 +11,7 @@ class Dojang_Renderer{
   }
   public function renderLeagueInfo(){
     $leagueInfo= $this->league->getLeagueInfo();
-    $html.='<a name="'.$leagueInfo->id.'"></a><br/>';
+    $html.='<a class="dojang-anchor" name="'.$leagueInfo->id.'"></a><br/>';
     $html.='<h3><span class="dashicons dashicons-sticky"></span>'.$leagueInfo->leagueName.' - League Details</h3>';
     $html.='<span>League Properties: hidden:'.$leagueInfo->hidden.' closed:'.$leagueInfo->closed.'</br></span>';
     $html.='<span>League Id:'.$leagueInfo->id.' pointsDistributed:'.$leagueInfo->pointsDistributed.'</br></span>';
