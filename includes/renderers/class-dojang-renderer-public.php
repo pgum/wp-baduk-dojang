@@ -66,8 +66,8 @@ class Dojang_Renderer_Public{
     $html.='<thead><tr><th>#</th><th>Player Name</th><th>Country</th><th>Nickname</th><th>Rank</th><th>Points</th></tr></thead><tbody>';
     $i=1;
     foreach($scoreboard as $s){
-      $html.='<tr><td>'.$i++.'</td><td>'.$s->playerName.'</td><td>'.$s->playerCountry.'</td>';
-      $html.='<td>'.$s->playerKgs.'</td><td>'.$s->playerRank.'</td><td>'.$s->playerPoints.'</td></tr>';
+      $html.='<tr><td>'.$i++.'</td><td>'.$s['playerName'].'</td><td>'.$s['playerCountry'].'</td>';
+      $html.='<td>'.$s['playerKgs'].'</td><td>'.$s['playerRank'].'</td><td>'.$s['playerPoints'].'</td></tr>';
     }
     $html.='</tbody></table>';
     return $html;
