@@ -30,7 +30,7 @@ class Dojang_Players {
 	}
 	public function getScoreboard(){
 		global $wpdb;
-    $allPlayers = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}players WHERE isApproved= 1");
+    $allPlayers = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}players WHERE playerApproved= 1");
 		$scoreboard=array();
     foreach($allPlayers as $p){
 			$playerPoints= $wpdb->get_results("SELECT leaguePoints FROM {$wpdb->prefix}groupplayers WHERE playerId = $p->playerId", ARRAY_N);
