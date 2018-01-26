@@ -49,6 +49,7 @@ class Dojang_Activator {
 		  playedWithTeacher smallint(6) NOT NULL,
 		  wonAgainstTeacher smallint(6) NOT NULL,
 		  isPaidMember int(11) NOT NULL,
+			leaguePoints int(11),
 		  PRIMARY KEY  (id)
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 		";
