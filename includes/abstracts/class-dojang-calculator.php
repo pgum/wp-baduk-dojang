@@ -114,10 +114,10 @@
         $pointsTo= $placesCount[$playerPlace];
         $pointsSum= array_sum(array_slice($pointsForPlace, $pointsFrom, $pointsTo));
         $playersPoints[$p->playerId]= round(($pointsSum / $placesCount[$playerPlace]), 2);
+        if($p->wonAgainstTeacher == 1)
+          $playersPoints[$p->playerId]+= $bonusForWinWithTeacher;
+        $playersPoints[$p->playerId]*= $leagueMultiplier;
       }
-      if($p->wonAgainstTeacher == 1)
-        $playersPoints[$p->playerId]+= $bonusForWinWithTeacher;
-      $playersPoints[$p->playerId]*= $leagueMultiplier;
       return $playersPoints;
     }
 
