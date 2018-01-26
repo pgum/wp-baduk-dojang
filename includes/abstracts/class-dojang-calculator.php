@@ -46,27 +46,7 @@
           $count++;
       return $count;
     }
-/*
-    public function getResultBetween($player, $opponent){
-      $result_none= 0;
-      $result_self= -1;
-      $result_player= $player->playerId;
-      $result_opponent= $opponent->playerId;
-      $returnResult= $result_none;
-      if($player->playerId == $opponent->playerId)
-        $returnResult= $result_self;
-      else
-        foreach($this->results as $result)
-          if($this->ifPlayerPlayedOpponent($player, $opponent, $result)){
-            if($this->ifPlayerWonGame($player, $result))
-              $returnResult= $result_player;
-            else
-              $returnResult= $result_opponent;
-            break;
-          }
-      return $returnResult;
-    }
-    */
+
     public function groupPlayersPlace(){
       $playersPlace= array();
       $playersResults= $this->groupPlayersResults();
