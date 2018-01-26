@@ -29,9 +29,9 @@ class Dojang_Group {
     foreach(explode(' ', $name) as $word) $initials .= mb_substr($word, 0, 1, 'utf-8');
     return $initials;
   }
-  private function calculateLeaguePoints($players, $results, $multiplier=2){
+  private function calculateLeaguePoints($players, $results){
     $calculator= new Dojang_Calculator($players, $results);
-    return $calculator->leaguePlayersPoints($multiplier);
+    return $calculator->leaguePlayersPoints($this->leaguePointsMultiplier);
   }
   private function calculatePlayerPlaceInGroup($players, $results){
     $calculator= new Dojang_Calculator($players, $results);

@@ -105,13 +105,20 @@
       $playersPoints= array();
       $playersPlaceArray= $this->groupPlayersPlace();
       $placesCount= array_count_values($playersPlaceArray);
+      $placesCount[0]= 0;
+      ksort($placesCount);
+      print_r($placesCount);
+      $lastPlace= 0;
       foreach($this->players as $p){
         $playerPlace= $playersPlaceArray[$p->playerId];
-        $playersPoints[$p->playerId]= round($pointsForPlace[$playerPlace] / $placesCount[$playerPlace], 2);
-        if($p->wonAgainstTeacher == 1)
-          $playersPoints[$p->playerId]+= $bonusForWinWithTeacher;
-        $playersPoints[$p->playerId]*= $leagueMultiplier;
+        $pointsFrom= array_sum(array_slice($placesCount, 0, $playerPlace));
+        $pointsTo= $placesCount[$playerPlace];
+        $pointsSum= array_sum(array_slice($pointsForPlace, $pointsFrom, $pointsTo));
+        $playersPoints[$p->playerId]= round(($pointsSum / $placesCount[$playerPlace]), 2);
       }
+      if($p->wonAgainstTeacher == 1)
+        $playersPoints[$p->playerId]+= $bonusForWinWithTeacher;
+      $playersPoints[$p->playerId]*= $leagueMultiplier;
       return $playersPoints;
     }
 
