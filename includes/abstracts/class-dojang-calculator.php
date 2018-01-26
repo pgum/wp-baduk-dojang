@@ -107,7 +107,6 @@
       $placesCount= array_count_values($playersPlaceArray);
       $placesCount[0]= 0;
       ksort($placesCount);
-      print_r($placesCount);
       $lastPlace= 0;
       foreach($this->players as $p){
         $playerPlace= $playersPlaceArray[$p->playerId];
