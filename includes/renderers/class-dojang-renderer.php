@@ -4,9 +4,15 @@ class Dojang_Renderer{
   public function __construct($leagueObject){
     $this->league= $leagueObject;
   }
+  public function renderLeagueCloseAndDistributePoints(){
+    $leagueInfo= $this->league->getLeagueInfo();
+    $html.='<a href="#'.$leagueInfo->id.'" class="button button-secondary dojang-distribute" x-league-id="'.$leagueInfo->id.'">Close League And Save Players Points</a>';
+    return $html;
+  }
   public function renderLeagueInfo(){
     $leagueInfo= $this->league->getLeagueInfo();
-    $html='<h3><span class="dashicons dashicons-sticky"></span>'.$leagueInfo->leagueName.' - League Details</h3>';
+    $html.='<a name="'.$leagueInfo->id.'"></a><br/>';
+    $html.='<h3><span class="dashicons dashicons-sticky"></span>'.$leagueInfo->leagueName.' - League Details</h3>';
     $html.='<span>League Properties: hidden:'.$leagueInfo->hidden.' closed:'.$leagueInfo->closed.'</br></span>';
     $html.='<span>League Id:'.$leagueInfo->id.' pointsDistributed:'.$leagueInfo->pointsDistributed.'</br></span>';
     $html.='<span>League Points Multiplier:'.$leagueInfo->multiplier.'</br></span>';
@@ -42,7 +48,6 @@ class Dojang_Renderer{
       $gR = new Dojang_Renderer_Group($group);
       $html.= $gR->renderGroupInfo();
       $html.= $gR->renderGroupTable();
-      $html.='<br/>';
     }
     return $html;
   }

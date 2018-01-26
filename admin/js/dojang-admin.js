@@ -68,4 +68,17 @@
 			});
 		});
 	});
+	/*AJAX on click Close League and Distribute points to players*/
+	$(function(){
+		$('.dojang-distribute').on('click', function(){
+			var leagueToClose= $(this).attr('x-league-id');
+			$.post({
+				url: ajaxurl,
+				data: {'action': 'dojang_close_league_distribute_points', 'league_id': leagueToClose},
+				success: function(data){
+					console.log(data);
+				}
+			});
+		});
+	});
 })( jQuery );

@@ -166,4 +166,8 @@ class Dojang_Admin {
 		echo 'Im gunna update played with teacher in groupplayer table for id='.$_POST['groupplayer_id'].'into value='.$_POST['wonWithTeacher'];
 		wp_die();
 	}
+	public function ajax_close_league_distribute_points(){
+		echo 'Im gunna update players with their points from league and close that league';
+		wp_die();
+	}
 }
