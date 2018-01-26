@@ -59,7 +59,19 @@ class Dojang_Renderer_Public{
 
   }
   public function renderScoreboard(){
-    return '<h3 class="dojang-scoreboard">Players Scoreboard</h3>';
+    $html.= '<h3 class="dojang-scoreboard">Players Scoreboard</h3>';
+    $html.='<table class="dojang-table dojang-player-list">';
+    $html.='<thead><tr><th>#</th><th>Player Name</th><th>Country</th><th>Nickname</th><th>Rank</th><th>Points</th></tr></thead><tbody>';
+    //global $wpdb;
+    //$allPlayers = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}players");
+    //foreach($allPlayers as $p){
+    //$playerPoints= $wpdb->getresults("SELECT leaguePoints FROM {$wpdb->prefix}groupplayers WHERE playerId = $p->playerId", ARRAY_N)
+    //$playerSum= array_sum($playerPoints);
+    //TODO: ...get
+    //$html.='<tr><td>##</td><td>PNPN</td><td>NN</td><td>RR</td><td>PTS</td></tr>';
+    //}
+    $html.='</tbody></table>';
+    return $html;
   }
   public function renderSubmitResultForm(){
     return '<h3 class="dojang-submit">Submit League game result</h3>';
