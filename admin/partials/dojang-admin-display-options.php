@@ -19,8 +19,8 @@
 	<h2><span class="dashicons dashicons-admin-settings"></span><?php echo esc_html( get_admin_page_title() ); ?></h2>
 <form method="post" action="options.php">
 <?php
-  settings_fields('dojang_options');
-  do_settings_sections('dojang_options');
+  settings_fields('dojangoptions');
+  do_settings_sections('dojangoptions');
   submit_button();
 ?>
 </form>

@@ -148,30 +148,28 @@ class Dojang_Admin {
 		include_once 'partials/dojang-admin-display-options.php';
 	}
 
-	public function register_setting(){
+	public function dojang_register_settings(){
 	// Add a General section
 	add_settings_section(
-		$this->option_name . '_general',
+		$this->option_name . 'options',
 		__( 'General', 'baduk-dojang' ),
 		array( $this, 'dojang_general_cb' ),
 		$this->plugin_name
 	);
 	add_settings_field(
-		$this->option_name.'_notice_email',
+		$this->option_name.'_email',
 		__('Notice Email', 'baduk-dojang'),
 		array( $this, 'dojang_email'),
 		$this->plugin_name,
-		$this->option_name.'_general',
-		array('label_for'=> $this->option_name.'_notice_email')
+		$this->option_name.'options',
+		array('label_for'=> $this->option_name.'_email')
 	);
 	register_setting(
 		$this->plugin_name,
-		'dojang_email'
-	);
+		'dojang_email');
 	}
 	public function dojang_email(){
-		$emial= get_option('dojang_email');
-		echo'<input type="text" name="baduk-dojang_email" id="baduk-dojang_email" value="'.$email.'"/>';
+		echo'<input type="text" name="baduk-dojang_email" id="baduk-dojang_email"/>';
 	}
 	public function dojang_general_cb(){
 		echo '<p>' . __( 'Please change the settings accordingly.', 'baduk-dojang' ) . '</p>';

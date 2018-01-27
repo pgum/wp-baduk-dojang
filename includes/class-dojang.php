@@ -177,7 +177,7 @@ class Dojang {
 
 		$this->loader->add_action('admin_menu', $plugin_admin, 'add_options_page');
 		//Settings register
-		$this->loader->add_action('admin_init', $plugin_admin, 'register_settings');
+		$this->loader->add_action('admin_init', $plugin_admin, 'dojang_register_settings');
 		//AJAX hooks for dynamic actions
 		$this->loader->add_action('wp_ajax_dojang_approve_result', $plugin_admin, 'ajax_approve_result' );
 		$this->loader->add_action('wp_ajax_dojang_remove_result', $plugin_admin, 'ajax_remove_result' );
