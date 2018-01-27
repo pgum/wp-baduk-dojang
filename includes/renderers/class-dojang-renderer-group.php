@@ -44,8 +44,7 @@ class Dojang_Renderer_Group{
       $html.= $this->groupResultsRenderer->getResultBetween($player, $p);
     $html.= '<td>'.$player->win.'</td><td>'.$player->loss.'</td>';
     $html.= '<td class="dojang-place-'.$player->place.'">#'.$player->place.'</td><td class="won-with-teacher-cell" x-groupplayer-id="'.$player->id.'">';
-    $html.= '<input type="checkbox" '.disabled( ($this->pointsDistributed == true), true ).' class="dojang-player-won-against-teacher" '.$this->renderCheckboxChecked($player->wonAgainstTeacher).'x-groupplayer-id="'.$player->id.'"/></td>';
-    $html.='<td>'.$i.'</td>';
+    $html.= '<input type="checkbox" '.($this->pointsDistributed == 1 ? 'disabled="disabled"' : '').' class="dojang-player-won-against-teacher" '.$this->renderCheckboxChecked($player->wonAgainstTeacher).'x-groupplayer-id="'.$player->id.'"/></td>';
     $html.= '<td>'.$player->leaguePoints.'</td>';
     return $html;
   }
