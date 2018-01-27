@@ -50,7 +50,6 @@ class Dojang_Players {
     foreach($allPlayers as $p){
 			$playerPoints= $wpdb->get_results("SELECT leaguePoints FROM {$wpdb->prefix}groupplayers WHERE playerId = $p->playerId", ARRAY_N);
       $playerPointsSum= $this->getArraySum($playerPoints);
-      print_r(array($p->playerId, $playerPoints, $playerPointsSum));
 			$playerData=array('playerName' => $p->playerName,
                         'playerCountry'=> $p->playerCountry,
                         'playerKgs' => $p->playerKgs,
