@@ -80,6 +80,7 @@
       return $resultsArray;
     }
     public function leaguePlayersPoints($leagueMultiplier){
+      //TODO: this should not be hardcoded but instead be in general settings
       $pointsForPlace= array(20,15,12,10,8,6,4,2);
       $bonusForWinWithTeacher= 15;
       $playersPoints= array();
