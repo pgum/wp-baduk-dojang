@@ -95,6 +95,25 @@ class Dojang {
 	 * @access   private
 	 */
 	private function load_dependencies() {
+		/**
+		 * My classes to include
+		 */
+		//Helpers
+		//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-result-helper.php';
+		//Abstracts
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-calculator.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-league.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-group.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-players.php';
+		//Renderers
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/renderers/class-dojang-renderer-results.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/renderers/class-dojang-renderer-group.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/renderers/class-dojang-renderer.php';
+		//public renderers
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/renderers/class-dojang-renderer-registration.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/renderers/class-dojang-renderer-group-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/renderers/class-dojang-renderer-public.php';
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
@@ -120,25 +139,6 @@ class Dojang {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-dojang-public.php';
 
 
-		/**
-		 * My classes to include
-		 */
-		//Helpers
-		//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-result-helper.php';
-		//Abstracts
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-calculator.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-league.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-group.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-players.php';
-		//Renderers
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/renderers/class-dojang-renderer-results.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/renderers/class-dojang-renderer-group.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/renderers/class-dojang-renderer.php';
-		//public renderers
-
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/renderers/class-dojang-renderer-registration.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/renderers/class-dojang-renderer-group-public.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/renderers/class-dojang-renderer-public.php';
 
 		$this->loader = new Dojang_Loader();
 
