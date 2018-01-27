@@ -47,8 +47,9 @@ class Dojang_Renderer{
   public function renderGroupsTable(){
     $html='<h3><span class="dashicons dashicons-forms"></span> Group Standings</h3>';
     $groupArray= $this->league->getGroupsDetails();
+    $pointsDistributed= $this->league->getLeagueInfo()->pointsDistributed;
     foreach ($groupArray as $group){
-      $gR = new Dojang_Renderer_Group($group);
+      $gR = new Dojang_Renderer_Group($group, $pointsDistributed);
       $html.= $gR->renderGroupInfo();
       $html.= $gR->renderGroupTable();
     }

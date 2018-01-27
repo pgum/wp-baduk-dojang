@@ -4,10 +4,12 @@ class Dojang_Renderer_Group{
   public $groupPlayers;
   public $groupResults;
   public $renderedGroupResults;
-  public function __construct($groupObject){
+  public $pointsDistributed;
+  public function __construct($groupObject, $pointsDistributed){
     $this->groupDetails= $groupObject->groupDetails;
     $this->groupPlayers= $groupObject->groupPlayers;
     $this->groupResults= $groupObject->groupResults;
+    $this->pointsDistributed = $pointsDistributed;
     $this->groupResultsRenderer= new Dojang_Renderer_Results($this->groupPlayers, $this->groupResults);
   }
   public function renderGroupInfo(){
@@ -27,7 +29,6 @@ class Dojang_Renderer_Group{
     return '<thead>'.$html.'</thead>';
   }
   private function renderPlayerDetailsCells($player){
-    $html.='<td>'.($player->tableOrder+1).'</td>';
     $html.='<td>'.($player->playerDetails->playerName).'</td>';
     $html.='<td>'.($player->playerDetails->playerKgs).'</td>';
     return $html;
@@ -44,18 +45,23 @@ class Dojang_Renderer_Group{
 //    $html.= $this->groupResultsRenderer->getWinCount($player).$this->groupResultsRenderer->getLossCount($player);
     $html.= '<td>'.$player->win.'</td><td>'.$player->loss.'</td>';
     $html.= '<td class="dojang-place-'.$player->place.'">#'.$player->place.'</td><td class="won-with-teacher-cell" x-groupplayer-id="'.$player->id.'">';
-    $html.= '<input type="checkbox" class="dojang-player-won-against-teacher" '.$this->renderCheckboxChecked($player->wonAgainstTeacher).'x-groupplayer-id="'.$player->id.'"/></td>';
+    $html.= '<input type="checkbox" '.disabled( ($this->pointsDistributed == true), true ).' class="dojang-player-won-against-teacher" '.$this->renderCheckboxChecked($player->wonAgainstTeacher).'x-groupplayer-id="'.$player->id.'"/></td>';
+    $html.='<td>'.$i.'</td>';
     $html.= '<td>'.$player->leaguePoints.'</td>';
     return $html;
   }
-  private function renderPlayerRow($player){
-    $html.= $this->renderPlayerDetailsCells($player);
+  private function renderPlayerRow($player, $i){
+    $html.= $this->renderPlayerDetailsCells($player, $i);
     $html.= $this->renderPlayerResultsCells($player);
     return '<tr>'.$html.'</tr>';
   }
   private function renderPlayersResults(){
-    foreach($this->groupPlayers as $p)
+    $i=0;
+    foreach($this->groupPlayers as $p){
+      $i++;
+      $html.='<td>'.$i.'</td>';
       $html.= $this->renderPlayerRow($p);
+    }
     return '<tbody>'.$html.'</tbody>';
   }
 }
