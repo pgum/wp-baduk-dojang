@@ -17,5 +17,6 @@
 
 <div class="wrap">
 	    <h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
-	    
+
+<span class="dojang-footer">Made with <span class="dashicons dashicons-heart" style="color: red"></span> by Piotr</span>
 </div>

@@ -21,4 +21,5 @@
 			$renderer= new Dojang_Renderer();
 			echo $renderer->renderPlayersMgmt();
 			 ?>
+<span class="dojang-footer">Made with <span class="dashicons dashicons-heart" style="color: red"></span> by Piotr</span>
 </div>
