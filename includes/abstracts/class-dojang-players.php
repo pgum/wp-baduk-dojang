@@ -42,7 +42,6 @@ class Dojang_Players {
       $realArray[]=$a[0];
     return array_sum($realArray);
   }
-
 	public function getScoreboard(){
 		global $wpdb;
     $allPlayers = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}players WHERE playerApproved= 1");
@@ -50,12 +49,11 @@ class Dojang_Players {
     foreach($allPlayers as $p){
 			$playerPoints= $wpdb->get_results("SELECT leaguePoints FROM {$wpdb->prefix}groupplayers WHERE playerId = $p->playerId", ARRAY_N);
       $playerPointsSum= $this->getArraySum($playerPoints);
-			$playerData=array('playerName' => $p->playerName,
-                        'playerCountry'=> $p->playerCountry,
-                        'playerKgs' => $p->playerKgs,
-                        'playerRank' => $p->playerRank,
-                        'playerPoints' => $playerPointsSum);
-			$scoreboard[$p->playerId]= $playerData;
+			$scoreboard[$p->playerId]=array('playerName' => $p->playerName,
+                                      'playerCountry'=> $p->playerCountry,
+                                      'playerKgs' => $p->playerKgs,
+                                      'playerRank' => $p->playerRank,
+                                      'playerPoints' => $playerPointsSum);
     }
 		uasort($scoreboard, array($this, 'playerScoreComparator'));
 		return $scoreboard;

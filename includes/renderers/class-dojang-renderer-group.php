@@ -33,18 +33,14 @@ class Dojang_Renderer_Group{
     $html.='<td>'.($player->playerDetails->playerKgs).'</td>';
     return $html;
   }
-  private function renderCheckboxChecked($flag){
-    $html='';
-    if($flag)
-      $html='checked ';
-    return $html;
-  }
   private function renderPlayerResultsCells($player){
     foreach($this->groupPlayers as $p)
       $html.= $this->groupResultsRenderer->getResultBetween($player, $p);
     $html.= '<td>'.$player->win.'</td><td>'.$player->loss.'</td>';
     $html.= '<td class="dojang-place-'.$player->place.'">#'.$player->place.'</td><td class="won-with-teacher-cell" x-groupplayer-id="'.$player->id.'">';
-    $html.= '<input type="checkbox" '.($this->pointsDistributed == 1 ? 'disabled="disabled"' : '').' class="dojang-player-won-against-teacher" '.$this->renderCheckboxChecked($player->wonAgainstTeacher).'x-groupplayer-id="'.$player->id.'"/></td>';
+    $disabled= ($this->pointsDistributed == 1 ? 'disabled="disabled" ' : '');
+    $checked= ($player->wonAgainstTeacher ? 'checked="checked" ' : '');
+    $html.= '<input type="checkbox" '.$disabled.' class="dojang-player-won-against-teacher" '.$checked.'x-groupplayer-id="'.$player->id.'"/></td>';
     $html.= '<td>'.$player->leaguePoints.'</td>';
     return $html;
   }
@@ -55,11 +51,8 @@ class Dojang_Renderer_Group{
   }
   private function renderPlayersResults(){
     $i=0;
-    foreach($this->groupPlayers as $p){
-      $i++;
-      $html.='<tr>'.'<td>'.$i.'</td>';
-      $html.= $this->renderPlayerRow($p).'</tr>';
-    }
+    foreach($this->groupPlayers as $p)
+      $html.='<tr>'.'<td>'.++$i.'</td>'.$this->renderPlayerRow($p).'</tr>';
     return '<tbody>'.$html.'</tbody>';
   }
 }
