@@ -26,7 +26,7 @@ class Dojang_Renderer{
   public function renderGamesToApproveTable(){
     $gamesToApproveArray= $this->league->getGamesToApprove();
     $html='<h3><span class="dashicons dashicons-flag"></span>Games to approve</h3>';
-    $html.='<table class="dojang-games-to-approve"><thead><th>#</th><th>Black</th><th>White</th><th>Add Date</th><th>Approve</th><th>Remove</th></thead><tbody>';
+    $html.='<table class="dojang-table-to-approve"><thead><th>#</th><th>Black</th><th>White</th><th>Add Date</th><th>Approve</th><th>Reject</th></thead><tbody>';
     $i=1;
     foreach($gamesToApproveArray as $game){
       $html.='<tr x-result-id="'.$game->id.'">
@@ -51,7 +51,33 @@ class Dojang_Renderer{
     }
     return $html;
   }
+  public function renderPlayersToApprove(){
+    $players= new Dojang_Players();
+    $playersToApprove= $players->getPlayersToApprove();
+    $html.='<table class="dojang-table-to-approve dojang-player-list">';
+    $html.='<thead><tr><th>Player Name</th><th>Country</th><th>Nickname</th><th>Rank</th><th>E-mail</th><th>Approve</th><th>Reject</th></tr></thead><tbody>';
+    foreach($playersToApprove as $p){
+      $pid      = $p['playerId'];
+      $pname    = $p['playerName'] ==     '' ? '&nbsp;' : $p['playerName'];
+      $pcountry = $p['playerCountry'] ==  '' ? '&nbsp;' : $p['playerCountry'];
+      $pkgs     = $p['playerKgs'] ==      '' ? '&nbsp;' : $p['playerKgs'];
+      $prank    = $p['playerRank'] ==     '' ? '&nbsp;' : $p['playerRank'];
+      $pemail   = $p['playerEmail'] ==    '' ? '&nbsp;' : $p['playerEmail'];
 
+      $html.='<tr x-player-id="'.$p['playerId'].'">';
+      $html.='<td>'.$pname.'</td>';
+      $html.='<td>'.$pcountry.'</td>';
+      $html.='<td>'.$pkgs.'</td>';
+      $html.='<td>'.$prank.'</td>';
+      $html.='<td>'.$pemail.'</td>';
+      $html.='<td>'.'<a href="#" class="button secondary dojang-approve-player" x-player-id="'.$pid.'">Approve Player</a>'.'</td>';
+      $html.='<td>'.'<a href="#" class="button button-red dojang-remove-player" x-player-id="'.$pid.'">Reject Player</a>'.'</td>';
+      $html.='</tr>';
+    }
+    $html.='</tbody></table>';
+    return $html;
+
+  }
   public function renderPlayersMgmt(){
     $players= new Dojang_Players();
     $playersData= $players->getAllPlayersData();

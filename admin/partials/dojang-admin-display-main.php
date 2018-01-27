@@ -20,6 +20,8 @@
 <?
 $league = new Dojang_League();
 $renderer = new Dojang_Renderer($league);
+echo $renderer->renderPlayersToApprove();
+echo "<br/>";
 echo $renderer->renderLeagueInfo();
 echo $renderer->renderGamesToApproveTable();
 echo $renderer->renderGroupsTable();

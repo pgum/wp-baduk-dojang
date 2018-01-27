@@ -2,7 +2,7 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
-.dojang-group-table, .dojang-games-to-approve{
+.dojang-group-table, .dojang-table-to-approve{
   border-collapse: collapse;
 }
  .dojang-group-table tbody td{
@@ -78,13 +78,13 @@ a.dojang-anchor{
 100% {background: lightgray;}
 }
 
-/*Games to Approve Table*/
-.dojang-games-to-approve tbody td{
+/*Games and Players to Approve Tables*/
+.dojang-table-to-approve tbody td{
   border: 1px black solid;
   min-width: 30px;
   padding: 3px;
 }
-.dojang-games-to-approve thead th{
+.dojang-table-to-approve thead th{
   border: 1px black solid;
   min-width: 30px;
   background: lightgray;

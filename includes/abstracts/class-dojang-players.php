@@ -32,6 +32,11 @@ class Dojang_Players {
 		global $wpdb;
     return $wpdb->get_results("SELECT * FROM {$wpdb->prefix}players ORDER BY playerApproved ASC", ARRAY_A);
 	}
+	public function getPlayersToApprove(){
+		global $wpdb;
+    return $wpdb->get_results("SELECT * FROM {$wpdb->prefix}players WHERE playerApproved = 0 ", ARRAY_A);
+	}
+
 
 	public function getScoreboard(){
 		global $wpdb;
