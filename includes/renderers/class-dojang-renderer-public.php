@@ -59,6 +59,8 @@ class Dojang_Renderer_Public{
 
   }
   public function renderScoreboard(){
+    //TODO: this should go to settings and not be hardcoded
+    $eligable_points = 100;
     $players= new Dojang_Players();
     $scoreboard= $players->getScoreboard();
     $html.= '<h3 class="dojang-scoreboard">Players Scoreboard</h3>';
@@ -66,7 +68,7 @@ class Dojang_Renderer_Public{
     $html.='<thead><tr><th>#</th><th>Player Name</th><th>Country</th><th>Nickname</th><th>Rank</th><th>Points</th></tr></thead><tbody>';
     $i=1;
     foreach($scoreboard as $s){
-      $html.='<tr><td>'.$i++.'</td><td>'.$s['playerName'].'</td><td>'.$s['playerCountry'].'</td>';
+      $html.='<tr '.($s['playerPoints'] >= $eligable_points ? 'class="dojang-eligable"' : '').'><td>'.$i++.'</td><td>'.$s['playerName'].'</td><td>'.$s['playerCountry'].'</td>';
       $html.='<td>'.$s['playerKgs'].'</td><td>'.$s['playerRank'].'</td><td>'.$s['playerPoints'].'</td></tr>';
     }
     $html.='</tbody></table>';
