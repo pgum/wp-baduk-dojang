@@ -68,6 +68,39 @@
 			});
 		});
 	});
+	/*Table editable cell UI and ajax call on button OK click*/
+	$(function(){
+		$('.dojang-editable-cell').each(function(){
+			var editedCell= $(this);
+			$(this).on('click', '.dojang-update-btn', function(){
+				//var inputVal = $(this).prev('input').val();
+				var inputVal = $(this).parent().children('input').val()
+				var fieldName= $(this).attr('x-field');
+				var playerId = $(this).attr('x-player-id');
+				//console.log('UPDATE BTN FIELD: '+fieldName+' TO: '+inputVal+' OF PLAYER ID:'+playerId);
+			$.post({
+				url: ajaxurl,
+				data: {'action': 'dojang_update_player_field', 'player_id': playerId, 'field': fieldName, 'value': inputVal},
+				success: function(data){
+					console.log(data);
+					editedCell.addClass('dojang-cell-updated').delay(2000).queue(function(){ $(this).removeClass('dojang-cell-updated').dequeue(); });}
+			});
+				$(this).parent()
+				.removeClass('dojang-editable-div-e')
+				.addClass('dojang-editable-div')
+				.html(inputVal);
+			});
+			$(this).on('click', '.dojang-editable-div', function(){
+				var cellValue= $(this).text();
+				var fieldName= $(this).attr('x-field');
+				var playerId= $(this).parents('tr').attr('x-player-id');
+				$(this)
+				.removeClass('dojang-editable-div')
+				.addClass('dojang-editable-div-e')
+				.html('<input value="'+cellValue+'"/><a href="#pid-'+playerId+'" class="dojang-update-btn button button-secondary" x-player-id="'+playerId+'" x-field="'+fieldName+'">OK</a>');
+			});
+		});
+	});
 	/*AJAX on click Close League and Distribute points to players*/
 	$(function(){
 		$('.dojang-distribute').on('click', function(){

@@ -16,6 +16,9 @@
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 
 <div class="wrap">
-	    <h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
-	    
+	    <h2><span class="dashicons dashicons-groups"></span><?php echo esc_html( get_admin_page_title() ); ?></h2>
+	    <?php
+			$renderer= new Dojang_Renderer();
+			echo $renderer->renderPlayersMgmt();
+			 ?>
 </div>

@@ -184,8 +184,7 @@ class Dojang {
 		$this->loader->add_action('wp_ajax_dojang_remove_player', $plugin_admin, 'ajax_remove_player' );
 		$this->loader->add_action('wp_ajax_dojang_update_played_with_teacher', $plugin_admin, 'ajax_update_played_with_teacher' );
 		$this->loader->add_action('wp_ajax_dojang_close_league_distribute_points', $plugin_admin, 'ajax_close_league_distribute_points' );
-
-
+		$this->loader->add_action('wp_ajax_dojang_update_player_field', $plugin_admin, 'ajax_update_player_field' );
 	}
 
 	/**

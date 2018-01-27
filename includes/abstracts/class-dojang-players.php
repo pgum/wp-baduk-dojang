@@ -28,6 +28,11 @@ class Dojang_Players {
 		if($scoreOne['playerPoints'] > $scoreTwo['playerPoints']) return $scoreOne_better;
 		return $scoreTwo_better;
 	}
+	public function getAllPlayersData(){
+		global $wpdb;
+    return $wpdb->get_results("SELECT * FROM {$wpdb->prefix}players ORDER BY playerApproved ASC", ARRAY_A);
+	}
+
 	public function getScoreboard(){
 		global $wpdb;
     $allPlayers = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}players WHERE playerApproved= 1");

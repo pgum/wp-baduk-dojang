@@ -170,4 +170,11 @@ class Dojang_Admin {
 		echo 'Im gunna update players with their points from league and close that league';
 		wp_die();
 	}
+	public function ajax_update_player_field(){
+		$playerId= $_POST['player_id'];
+		$field= $_POST['field'];
+		$value= $_POST['value'];
+		echo 'Im gunna update player ('.$playerId.') field '.$field.' to value '.$value;
+		wp_die();
+	}
 }
