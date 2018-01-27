@@ -124,7 +124,7 @@ class Dojang {
 		 * My classes to include
 		 */
 		//Helpers
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-result-helper.php';
+		//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-result-helper.php';
 		//Abstracts
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-calculator.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/abstracts/class-dojang-league.php';
