@@ -50,17 +50,17 @@ class Dojang_Renderer_Group{
     $html.= '<td>'.$player->leaguePoints.'</td>';
     return $html;
   }
-  private function renderPlayerRow($player, $i){
-    $html.= $this->renderPlayerDetailsCells($player, $i);
+  private function renderPlayerRow($player){
+    $html.= $this->renderPlayerDetailsCells($player);
     $html.= $this->renderPlayerResultsCells($player);
-    return '<tr>'.$html.'</tr>';
+    return $html;
   }
   private function renderPlayersResults(){
     $i=0;
     foreach($this->groupPlayers as $p){
       $i++;
-      $html.='<td>'.$i.'</td>';
-      $html.= $this->renderPlayerRow($p);
+      $html.='<tr>'.'<td>'.$i.'</td>';
+      $html.= $this->renderPlayerRow($p).'</tr>';
     }
     return '<tbody>'.$html.'</tbody>';
   }
