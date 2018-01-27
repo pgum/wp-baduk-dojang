@@ -6,7 +6,10 @@ class Dojang_Renderer{
   }
   public function renderLeagueCloseAndDistributePoints(){
     $leagueInfo= $this->league->getLeagueInfo();
-    $html.='<a href="#'.$leagueInfo->id.'" class="button button-secondary dojang-distribute" x-league-id="'.$leagueInfo->id.'">Close League And Save Players Points</a>';
+    if($leagueInfo->pointsDistributed == 0)
+      $html='<a href="#'.$leagueInfo->id.'" class="button button-secondary dojang-distribute" x-league-id="'.$leagueInfo->id.'">Close League And Save Players Points</a>';
+    else
+      $html='<span class="button button-secondary dojang-distribute" x-league-id="'.$leagueInfo->id.'">League is Closed and Players got their points!</span>';
     return $html;
   }
   public function renderLeagueInfo(){
