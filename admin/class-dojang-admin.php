@@ -197,7 +197,10 @@ class Dojang_Admin {
 		wp_die();
 	}
 	public function ajax_close_league_distribute_points(){
-		echo 'Im gunna update players with their points from league and close that league';
+		$leagueId = $_GET['league_id'];
+		global $wpdb;
+		$result= $wpdb->update('leagues', array('column' => 'pointsDistributed', 'field' => '1', array('id' => $leagueId), array('%d')));
+		echo 'Im gunna update players with their points from league and close that league='.$leagueId.' and result was='.$result;
 		wp_die();
 	}
 	public function ajax_update_player_field(){
