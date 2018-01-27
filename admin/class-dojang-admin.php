@@ -78,7 +78,7 @@ class Dojang_Admin {
 	public function add_options_page() {
 		//Top level settings page
 		$this->plugin_screen_hook_suffix = add_menu_page(
-			__( 'Baduk Dojang Settings', 'baduk-dojang' ),
+			__( 'Baduk Dojang Overview', 'baduk-dojang' ),
 			__( 'Baduk Dojang', 'baduk-dojang' ),
 			'manage_options',
 			$this->plugin_name,
@@ -116,6 +116,16 @@ class Dojang_Admin {
 		array( $this, 'display_options_page_newleague' ),
 		'dashicons-plus-alt'
 		);
+
+		$this->plugin_screen_hook_suffix_submenu = add_submenu_page(
+		$this->plugin_name,
+		"Dojang Settings",
+		"Settings",
+		'manage_options',
+		$this->plugin_name.'options',
+		array( $this, 'display_options_page_options' ),
+		'dashicons-plus-alt'
+		);
 	}
 /**
 	 * Render the options page for plugin
@@ -134,15 +144,37 @@ class Dojang_Admin {
 	public function display_options_page_newleague() {
 		include_once 'partials/dojang-admin-display-newleague.php';
 	}
+	public function display_options_page_options() {
+		include_once 'partials/dojang-admin-display-options.php';
+	}
 
 	public function register_setting(){
 	// Add a General section
 	add_settings_section(
 		$this->option_name . '_general',
-		__( 'General', 'outdated-notice' ),
-		array( $this, $this->option_name . '_general_cb' ),
+		__( 'General', 'baduk-dojang' ),
+		array( $this, 'dojang_general_cb' ),
 		$this->plugin_name
 	);
+	add_settings_field(
+		$this->option_name.'_notice_email',
+		__('Notice Email', 'baduk-dojang'),
+		array( $this, 'dojang_email'),
+		$this->plugin_name,
+		$this->option_name.'_general',
+		array('label_for'=> $this->option_name.'_notice_email')
+	);
+	register_setting(
+		$this->plugin_name,
+		'dojang_email'
+	);
+	}
+	public function dojang_email(){
+		$emial= get_option('dojang_email');
+		echo'<input type="text" name="baduk-dojang_email" id="baduk-dojang_email" value="'.$email.'"/>';
+	}
+	public function dojang_general_cb(){
+		echo '<p>' . __( 'Please change the settings accordingly.', 'baduk-dojang' ) . '</p>';
 	}
 	//AJAX callbacks
 	//wp_die(); ir required to terminate immediately and return proper response
