@@ -25,8 +25,12 @@ foreach($archiveLeaguesIds as $leagueId){
 	$league= new Dojang_League($leagueId);
 	$renderer= new Dojang_Renderer($league);
 	$html.=$renderer->renderLeagueInfo().'<br/>';
+	$leagueClosed= $league->getLeagueInfo()->closed;
+	$archiveClass= ($leagueClosed==1) ? '-archive dojang-hidden' : '';
+	$html.='<div class="dojang-league-groups-results-tables'.$archiveClass.'" x-league-id="'.$leagueId.'">';
 	$html.=$renderer->renderLeagueCloseAndDistributePoints().'<br/>';
 	$html.=$renderer->renderGroupsTable().'<br/>';
+	$html.='</div>';
 }
 echo $html;
 
