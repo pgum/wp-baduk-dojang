@@ -5,7 +5,7 @@ class Dojang_Renderer_Submit_Game{
     $league= new Dojang_League();
     $groups = $league->getGroupsDetails();
     foreach($groups as $g){
-      $gId= $g->groupDetails->id;
+      $gId= $g->groupDetails->playerGroupId;
       $gName= $g->groupDetails->groupName;
       $s= ($prev == $grId ? 'selected="selected"' : '');
       $html.='<option value="'.$gId.'" '.$s.'>'.$gName.'</option>';
@@ -17,13 +17,13 @@ class Dojang_Renderer_Submit_Game{
     $groups = $league->getGroupsDetails();
     $html='<option x-group-id="-1" value="-1">Select Player</option>';
     foreach($groups as $g){
-      $gId= $g->groupDetails->id;
+      $gId= $g->groupDetails->playerGroupId;
       $gName= $g->groupDetails->groupName;
       $gPlayers= $g->groupPlayers;
       foreach($gPlayers as $p){
         $pName= $p->playerDetails->playerName;
-        $s= ($prev == $p->id ? 'selected="selected"' : '');
-        $html.='<option x-group-id="'.$gId.'" value="'.$p->id.'" '.$s.'>'.$gName.' - '.$pName.'</option>';
+        $s= ($prev == $p->playerId ? 'selected="selected"' : '');
+        $html.='<option x-group-id="'.$gId.'" value="'.$p->playerId.'" '.$s.'>'.$gName.' - '.$pName.'</option>';
       }
     }
     return $html;
