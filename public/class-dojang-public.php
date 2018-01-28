@@ -270,7 +270,7 @@ class Dojang_Public {
 	}
 	public function post_register_data(){
 		$validation_result= $this->validate_post_register($_POST);
-		$data = $this->sanitizeUserData($dataToValidate);
+		$data = $this->sanitizeUserData($_POST);
 		if($validation_result['suc'] == 1){
 			global $wpdb;
 			$dataToInsert= array(	'studentId' => '',
