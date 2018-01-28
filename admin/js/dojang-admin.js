@@ -1,5 +1,20 @@
 (function( $ ) {
 	'use strict';
+	$(function(){
+		$('.dojang-results-archive').each(function(){
+			$(this).on('click',function(){
+				var leagueId= $(this).attr('x-league-id');
+				if($(this).hasClass('dojang-collapse')){
+					$(this).removeClass('dojang-collapse').addClass('dojang-expand');
+					$('.dojang-league-groups-results-tables-archive[x-league-id='+leagueId+']').addClass('dojang-hidden');
+				}
+				else if($(this).hasClass('dojang-expand')){
+					$(this).removeClass('dojang-expand').addClass('dojang-collapse');
+					$('.dojang-league-groups-results-tables-archive[x-league-id='+leagueId+']').removeClass('dojang-hidden');
+				}
+			});
+		});
+	});
 	$(function() {
 		/*Baduk Dojank Main View, change not approved results in table when hover over Games to Approve list*/
 		$('.dojang-games-to-approve tbody tr')
