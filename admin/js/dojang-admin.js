@@ -33,7 +33,7 @@
 			$.post({
 				url: ajaxurl,
 				data: {'action': 'dojang_approve_result', 'result_id': $(this).attr('x-result-id')},
-				success: function(data){ console.log(data); }
+				success: function(data){ console.log(data); $(this).parents('tr').fadeOut(300, function(){$(this).remove();});}
 			});
 		});
 		$('.dojang-remove-result').on('click', function(){
@@ -42,7 +42,7 @@
 				$.post({
 					url: ajaxurl,
 					data: {'action': 'dojang_remove_result', 'result_id': $(this).attr('x-result-id')},
-					success: function(data){ console.log(data); }
+					success: function(data){ console.log(data); $(this).parents('tr').fadeOut(300, function(){$(this).remove();});}
 				});
 			}
 		});
@@ -53,7 +53,7 @@
 			$.post({
 				url: ajaxurl,
 				data: {'action': 'dojang_approve_player', 'player_id': $(this).attr('x-player-id')},
-				success: function(data){ console.log(data); }
+				success: function(data){ console.log(data); $(this).parents('tr').fadeOut(300, function(){$(this).remove();});}
 			});
 		});
 		$('.dojang-remove-player').on('click', function(){
@@ -62,7 +62,7 @@
 				$.post({
 					url: ajaxurl,
 					data: {'action': 'dojang_remove_player', 'player_id': $(this).attr('x-player-id')},
-					success: function(data){ console.log(data); }
+					success: function(data){ console.log(data); $(this).parents('tr').fadeOut(300, function(){$(this).remove();});}
 				});
 			}
 		});
