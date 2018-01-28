@@ -177,44 +177,61 @@ class Dojang_Admin {
 	//AJAX callbacks
 	//wp_die(); ir required to terminate immediately and return proper response
 	public function ajax_approve_result(){
+		global $wpdb;
+		$rid= $_POST['result_id'];
+		$wpdb->update("{$wpdb->prefix}results", array('isApproved' => 1), array('id' => $rid));
 		echo 'Ajax Approve Result Id= '.$_POST['result_id'];
 		wp_die();
 	}
 	public function ajax_remove_result(){
+		global $wpdb;
+		$rid= $_POST['result_id'];
+		$wpdb->delete("{$wpdb->prefix}results", array('id' => $rid));
 		echo 'Ajax Remove Result Id= '.$_POST['result_id'];
 		wp_die();
 	}
 	public function ajax_approve_player(){
+		global $wpdb;
+		$pid= $_POST['player_id'];
+		$wpdb->update("{$wpdb->prefix}players", array('isApproved' => 1), array('playerId' => $pid));
 		echo 'Ajax Approve Player Id= '.$_POST['player_id'];
 		wp_die();
 	}
 	public function ajax_remove_player(){
+		global $wpdb;
+		$pid= $_POST['player_id'];
+		$wpdb->delete("{$wpdb->prefix}players", array('playerId' => $pid));
 		echo 'Ajax Remove Player Id= '.$_POST['player_id'];
 		wp_die();
 	}
 	public function ajax_update_played_with_teacher(){
+		global $wpdb;
+		$wwt= $_POST['wonWithTeacher'] ? 1 : 0;
+		$gpid= $_POST['groupplayer_id'];
+		$wpdb->update("{$wpdb->prefix}groupplayers", array('wonWithTeacher' => $wwt), array('id' => $gpid));
 		echo 'Im gunna update played with teacher in groupplayer table for id='.$_POST['groupplayer_id'].'into value='.$_POST['wonWithTeacher'];
 		wp_die();
 	}
 	public function ajax_close_league_distribute_points(){
 		$leagueId = $_POST['league_id'];
 		global $wpdb;
-		$result= $wpdb->update("{$pwdb->prefix}leagues", array('pointsDistributed' => 1), array('id' => $leagueId));
+		$result= $wpdb->update("{$pwdb->prefix}leagues", array('pointsDistributed' => 1, 'closed' => 1), array('id' => $leagueId));
 		$league= new Dojang_League($leagueId);
 		$groups= $league->getGroupsDetails();
-		$res= array();
 		foreach($groups as $g)
 			foreach($g->groupPlayers as $p){
-			  $res.="{$wpdb->prefix}groupplayers -> leaguePoints => {$p->leaguePoints} WHERE 'id' => {$p->id}  (playerId={$p->playerId})\n";
 				$wpdb->update("{$wpdb->prefix}groupplayers", array('leaguePoints' => $p->leaguePoints), array('id' => $p->id));
 			}
-		echo 'Im gunna update players with their points from league and close that league='.$leagueId.' and result was='.$result .' DUMP:'.$res;
+		echo 'Im gunna update players with their points from league and close that league='.$leagueId.' and result was='.$result;
 		wp_die();
 	}
 	public function ajax_update_player_field(){
+		global $wpdb;
 		$playerId= $_POST['player_id'];
 		$field= $_POST['field'];
 		$value= $_POST['value'];
+		$pid= $_POST['player_id'];
+		$wpdb->update("{$wpdb->prefix}players", array($field => $value), array('playerId' => $playerId));
 		echo 'Im gunna update player ('.$playerId.') field '.$field.' to value '.$value;
 		wp_die();
 	}
