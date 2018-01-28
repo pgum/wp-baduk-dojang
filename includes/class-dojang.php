@@ -212,7 +212,6 @@ class Dojang {
 	}
 
 	private function define_shortcodes(){
-		//TODO: add shortcodes for player registration form, current league standings, player scores, submit results
 		$plugin_public = new Dojang_Public( $this->get_plugin_name(), $this->get_version() );
 		add_shortcode('dojang-register-form', array($plugin_public, 'renderRegisterForm'));
 		add_shortcode('dojang-current-league', array($plugin_public, 'renderCurrentLeague'));
