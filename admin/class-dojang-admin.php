@@ -235,4 +235,10 @@ class Dojang_Admin {
 		echo 'Im gunna update player ('.$playerId.') field '.$field.' to value '.$value;
 		wp_die();
 	}
+	public function ajax_league_points_update(){
+		global $wpdb;
+		$wpdb->update("{$wpdb->prefix}leagues", array('multiplier' => $_POST['multiplier']), array('id' => $_POST['league_id']));
+		echo 'Im gunna update league ('.$_POST['league_id'].') points multiplier= '.$_POST['multiplier'];
+		wp_die();
+	}
 }

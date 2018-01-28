@@ -130,10 +130,26 @@
 					url: ajaxurl,
 					data: {'action': 'dojang_close_league_distribute_points', 'league_id': leagueToClose},
 					success: function(data){
+						alert('League Points distributed and league closed.');
 						console.log(data);
 					}
 				});
 		}
+		});
+	});
+	$(function(){
+		$('.dojang-update-league-points').on('click', function(){
+			var leagueId= $(this).attr('x-league-id');
+			var multiplier_raw= $(".dojang-league-points-input[x-league-id='+leagueId+']").val();
+			var multiplier = parseInt(multiplier_raw);
+				$.post({
+					url: ajaxurl,
+					data: {'action': 'dojang_league_points_update', 'league_id': leagueId, 'multiplier': multiplier},
+					success: function(data){
+						alert('League Points multiplier updated.');
+						console.log(data);
+					}
+				});
 		});
 	});
 })( jQuery );
