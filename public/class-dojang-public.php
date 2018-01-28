@@ -117,6 +117,21 @@ class Dojang_Public {
 		$html.= $renderer->renderRegisterForm();
 		return $html;
 	}
+	public function renderSubmitResultForm(){
+		$renderer= new Dojang_Renderer_Public();
+		$html='';
+		if(isset($_GET['suc']) && $_GET['suc'] == 1)
+			$html.= $renderer->renderGameSubmittedNotice();
+		if(isset($_GET['suc']) && $_GET['suc'] == 0){
+			$msg.=  isset($_GET['dgroup'])   ? 'You have to choose the group!<br/>'    : "";
+			$msg.=  isset($_GET['dwhite'])   ? 'You have to choose white player!<br/>'   : "";
+			$msg.=  isset($_GET['dblack'])   ? 'You have to choose black player!<br/>'     : "";
+			$msg.=  isset($_GET['dwinner'])  ? 'You have to choose a winner!<br/>' : "";
+			$msg.=  isset($_GET['dmismatch'])? 'Chosen players are from different groups!<br/>' : "";
+			$msg.=  isset($_GET['dpassword'])? 'Provided password is invalid!<br/>' : "";
+			$html.= $renderer->renderGameNotSubmittedNotice($msg);
+		return $renderer->renderSubmitResultForm();
+	}
 	public function renderCurrentLeague(){
 		//$league= new Dojang_League();
 		$renderer= new Dojang_Renderer_Public();
@@ -129,10 +144,6 @@ class Dojang_Public {
 	public function renderScoreboard(){
 		$renderer= new Dojang_Renderer_Public();
 		return $renderer->renderScoreboard();
-	}
-	public function renderSubmitResultForm(){
-		$renderer= new Dojang_Renderer_Public();
-		return $renderer->renderSubmitResultForm();
 	}
 	public function renderArchive(){
 		global $wpdb;
@@ -177,10 +188,36 @@ class Dojang_Public {
 	}
 	private function validate_post_game($data){
 		$returnArray=array();
+		$returnResult=1;
 		//TODO: isPlayerInLeague use to see if both players selected belong to same group
 		//TODO: see if player winner and player loser are selected players (ie player 64 vs 105 and won 126)
-		$returnResult=1;
-		$referer= $_SERVER['HTTP_REFERER'];
+		//TODO: obvious password should be set in options not hardcoded...
+		if($data['dojang-game-w-group'] != $data['dojang-game-b-group']){
+			$returnArray['dmismatch']= 1;
+			$returnResult= 0;
+		}else{
+			//there always could be some html modifications by the user
+			$league= new Dojang_League();
+			$w_groups= $league->isPlayerInLeague($data['dojang-game-white']);
+			$b_groups= $league->isPlayerInLeague($data['dojang-game-black']);
+			if($w_groups != $b_groups){
+				$returnArray['dmismatch']= 1;
+				$returnResult= 0;
+			}
+		}
+		if($data['dojang-game-password'] != 'test'){
+			$returnArray['dpassword']= 1;
+			$returnResult= 0;
+		}
+		if($returnResult == 0){
+			if(isset($data['dojang-game-group'])) $returnArray['prev-gr'] = '"'.$data['dojang-game-group'].'"';
+			if(isset($data['dojang-game-white'])) $returnArray['prev-wh'] = '"'.$data['dojang-game-white'].'"';
+			if(isset($data['dojang-game-black'])) $returnArray['prev-bl'] = '"'.$data['dojang-game-black'].'"';
+			if(isset($data['dojang-game-w-group'])) $returnArray['prev-wg'] = '"'.$data['dojang-game-w-group'].'"';
+			if(isset($data['dojang-game-b-group'])) $returnArray['prev-bg'] = '"'.$data['dojang-game-b-group'].'"';
+			if(isset($data['dojang-game-winner'])) $returnArray['prev-wi'] = '"'.$data['dojang-game-winner'].'"';
+			$returnArray['prev-rank'] = $data['dojang-player-rank'];
+		}
 		$returnArray['suc'] = $returnResult;
 		return $returnArray;
 	}

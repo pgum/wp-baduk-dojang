@@ -64,6 +64,14 @@ class Dojang_League {
     $game->playerIdWinner=$gamePlayers[$game->playerIdWinner]->playerName;
     return $game;
   }
+  public function isPlayerInLeague($playerId){
+    $ret= array();
+    foreach($this->groupIds as $gid){
+      $group= new Dojang_Group($gid);
+      $ret[]= array('groupId' => $gid, 'inGroup' => $group->isPlayerInGroup($playerId));
+    }
+    return $ret;
+  }
   public function getGamesToApprove(){
     global $wpdb;
     $gamesToApprove=array();

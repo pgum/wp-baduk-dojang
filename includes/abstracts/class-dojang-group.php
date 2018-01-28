@@ -41,6 +41,11 @@ class Dojang_Group {
     $calculator= new Dojang_Calculator($players, $results);
     return $calculator->groupPlayersResults();
   }
+  public function isPlayerInGroup($playerId){
+    foreach($this->groupPlayers as $p)
+      if($p->id == $playerId) return true;
+    return false;
+  }
   public function __construct($groupId, $leaguePointsMultiplier=1){
     global $wpdb;
     $this->leaguePointsMultiplier = $leaguePointsMultiplier;
