@@ -112,7 +112,7 @@
 				$(this)
 				.removeClass('dojang-editable-div')
 				.addClass('dojang-editable-div-e')
-				.html('<input value="'+cellValue+'"/><a href="#pid-'+playerId+'" class="dojang-update-btn button button-secondary" x-player-id="'+playerId+'" x-field="'+fieldName+'">OK</a>');
+				.html('<input class="dojang-input" value="'+cellValue+'"/><a href="#pid-'+playerId+'" class="dojang-update-btn button button-secondary" x-player-id="'+playerId+'" x-field="'+fieldName+'">OK</a>');
 			});
 		});
 	});
