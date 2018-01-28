@@ -13,6 +13,10 @@ class Dojang_Renderer_Public{
     $registerRenderer= new Dojang_Renderer_Registration();
     return $registerRenderer->renderRegisterForm();
   }
+  public function renderSubmitResultForm(){
+    $submitGameRenderer= new Dojang_Renderer_Submit_Game();
+    return $submitGameRenderer->renderSubmitResultForm();
+  }
   public function renderLeague($league){
     $groupArray= $league->getGroupsDetails();
     $leagueName= $league->getLeagueInfo()->leagueName;
@@ -76,9 +80,6 @@ class Dojang_Renderer_Public{
     }
     $html.='</tbody></table>';
     return $html;
-  }
-  public function renderSubmitResultForm(){
-    return '<h3 class="dojang-submit">Submit League game result</h3>';
   }
 }
  ?>
