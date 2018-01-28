@@ -2,13 +2,13 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
-.dojang-group-table, .dojang-table-to-approve{ border-collapse: collapse; }
-.dojang-group-table tbody td{
+.dojang-group-table, .dojang-table-to-approve, .dojang-player-list { border-collapse: collapse; }
+.dojang-group-table tbody td, .dojang-player-list tbody td{
   border: 1px black solid;
   min-width: 30px;
   padding: 3px;
 }
-.dojang-group-table thead th{
+.dojang-group-table thead th, .dojang-player-list thead th{
   border: 1px black solid;
   min-width: 30px;
   background: lightgray;
