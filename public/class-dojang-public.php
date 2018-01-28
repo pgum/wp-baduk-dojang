@@ -221,7 +221,7 @@ class Dojang_Public {
 		$data = $this->sanitizeUserData($_POST);
 		if($validation_result['suc'] == 1){
 			global $wpdb;
-			$dataToInsert= array( 'groupId' => $data['dojang-game-group'],
+			/*$dataToInsert= array( 'groupId' => $data['dojang-game-group'],
 														'playerIdBlack' =>$data['dojang-game-black'],
 														'playerIdWhite' =>$data['dojang-game-white'],
 														'playerIdWinner' =>($data['dojang-game-winner'] == 0 ? $data['dojang-game-black'] : $data['dojang-game-white']),
@@ -233,7 +233,14 @@ class Dojang_Public {
 														'result' => '',
 														'link' => '',
 														'oldResultId' => '');
-			$wpdb->insert("{$wpdb->prefix}results", $dataToInsert);
+			$wpdb->insert("{$wpdb->prefix}results", $dataToInsert);*/
+			$query="INSERT INTO {$wpdb->prefix}results (groupId, playerIdWhite, playerIdBlack, playerIdWinner, addDate, isApproved) VALUES (
+						'".intval($data['dojang-game-group'])."',
+						'".intval($data['dojang-game-white'])."',
+						'".intval($data['dojang-game-black'])."',
+						'".intval(($data['dojang-game-winner'] == 0 ? $data['dojang-game-black'] : $data['dojang-game-white']))."',
+						NOW(),
+						0);";
 		}
 		wp_safe_redirect(add_query_arg( $validation_result, home_url('/league-results')));
 		exit;
