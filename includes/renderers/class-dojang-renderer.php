@@ -4,7 +4,7 @@ class Dojang_Renderer{
   public function __construct($leagueObject= NULL){
     $this->league= $leagueObject;
   }
-  public function renderLeagueCloseAndDistributePoints(){
+  private function renderLeagueCloseAndDistributePoints(){
     $leagueInfo= $this->league->getLeagueInfo();
     if($leagueInfo->pointsDistributed == 0)
       $html='<a href="#'.$leagueInfo->id.'" class="button button-secondary dojang-distribute" x-league-id="'.$leagueInfo->id.'">Close League And Save Players Points</a>';
@@ -40,6 +40,7 @@ class Dojang_Renderer{
       $html.= $this->renderLeagueInfoLine('League points are to distributed. You can change League multiplier, and check players that won with teacher.');
       $html.= $this->renderLeagueInfoLine('League points multiplier: '.$this->renderLeaguePointsInput($leagueInfo->multiplier, $leagueInfo->id));
     }
+    $html.= $this->renderLeagueCloseAndDistributePoints();
     $html.='</div>';
     return $html;
   }
