@@ -12,13 +12,35 @@ class Dojang_Renderer{
       $html='<span class="button button-secondary button-disabled" x-league-id="'.$leagueInfo->id.'">League is Closed and Players got their points!</span>';
     return $html;
   }
+  private function renderLeaguePointsInput($multiplier, $leagueId){
+    $html.= '<input class="dojang-league-points-input" value="'.$multiplier.'" x-league-id="'.$leagueId.'"/>';
+    $html.= '<a href="#" class="dojang-update-league-points button button-secondary" x-league-id="'.$leagueId.'">Update</a>';
+    return $html;
+  }
+  private function renderLeagueInfoLine($msg){
+    return '<span class="dojang-league-info">'.$msg.'</span>';
+  }
   public function renderLeagueInfo(){
     $leagueInfo= $this->league->getLeagueInfo();
     $html.='<a class="dojang-anchor" name="'.$leagueInfo->id.'"></a><br/>';
-    $html.='<h3><span class="dashicons dashicons-sticky"></span>'.$leagueInfo->leagueName.' - League Details</h3>';
-    $html.='<span>League Properties: hidden:'.$leagueInfo->hidden.' closed:'.$leagueInfo->closed.'</br></span>';
-    $html.='<span>League Id:'.$leagueInfo->id.' pointsDistributed:'.$leagueInfo->pointsDistributed.'</br></span>';
-    $html.='<span>League Points Multiplier:'.$leagueInfo->multiplier.'</br></span>';
+    $leagueClosed= $leagueInfo->closed;
+    $archiveClass= ($leagueClosed==1) ? '-archive dojang-expand' : '';
+    $html.='<h3 class="dojang-results'.$archiveClass.'" x-league-id="'.$leagueInfo->id.'"><span class="dashicons dashicons-sticky"></span>'.$leagueInfo->leagueName.' - League Details</h3>';
+    //$html.='<span>League Properties: hidden:'.$leagueInfo->hidden.' closed:'.$leagueInfo->closed.'</br></span>';
+    //$html.='<span>League Id:'.$leagueInfo->id.' pointsDistributed:'.$leagueInfo->pointsDistributed.'</br></span>';
+    //$html.='<span>League Points Multiplier:'.$leagueInfo->multiplier.'</br></span>';
+    $html.='<div class="dojang-league-properties" x-league-id="'.$leagueInfo->id.'">';
+    if($leagueInfo->closed) $html.= $this->renderLeagueInfoLine('League is closed. Its visible in league archives.');
+    else $html.= $this->renderLeagueInfoLine('League is open and is visible as Current League.');
+    if($leagueInfo->pointsDistributed){
+      $html.= $this->renderLeagueInfoLine('Player league points were distributed. League is in read-only state.');
+      $html.= $this->renderLeagueInfoLine('League points multiplier: '.$leagueInfo->multiplier);
+    }
+    else{
+      $html.= $this->renderLeagueInfoLine('League points are to distributed. You can change League multiplier, and check players that won with teacher.');
+      $html.= $this->renderLeagueInfoLine('League points multiplier: '.$this->renderLeaguePointsInput($leagueInfo->multiplier, $leagueInfo->id));
+    }
+    $html.='</div>';
     return $html;
   }
   private function renderResultToApprovePlayers($black, $white, $winner){
