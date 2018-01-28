@@ -152,7 +152,6 @@ class Dojang_Admin {
 			<form method="post" action="options.php"><?php
 				// This prints out all hidden setting fields
 				settings_fields( 'dojangoptions' );
-				echo'<input type="text" name="dojangoptions[dojang_email]" id="dojang_email" value="'.$this->options['dojang_email'].'"/>';
 				do_settings_sections( 'dojangoptions');
 				submit_button();
 				print_r( get_option('dojangoptions'));
@@ -171,17 +170,36 @@ class Dojang_Admin {
 		array( $this, 'render_section_info' ),
 		'dojangoptions'
 	);
-	add_settings_field(
-		'dojang_email',
-		__('Notice Email', 'baduk-dojang'),
-		array($this, 'render_dojang_email'),
-		'dojangoptions',
-		'dojang_section_id'
-	);
+	add_settings_field( 'dojang_email',	__('Notice Email', 'baduk-dojang'),	array($this, 'render_dojang_email'),'dojangoptions','dojang_section_id');
+	add_settings_field( 'dojang_welcome',	__('Approved Player Welcome Message', 'baduk-dojang'),	array($this, 'render_dojang_welcome'),'dojangoptions','dojang_section_id');
+	add_settings_field( 'dojang_points',	__('League Points Distribution', 'baduk-dojang'),	array($this, 'render_dojang_points'),'dojangoptions','dojang_section_id');
+	add_settings_field( 'dojang_bonus',	__('Won With Teacher Bonus', 'baduk-dojang'),	array($this, 'render_dojang_bonus'),'dojangoptions','dojang_section_id');
+	add_settings_field( 'dojang_pass',	__('Submit Game Password', 'baduk-dojang'),	array($this, 'render_dojang_pass'),'dojangoptions','dojang_section_id');
 	}
 	public function render_dojang_email(){
-		echo'<input type="text" name="dojangoptions[dojang_email]" id="dojang_email" value="'.$this->options['dojang_email'].'"/>';
+		echo '<input type="text" name="dojangoptions[dojang_email]" id="dojang_email" value="'.$this->options['dojang_email'].'"/>';
+		echo '<label for="dojangoptions[dojang_email]">E-mail address that will get notices when someone registers to league.</label>';
 	}
+	public function render_dojang_welcome(){
+		echo '<textarea name="dojangoptions[dojang_welcome]" id="dojang_welcome">'.$this->options['dojang_welcome'].'</textarea>';
+		echo '<label for="dojangoptions[dojang_welcome]">Welcome message that will be send to approved player.</label>';
+	}
+	public function render_dojang_points(){
+		echo '<input type="text" name="dojangoptions[dojang_points]" id="dojang_points" value="'.$this->options['dojang_points'].'"/>';
+		echo '<label for="dojangoptions[dojang_points]">League points distribution in format: <i>1st,2nd,3rd,....</i> .</label>';
+		echo '<span> Standard one is: 20,15,12,10,8,6,4,2 (Currently Hardcoded!</span>';
+	}
+	public function render_dojang_bonus(){
+		echo '<input type="text" name="dojangoptions[dojang_bonus]" id="dojang_bonus" value="'.$this->options['dojang_bonus'].'"/>';
+		echo '<label for="dojangoptions[dojang_bonus]">League points bonus for winning with teacher.</label>';
+		echo '<span> Standard one is: 15 (Currently Hardcoded!)</span>';
+	}
+	public function render_dojang_pass(){
+		echo '<input type="text" name="dojangoptions[dojang_pass]" id="dojang_bonus" value="'.$this->options['dojang_pass'].'"/>';
+		echo '<label for="dojangoptions[dojang_pass]">Submit result password.</label>';
+	}
+
+
 	public function render_section_info(){
 		echo '<p>' . __( 'Please change these settings accordingly:', 'baduk-dojang' ) . '</p>';
 	}
@@ -217,9 +235,9 @@ class Dojang_Admin {
 	}
 	public function ajax_update_played_with_teacher(){
 		global $wpdb;
-		$wwt= $_POST['wonWithTeacher'] ? 1 : 0;
+		$wwt= $_POST['wonWithTeacher'] == 'true' ? 1 : 0;
 		$gpid= $_POST['groupplayer_id'];
-		$wpdb->update("{$wpdb->prefix}groupplayers", array('wonWithTeacher' => $wwt), array('id' => $gpid));
+		$wpdb->update("{$wpdb->prefix}groupplayers", array('wonAgainstTeacher' => $wwt), array('id' => $gpid));
 		echo 'Im gunna update played with teacher in groupplayer table for id='.$_POST['groupplayer_id'].'into value='.$_POST['wonWithTeacher'];
 		wp_die();
 	}

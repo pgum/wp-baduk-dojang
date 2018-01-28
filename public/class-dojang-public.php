@@ -195,7 +195,9 @@ class Dojang_Public {
 			$returnArray['dwinner']= 1;
 			$returnResult= 0;
 		}
-		if($data['dojang-game-pass'] != 'test'){
+		$options= get_options('dojangoptions');
+		$pass= $options['dojang_pass'];
+		if($data['dojang-game-pass'] != $pass){
 			$returnArray['dpassword']= 1;
 			$returnResult= 0;
 		}
@@ -289,6 +291,9 @@ class Dojang_Public {
 														'playerTimezone' => '',
 														'playerApproved' => 0);
 			$wpdb->insert("{$wpdb->prefix}players", $dataToInsert);
+			$options= get_option('dojangoptions');
+			$msg ='Hi! New player is waiting for approval: '.$data['dojang-player-name'].'('.$data['dojang-player-rank'].'). Player e-mail: '.$data['dojang-player-email'];
+			wp_mail($options['dojang_email'],'New Player Registered',$msg);
 		}
 		wp_safe_redirect(add_query_arg( $validation_result, home_url('/register-to-online-teaching')));
 		exit;

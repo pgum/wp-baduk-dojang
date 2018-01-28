@@ -81,8 +81,12 @@
     }
     public function leaguePlayersPoints($leagueMultiplier){
       //TODO: this should not be hardcoded but instead be in general settings
-      $pointsForPlace= array(20,15,12,10,8,6,4,2);
-      $bonusForWinWithTeacher= 15;
+      //TODO: probably works
+      //$pointsForPlace= array(20,15,12,10,8,6,4,2);
+      $options= get_option('dojangoptions');
+      $pointsForPlace= explode(',',$options['dojang_points']);
+      //$bonusForWinWithTeacher= 15;
+      $bonusForWinWithTeacher= $options['dojang_bonus'];
       $playersPoints= array();
       $playersPlaceArray= $this->groupPlayersPlace();
       $placesCount= array_count_values($playersPlaceArray);
