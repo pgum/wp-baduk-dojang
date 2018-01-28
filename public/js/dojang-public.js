@@ -43,4 +43,18 @@
 			 });
 		 });
 	 });
+	 $(function(){
+		 $('.dojang-game-player-list').each(function(){
+			 $(this).on('change',function(){
+				 var color= $(this).attr('id');
+				 var group= $(this).find(':selected').attr('x-group-id');
+				 if(color==='dojang-pw'){
+					 $('#dojang-wg').val(group);
+				 }
+				 if(color==='dojang-pb'){
+					 $('#dojang-bg').val(group);
+				 }
+			 });
+		 });
+	 });
 })( jQuery );

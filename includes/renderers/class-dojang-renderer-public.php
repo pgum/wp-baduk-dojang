@@ -8,6 +8,14 @@ class Dojang_Renderer_Public{
     $registerRenderer= new Dojang_Renderer_Registration();
     return $registerRenderer->renderPlayerRegisteredNotice();
   }
+  public function renderGameNotSubmittedNotice($msg){
+    $registerRenderer= new Dojang_Renderer_Submit_Game();
+    return $registerRenderer->renderGameNotSubmittedNotice($msg);
+  }
+  public function renderGameSubmittedNotice(){
+    $registerRenderer= new Dojang_Renderer_Submit_Game();
+    return $registerRenderer->renderGameSubmittedNotice();
+  }
   public function renderRegisterForm(){
     $registerRenderer= new Dojang_Renderer_Registration();
     return $registerRenderer->renderRegisterForm();

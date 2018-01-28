@@ -55,14 +55,13 @@ class Dojang_Group {
     $playersResultsArray= $this->calculatePlayerResults($this->groupPlayers, $this->groupResults);
     $leaguePointsArray= $this->calculateLeaguePoints($this->groupPlayers, $this->groupResults);
     $playersPlaceArray= $this->calculatePlayerPlaceInGroup($this->groupPlayers, $this->groupResults);
-
     foreach($this->groupPlayers as $p){
-        $p->playerDetails= $wpdb->get_row("SELECT studentId, playerName, playerEmail, playerKgs, playerRank, playerCountry, playerApproved FROM {$wpdb->prefix}players WHERE playerId = {$p->playerId}");
-        $p->playerDetails->{"playerInitials"}= $this->getInitials($p->playerDetails->playerName);
-        $p->{"leaguePoints"}= $leaguePointsArray[$p->playerId];
-        $p->{"place"}= $playersPlaceArray[$p->playerId];
-        $p->{"win"}= $playersResultsArray[$p->playerId]['win'];
-        $p->{"loss"}= $playersResultsArray[$p->playerId]['loss'];
-      }
+      $p->playerDetails= $wpdb->get_row("SELECT studentId, playerName, playerEmail, playerKgs, playerRank, playerCountry, playerApproved FROM {$wpdb->prefix}players WHERE playerId = {$p->playerId}");
+      $p->playerDetails->{"playerInitials"}= $this->getInitials($p->playerDetails->playerName);
+      $p->{"leaguePoints"}= $leaguePointsArray[$p->playerId];
+      $p->{"place"}= $playersPlaceArray[$p->playerId];
+      $p->{"win"}= $playersResultsArray[$p->playerId]['win'];
+      $p->{"loss"}= $playersResultsArray[$p->playerId]['loss'];
+    }
   }
 }

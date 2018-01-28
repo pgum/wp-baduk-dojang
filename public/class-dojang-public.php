@@ -130,7 +130,9 @@ class Dojang_Public {
 			$msg.=  isset($_GET['dmismatch'])? 'Chosen players are from different groups!<br/>' : "";
 			$msg.=  isset($_GET['dpassword'])? 'Provided password is invalid!<br/>' : "";
 			$html.= $renderer->renderGameNotSubmittedNotice($msg);
-		return $renderer->renderSubmitResultForm();
+		}
+		$html.= $renderer->renderSubmitResultForm();
+		return $html;
 	}
 	public function renderCurrentLeague(){
 		//$league= new Dojang_League();
@@ -195,7 +197,7 @@ class Dojang_Public {
 		if($data['dojang-game-w-group'] != $data['dojang-game-b-group']){
 			$returnArray['dmismatch']= 1;
 			$returnResult= 0;
-		}else{
+		}else{/*
 			//there always could be some html modifications by the user
 			$league= new Dojang_League();
 			$w_groups= $league->isPlayerInLeague($data['dojang-game-white']);
@@ -203,9 +205,25 @@ class Dojang_Public {
 			if($w_groups != $b_groups){
 				$returnArray['dmismatch']= 1;
 				$returnResult= 0;
-			}
+			}*/
 		}
-		if($data['dojang-game-password'] != 'test'){
+		if(($data['dojang-game-w-group'] != $data['dojang-game-group']) || ($data['dojang-game-b-group'] != $data['dojang-game-group'])){
+			$returnArray['dmismatch']= 1;
+			$returnResult= 0;
+		}
+		if($data['dojang-game-white'] < 0){
+			$returnArray['dwhite']= 1;
+			$returnResult= 0;
+		}
+		if($data['dojang-game-black'] < 0){
+			$returnArray['dblack']= 1;
+			$returnResult= 0;
+		}
+		if($data['dojang-game-winner'] < 0){
+			$returnArray['dwinner']= 1;
+			$returnResult= 0;
+		}
+		if($data['dojang-game-pass'] != 'test'){
 			$returnArray['dpassword']= 1;
 			$returnResult= 0;
 		}
@@ -216,7 +234,6 @@ class Dojang_Public {
 			if(isset($data['dojang-game-w-group'])) $returnArray['prev-wg'] = '"'.$data['dojang-game-w-group'].'"';
 			if(isset($data['dojang-game-b-group'])) $returnArray['prev-bg'] = '"'.$data['dojang-game-b-group'].'"';
 			if(isset($data['dojang-game-winner'])) $returnArray['prev-wi'] = '"'.$data['dojang-game-winner'].'"';
-			$returnArray['prev-rank'] = $data['dojang-player-rank'];
 		}
 		$returnArray['suc'] = $returnResult;
 		return $returnArray;
