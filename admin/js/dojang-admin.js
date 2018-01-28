@@ -89,7 +89,7 @@
 			var editedCell= $(this);
 			$(this).on('click', '.dojang-update-btn', function(){
 				//var inputVal = $(this).prev('input').val();
-				var inputVal = $(this).parent().children('input').val()
+				var inputVal = $(this).parent().children('input').val();
 				var fieldName= $(this).attr('x-field');
 				var playerId = $(this).attr('x-player-id');
 				//console.log('UPDATE BTN FIELD: '+fieldName+' TO: '+inputVal+' OF PLAYER ID:'+playerId);
