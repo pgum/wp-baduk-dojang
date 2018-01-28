@@ -18,7 +18,7 @@ class Dojang_Renderer{
     return $html;
   }
   private function renderLeagueInfoLine($msg){
-    return '<span class="dojang-league-info">'.$msg.'</span>';
+    return '<span class="dojang-league-info">'.$msg.'</span><br/>';
   }
   public function renderLeagueInfo(){
     $leagueInfo= $this->league->getLeagueInfo();
