@@ -159,36 +159,8 @@ class Dojang_Public {
 		return $html;
 	}
   /*POST DATA handlers*/
-	private function validate_post_register($data){
-		$returnArray=array();
-		$returnResult=1;
-		if(strlen($data['dojang-player-name'])== 0){
-			$returnArray['dname']= 1;
-			$returnResult=0;
-		}
-		if(is_email($data['dojang-player-email'])== false){
-			$returnArray['demail']= 1;
-			$returnResult=0;
-		}
-		if(strlen($data['dojang-player-kgs-account'])== 0){
-			$returnArray['dkgs']= 1;
-			$returnResult=0;
-		}
-		if(strlen($data['dojang-player-country'])== 0){
-			$returnArray['dcountry']= 1;
-			$returnResult=0;
-		}
-		if($returnResult == 0){
-			if(isset($data['dojang-player-name'])) $returnArray['prev-name'] = '"'.$data['dojang-player-name'].'"';
-			if(isset($data['dojang-player-kgs-account'])) $returnArray['prev-kgs'] = '"'.$data['dojang-player-kgs-account'].'"';
-			if(isset($data['dojang-player-email'])) $returnArray['prev-email'] = '"'.$data['dojang-player-email'].'"';
-			if(isset($data['dojang-player-country'])) $returnArray['prev-country'] = '"'.$data['dojang-player-country'].'"';
-			$returnArray['prev-rank'] = $data['dojang-player-rank'];
-		}
-		$returnArray['suc'] = $returnResult;
-		return $returnArray;
-	}
-	private function validate_post_game($data){
+	private function validate_post_game($dataToValidate){
+		$data = $this->sanitizeUserData($dataToValidate);
 		$returnArray=array();
 		$returnResult=1;
 		//TODO: isPlayerInLeague use to see if both players selected belong to same group
@@ -238,13 +210,79 @@ class Dojang_Public {
 		$returnArray['suc'] = $returnResult;
 		return $returnArray;
 	}
+	private function sanitizeUserData($data){
+		$sanitizedData=array();
+		foreach($data as $k => $v)
+			$sanitizedData[$k] = sanitize_text_field($v);
+		return $sanitizedData;
+	}
 	public function post_submit_game(){
 		$validation_result= $this->validate_post_game($_POST);
+		$data = $this->sanitizeUserData($_POST);
+		if($validation_result['suc'] == 1){
+			global $wpdb;
+			$dataToInsert= array( 'groupId' => $data['dojang-game-group'],
+														'playerIdBlack' =>$data['dojang-game-black'],
+														'playerIdWhite' =>$data['dojang-game-white'],
+														'playerIdWinner' =>($data['dojang-game-winner'] == 0 ? $data['dojang-game-black'] : $data['dojang-game-white']),
+														'file' => '',
+														'linkKgs' => '',
+														'commentedGameId' => '',
+														'addDate' => current_time('Y-m-d'),
+														'isApproved' => 0,
+														'result' => '',
+														'link' => '',
+														'oldResultId' => '');
+			$wpdb->insert("{$wpdb->prefix}results", $dataToInsert);
+		}
 		wp_safe_redirect(add_query_arg( $validation_result, home_url('/league-results')));
 		exit;
 	}
+	private function validate_post_register($dataToValidate){
+		$returnArray=array();
+		$data = $this->sanitizeUserData($dataToValidate);
+		$returnResult=1;
+		if(strlen($data['dojang-player-name'])== 0){
+			$returnArray['dname']= 1;
+			$returnResult=0;
+		}
+		if(is_email($data['dojang-player-email'])== false){
+			$returnArray['demail']= 1;
+			$returnResult=0;
+		}
+		if(strlen($data['dojang-player-kgs-account'])== 0){
+			$returnArray['dkgs']= 1;
+			$returnResult=0;
+		}
+		if(strlen($data['dojang-player-country'])== 0){
+			$returnArray['dcountry']= 1;
+			$returnResult=0;
+		}
+		if($returnResult == 0){
+			if(isset($data['dojang-player-name'])) $returnArray['prev-name'] = '"'.$data['dojang-player-name'].'"';
+			if(isset($data['dojang-player-kgs-account'])) $returnArray['prev-kgs'] = '"'.$data['dojang-player-kgs-account'].'"';
+			if(isset($data['dojang-player-email'])) $returnArray['prev-email'] = '"'.$data['dojang-player-email'].'"';
+			if(isset($data['dojang-player-country'])) $returnArray['prev-country'] = '"'.$data['dojang-player-country'].'"';
+			$returnArray['prev-rank'] = $data['dojang-player-rank'];
+		}
+		$returnArray['suc'] = $returnResult;
+		return $returnArray;
+	}
 	public function post_register_data(){
 		$validation_result= $this->validate_post_register($_POST);
+		$data = $this->sanitizeUserData($dataToValidate);
+		if($validation_result['suc'] == 1){
+			global $wpdb;
+			$dataToInsert= array(	'studentId' => '',
+														'playerName' => $data['dojang-player-name'],
+														'playerEmail' => $data['dojang-player-email'],
+														'playerKgs' => $data['dojang-player-kgs-account'],
+														'playerRank' => $data['dojang-player-rank'],
+														'playerCountry' => $data['dojang-player-country'],
+														'playerTimezone' => '',
+														'isApproved' => 0);
+			$wpdb->insert("{$wpdb->prefix}players", $dataToInsert);
+		}
 		wp_safe_redirect(add_query_arg( $validation_result, home_url('/register-to-online-teaching')));
 		exit;
 	}
