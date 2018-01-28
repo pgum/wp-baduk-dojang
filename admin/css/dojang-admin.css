@@ -36,6 +36,9 @@
   width:100%;
   height:100%;
 }
+.dojang-update-btn { padding: 0 3px 1px; }
+.dojang-input { width: 70px; }
+.dojang-league-points-input{ width: 64px; }
 a.dojang-anchor{
   display: block;
   position: relative;
