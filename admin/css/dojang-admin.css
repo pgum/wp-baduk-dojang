@@ -43,7 +43,7 @@ a.dojang-anchor{
   display: block;
   position: relative;
   /*TODO: set this to proper value by hand later*/
-  top: -100px;
+  top: -80px;
   visibility: hidden;
 }
 /*Animations*/

@@ -173,6 +173,7 @@ class Dojang_Admin {
 	add_settings_field( 'dojang_welcome',	__('Approved Player Welcome Message', 'baduk-dojang'),	array($this, 'render_dojang_welcome'),'dojangoptions','dojang_section_id');
 	add_settings_field( 'dojang_points',	__('League Points Distribution', 'baduk-dojang'),	array($this, 'render_dojang_points'),'dojangoptions','dojang_section_id');
 	add_settings_field( 'dojang_bonus',	__('Won With Teacher Bonus', 'baduk-dojang'),	array($this, 'render_dojang_bonus'),'dojangoptions','dojang_section_id');
+	add_settings_field( 'dojang_eligable',	__('Points for prize', 'baduk-dojang'),	array($this, 'render_dojang_eligable'),'dojangoptions','dojang_section_id');
 	add_settings_field( 'dojang_pass',	__('Submit Game Password', 'baduk-dojang'),	array($this, 'render_dojang_pass'),'dojangoptions','dojang_section_id');
 	}
 	public function render_dojang_email(){
@@ -185,12 +186,15 @@ class Dojang_Admin {
 	}
 	public function render_dojang_points(){
 		echo '<input type="text" name="dojangoptions[dojang_points]" id="dojang_points" value="'.$this->options['dojang_points'].'"/>';
-		echo '<label for="dojangoptions[dojang_points]">League points distribution in format: <i>1st,2nd,3rd,....</i> .</label>';
-		echo '<span> Standard one is: 20,15,12,10,8,6,4,2 (Currently Hardcoded!</span>';
+		echo '<label for="dojangoptions[dojang_points]">League points distribution in format: <i>1st,2nd,3rd,....</i>  Standard one is: 20,15,12,10,8,6,4,2.</label>';
 	}
 	public function render_dojang_bonus(){
 		echo '<input type="text" name="dojangoptions[dojang_bonus]" id="dojang_bonus" value="'.$this->options['dojang_bonus'].'"/>';
-		echo '<label for="dojangoptions[dojang_bonus]">League points bonus for winning with teacher.</label>';
+		echo '<label for="dojangoptions[dojang_bonus]">League points bonus for winning with teacher. Standard one is: 15.</label>';
+	}
+	public function render_dojang_eligable(){
+		echo '<input type="text" name="dojangoptions[dojang_eligable]" id="dojang_eligable" value="'.$this->options['dojang_eligable'].'"/>';
+		echo '<label for="dojangoptions[dojang_eligable]">Set how much points is needed for a prize. Standard one is: 100.</label>';
 	}
 	public function render_dojang_pass(){
 		echo '<input type="text" name="dojangoptions[dojang_pass]" id="dojang_bonus" value="'.$this->options['dojang_pass'].'"/>';

@@ -125,7 +125,7 @@ class Dojang_Renderer{
                        <th>League Points</th></tr></thead><tbody>';
     foreach($playersData as $p){
       $html.='<tr x-player-id="'.$p['playerId'].'">';
-      $html.='<td><a name="pid-'.$p['playerId'].'"></a>'.$p['playerId'].'</td>';
+      $html.='<td><a name="pid-'.$p['playerId'].'" class="dojang-anchor"></a>'.$p['playerId'].'</td>';
       $html.= $this->renderEditableCell($p['playerName'], 'playerName');
       $html.= $this->renderEditableCell($p['playerCountry'], 'playerCountry');
       $html.= $this->renderEditableCell($p['playerKgs'], 'playerKgs');

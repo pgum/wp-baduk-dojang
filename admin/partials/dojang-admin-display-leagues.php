@@ -18,7 +18,6 @@
 <div class="wrap">
 <?php
 global $wpdb;
-//TODO: sculpt this more...
 $archiveLeaguesIds= $wpdb->get_col("SELECT id AS pastLeagues FROM {$wpdb->prefix}leagues WHERE closed = 1 ORDER BY pastLeagues DESC");
 $html='';
 foreach($archiveLeaguesIds as $leagueId){

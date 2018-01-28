@@ -73,8 +73,8 @@ class Dojang_Renderer_Public{
 
   }
   public function renderScoreboard(){
-    //TODO: this should go to settings and not be hardcoded
-    $eligable_points = 100;
+    $options= get_option('dojangoptions');
+    $eligable_points = $options['dojang_eligable'] != '' ? $options['dojang_eligable'] : 100;
     $players= new Dojang_Players();
     $scoreboard= $players->getScoreboard();
     $html.= '<h3 class="dojang-scoreboard">Players Scoreboard</h3>';
