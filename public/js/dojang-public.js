@@ -44,6 +44,9 @@
 		 });
 	 });
 	 $(function(){
+		 $('.dojang-notice').detach().prependTo('.entry-content');
+	 });
+	 $(function(){
 		 $('.dojang-game-player-list').each(function(){
 			 $(this).on('change',function(){
 				 var color= $(this).attr('id');
