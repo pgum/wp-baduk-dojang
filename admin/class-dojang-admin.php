@@ -154,7 +154,6 @@ class Dojang_Admin {
 				settings_fields( 'dojangoptions' );
 				do_settings_sections( 'dojangoptions');
 				submit_button();
-				print_r( get_option('dojangoptions'));
 			?></form>
 			<span class="dojang-footer">Made with <span class="dashicons dashicons-heart" style="color: red"></span> by Piotr</span>
 		</div>
@@ -192,7 +191,6 @@ class Dojang_Admin {
 	public function render_dojang_bonus(){
 		echo '<input type="text" name="dojangoptions[dojang_bonus]" id="dojang_bonus" value="'.$this->options['dojang_bonus'].'"/>';
 		echo '<label for="dojangoptions[dojang_bonus]">League points bonus for winning with teacher.</label>';
-		echo '<span> Standard one is: 15 (Currently Hardcoded!)</span>';
 	}
 	public function render_dojang_pass(){
 		echo '<input type="text" name="dojangoptions[dojang_pass]" id="dojang_bonus" value="'.$this->options['dojang_pass'].'"/>';
