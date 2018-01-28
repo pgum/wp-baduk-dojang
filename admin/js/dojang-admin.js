@@ -30,19 +30,21 @@
   /*AJAX on click events to approve and remove pending result*/
 	$(function(){
 		$('.dojang-approve-result').on('click', function(){
+			var resultId= $(this).attr('x-result-id');
 			$.post({
 				url: ajaxurl,
-				data: {'action': 'dojang_approve_result', 'result_id': $(this).attr('x-result-id')},
-				success: function(data){ console.log(data); $(this).parents('tr').fadeOut(300, function(){$(this).remove();});}
+				data: {'action': 'dojang_approve_result', 'result_id': resultId},
+				success: function(data){ console.log(data); $('.dojang-table-to-approve tr[x-result-id='+resultId+']').fadeOut(800, function(){$(this).remove();});}
 			});
 		});
 		$('.dojang-remove-result').on('click', function(){
+			var resultId= $(this).attr('x-result-id');
 			var choice= confirm("Are you sure you want to remove pending result?\n(Players will have to submit result again)");
 			if(choice){
 				$.post({
 					url: ajaxurl,
-					data: {'action': 'dojang_remove_result', 'result_id': $(this).attr('x-result-id')},
-					success: function(data){ console.log(data); $(this).parents('tr').fadeOut(300, function(){$(this).remove();});}
+					data: {'action': 'dojang_remove_result', 'result_id': resultId},
+					success: function(data){ console.log(data); $('.dojang-table-to-approve tr[x-result-id='+resultId+']').fadeOut(800, function(){$(this).remove();});}
 				});
 			}
 		});
@@ -50,19 +52,21 @@
   /*AJAX on click events to approve and remove pending players*/
 	$(function(){
 		$('.dojang-approve-player').on('click', function(){
+			var playerId= $(this).attr('x-player-id');
 			$.post({
 				url: ajaxurl,
-				data: {'action': 'dojang_approve_player', 'player_id': $(this).attr('x-player-id')},
-				success: function(data){ console.log(data); $(this).parents('tr').fadeOut(300, function(){$(this).remove();});}
+				data: {'action': 'dojang_approve_player', 'player_id': playerId},
+				success: function(data){ console.log(data); $('.dojang-table-to-approve tr[x-player-id='+playerId+']').fadeOut(800, function(){$(this).remove();});}
 			});
 		});
 		$('.dojang-remove-player').on('click', function(){
 			var choice= confirm("Are you sure you want to remove pending player?\n(Player will have to register again)");
 			if(choice){
+				var playerId= $(this).attr('x-player-id');
 				$.post({
 					url: ajaxurl,
-					data: {'action': 'dojang_remove_player', 'player_id': $(this).attr('x-player-id')},
-					success: function(data){ console.log(data); $(this).parents('tr').fadeOut(300, function(){$(this).remove();});}
+					data: {'action': 'dojang_remove_player', 'player_id': playerId},
+					success: function(data){ console.log(data); $('.dojang-table-to-approve tr[x-player-id='+playerId+']').fadeOut(800, function(){$(this).remove();});}
 				});
 			}
 		});
