@@ -37,7 +37,7 @@ class Dojang_Renderer{
       $html.= $this->renderLeagueInfoLine('League points multiplier: '.$leagueInfo->multiplier);
     }
     else{
-      $html.= $this->renderLeagueInfoLine('League points are to distributed. You can change League multiplier, and check players that won with teacher.');
+      $html.= $this->renderLeagueInfoLine('League points are to calculated but not yet distributed. You can change League multiplier, and check players that won with teacher.');
       $html.= $this->renderLeagueInfoLine('League points multiplier: '.$this->renderLeaguePointsInput($leagueInfo->multiplier, $leagueInfo->id));
     }
     $html.= $this->renderLeagueCloseAndDistributePoints();
