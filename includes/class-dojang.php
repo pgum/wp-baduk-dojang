@@ -206,6 +206,9 @@ class Dojang {
 		$this->loader->add_action('admin_post_nopriv_dojang_register', $plugin_public, 'post_register_data' );
 		$this->loader->add_action('admin_post_dojang_register', $plugin_public, 'post_register_data' );
 
+		$this->loader->add_action('admin_post_nopriv_dojang_submit_game', $plugin_public, 'post_submit_game' );
+		$this->loader->add_action('admin_post_dojang_submit_game', $plugin_public, 'post_submit_game' );
+
 	}
 
 	private function define_shortcodes(){

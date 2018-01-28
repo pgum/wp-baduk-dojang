@@ -146,7 +146,7 @@ class Dojang_Public {
 		return $html;
 	}
   /*POST DATA handlers*/
-	private function validate_post_data($data){
+	private function validate_post_register($data){
 		$returnArray=array();
 		$returnResult=1;
 		if(strlen($data['dojang-player-name'])== 0){
@@ -175,8 +175,22 @@ class Dojang_Public {
 		$returnArray['suc'] = $returnResult;
 		return $returnArray;
 	}
+	private function validate_post_game($data){
+		$returnArray=array();
+		//TODO: isPlayerInLeague use to see if both players selected belong to same group
+		//TODO: see if player winner and player loser are selected players (ie player 64 vs 105 and won 126)
+		$returnResult=1;
+		$referer= $_SERVER['HTTP_REFERER'];
+		$returnArray['suc'] = $returnResult;
+		return $returnArray;
+	}
+	public function post_submit_game(){
+		$validation_result= $this->validate_post_game($_POST);
+		wp_safe_redirect(add_query_arg( $validation_result, home_url('/league-results')));
+		exit;
+	}
 	public function post_register_data(){
-		$validation_result= $this->validate_post_data($_POST);
+		$validation_result= $this->validate_post_register($_POST);
 		wp_safe_redirect(add_query_arg( $validation_result, home_url('/register-to-online-teaching')));
 		exit;
 	}

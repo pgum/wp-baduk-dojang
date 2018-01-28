@@ -4,7 +4,6 @@ class Dojang_Renderer_Public{
     $registerRenderer= new Dojang_Renderer_Registration();
     return $registerRenderer->renderPlayerNotRegisteredNotice($msg);
   }
-
   public function renderPlayerRegisteredNotice(){
     $registerRenderer= new Dojang_Renderer_Registration();
     return $registerRenderer->renderPlayerRegisteredNotice();
