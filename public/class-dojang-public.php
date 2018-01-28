@@ -280,7 +280,7 @@ class Dojang_Public {
 														'playerRank' => $data['dojang-player-rank'],
 														'playerCountry' => $data['dojang-player-country'],
 														'playerTimezone' => '',
-														'isApproved' => 0);
+														'playerApproved' => 0);
 			$wpdb->insert("{$wpdb->prefix}players", $dataToInsert);
 		}
 		wp_safe_redirect(add_query_arg( $validation_result, home_url('/register-to-online-teaching')));

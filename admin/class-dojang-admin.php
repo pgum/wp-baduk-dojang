@@ -193,7 +193,7 @@ class Dojang_Admin {
 	public function ajax_approve_player(){
 		global $wpdb;
 		$pid= $_POST['player_id'];
-		$wpdb->update("{$wpdb->prefix}players", array('isApproved' => 1), array('playerId' => $pid));
+		$wpdb->update("{$wpdb->prefix}players", array('playerApproved' => 1), array('playerId' => $pid));
 		echo 'Ajax Approve Player Id= '.$_POST['player_id'];
 		wp_die();
 	}

@@ -140,7 +140,7 @@
 	$(function(){
 		$('.dojang-update-league-points').on('click', function(){
 			var leagueId= $(this).attr('x-league-id');
-			var multiplier_raw= $(".dojang-league-points-input[x-league-id='+leagueId+']").val();
+			var multiplier_raw= $('.dojang-league-points-input[x-league-id='+leagueId+']').val();
 			var multiplier = parseInt(multiplier_raw);
 				$.post({
 					url: ajaxurl,

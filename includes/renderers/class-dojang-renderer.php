@@ -105,9 +105,9 @@ class Dojang_Renderer{
     return $html;
 
   }
-  private function renderEditableCell($raw_val){
-    $val = $raw_val == '' ? '&nbsp;' : $raw_val;
-    return '<td class="dojang-editable-cell"><div class="dojang-editable-div" x-field="playerName">'.$val.'</div></td>';
+  private function renderEditableCell($rawVal, $fieldName){
+    $val = $rawVal == '' ? '&nbsp;' : $rawVal;
+    return '<td class="dojang-editable-cell"><div class="dojang-editable-div" x-field="'.$fieldName.'">'.$val.'</div></td>';
   }
   public function renderPlayersMgmt(){
     $players= new Dojang_Players();
@@ -127,13 +127,13 @@ class Dojang_Renderer{
       $ppoints  = isset($scoreboard[$p['playerId']]) ? '' : $scoreboard[$p['playerId']];
       $html.='<tr x-player-id="'.$p['playerId'].'">';
       $html.='<td><a name="pid-'.$p['playerId'].'"></a>'.$p['playerId'].'</td>';
-      $html.= $this->renderEditableCell($p['playerName']);
-      $html.= $this->renderEditableCell($p['playerCountry']);
-      $html.= $this->renderEditableCell($p['playerKgs']);
-      $html.= $this->renderEditableCell($p['playerRank']);
-      $html.= $this->renderEditableCell($p['playerEmail']);
-      $html.= $this->renderEditableCell($p['playerTimezone']);
-      $html.= $this->renderEditableCell($p['playerApproved']);
+      $html.= $this->renderEditableCell($p['playerName'], 'playerName');
+      $html.= $this->renderEditableCell($p['playerCountry'], 'playerCountry');
+      $html.= $this->renderEditableCell($p['playerKgs'], 'playerKgs');
+      $html.= $this->renderEditableCell($p['playerRank'], 'playerRank');
+      $html.= $this->renderEditableCell($p['playerEmail'], 'playerEmail');
+      $html.= $this->renderEditableCell($p['playerTimezone'], 'playerTimezone');
+      $html.= $this->renderEditableCell($p['playerApproved'], 'playerApproved');
       $html.='<td>'.$ppoints.'</td>';
       $html.='</tr>';
     }
