@@ -35,9 +35,9 @@ class Dojang_Admin {
 	 *
 	 * @since  	1.0.0
 	 * @access 	private
-	 * @var  	string 		$option_name 	Option name of this plugin
+	 * @var  	string 		$options
 	 */
-	private $option_name = 'dojang';
+	private $options;
 
 	/**
 	 * Initialize the class and set its properties.
@@ -122,7 +122,7 @@ class Dojang_Admin {
 		"Dojang Settings",
 		"Settings",
 		'manage_options',
-		$this->plugin_name.'options',
+		'dojangoptions',
 		array( $this, 'display_options_page_options' ),
 		'dashicons-plus-alt'
 		);
@@ -145,34 +145,45 @@ class Dojang_Admin {
 		include_once 'partials/dojang-admin-display-newleague.php';
 	}
 	public function display_options_page_options() {
-		include_once 'partials/dojang-admin-display-options.php';
+		$this->options = get_option('dojangoptions');
+		?>
+		<div class="wrap">
+			<h2><span class="dashicons dashicons-admin-settings"></span>My Settings</h2>
+			<form method="post" action="options.php"><?php
+				// This prints out all hidden setting fields
+				settings_fields( 'dojangoptions' );
+				echo'<input type="text" name="dojangoptions[dojang_email]" id="dojang_email" value="'.$this->options['dojang_email'].'"/>';
+				do_settings_sections( 'dojangoptions');
+				submit_button();
+				print_r( get_option('dojangoptions'));
+			?></form>
+			<span class="dojang-footer">Made with <span class="dashicons dashicons-heart" style="color: red"></span> by Piotr</span>
+		</div>
+		<?php
 	}
 
 	public function dojang_register_settings(){
 	// Add a General section
+	register_setting('dojangoptions', 'dojangoptions');
 	add_settings_section(
-		$this->option_name . 'options',
-		__( 'General', 'baduk-dojang' ),
-		array( $this, 'dojang_general_cb' ),
-		$this->plugin_name
+		'dojang_section_id',
+		__( 'General Settings', 'baduk-dojang' ),
+		array( $this, 'render_section_info' ),
+		'dojangoptions'
 	);
 	add_settings_field(
-		$this->option_name.'_email',
+		'dojang_email',
 		__('Notice Email', 'baduk-dojang'),
-		array( $this, 'dojang_email'),
-		$this->plugin_name,
-		$this->option_name.'options',
-		array('label_for'=> $this->option_name.'_email')
+		array($this, 'render_dojang_email'),
+		'dojangoptions',
+		'dojang_section_id'
 	);
-	register_setting(
-		$this->plugin_name,
-		'dojang_email');
 	}
-	public function dojang_email(){
-		echo'<input type="text" name="baduk-dojang_email" id="baduk-dojang_email"/>';
+	public function render_dojang_email(){
+		echo'<input type="text" name="dojangoptions[dojang_email]" id="dojang_email" value="'.$this->options['dojang_email'].'"/>';
 	}
-	public function dojang_general_cb(){
-		echo '<p>' . __( 'Please change the settings accordingly.', 'baduk-dojang' ) . '</p>';
+	public function render_section_info(){
+		echo '<p>' . __( 'Please change these settings accordingly:', 'baduk-dojang' ) . '</p>';
 	}
 	//AJAX callbacks
 	//wp_die(); ir required to terminate immediately and return proper response
