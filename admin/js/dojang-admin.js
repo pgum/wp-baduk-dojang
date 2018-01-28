@@ -124,13 +124,16 @@
 	$(function(){
 		$('.dojang-distribute').on('click', function(){
 			var leagueToClose= $(this).attr('x-league-id');
-			$.post({
-				url: ajaxurl,
-				data: {'action': 'dojang_close_league_distribute_points', 'league_id': leagueToClose},
-				success: function(data){
-					console.log(data);
-				}
-			});
+			var choice= confirm("Are you sure you want to close league and distribute points to players?\n(League will be read-only and no further changes could be done)\nMake sure all results are there and 'win with teacher' is filled out!");
+			if(choice){
+				$.post({
+					url: ajaxurl,
+					data: {'action': 'dojang_close_league_distribute_points', 'league_id': leagueToClose},
+					success: function(data){
+						console.log(data);
+					}
+				});
+		}
 		});
 	});
 })( jQuery );
