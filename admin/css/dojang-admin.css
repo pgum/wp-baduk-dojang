@@ -2,10 +2,8 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
-.dojang-group-table, .dojang-table-to-approve{
-  border-collapse: collapse;
-}
- .dojang-group-table tbody td{
+.dojang-group-table, .dojang-table-to-approve{ border-collapse: collapse; }
+.dojang-group-table tbody td{
   border: 1px black solid;
   min-width: 30px;
   padding: 3px;
@@ -17,12 +15,8 @@
   padding: 3px;
 }
 /*Result Table Cell Styles*/
-.dojang-result-not-approved{
-  background: yellow;
-}
-.dojang-result-own{
-  background: gray;
-}
+.dojang-result-not-approved{ background: yellow; }
+.dojang-result-own{ background: gray; }
 .dojang-result-highlight {
   background: #00b9eb !important;
   animation:highlight-pulse-animation 2s;
@@ -35,9 +29,9 @@
   -webkit-animation:update-pulse-animation 2s; /* Safari and Chrome */
 
 }
-.dojang-editable-cell{
-  background: #d5d5d5;
-}
+.dojang-league-properties { border: 1px solid black; }
+.dojang-league-info::after {  content: '\A'; }
+.dojang-editable-cell{ background: #d5d5d5; }
 .dojang-editable-cell div{
   width:100%;
   height:100%;
@@ -46,7 +40,7 @@ a.dojang-anchor{
   display: block;
   position: relative;
   /*TODO: set this to proper value by hand later*/
-  top: -250px;
+  top: -100px;
   visibility: hidden;
 }
 /*Animations*/
@@ -78,6 +72,11 @@ a.dojang-anchor{
 100% {background: lightgray;}
 }
 
+h3.dojang-collapse:after {font-family: 'dashicons'; content: '\f506'; margin-left:10px;}
+h3.dojang-expand:after {font-family: 'dashicons'; content: '\f211'; margin-left:10px;}
+.dojang-hidden {display:none;}
+h3.dojang-results-archive {cursor: pointer;}
+
 /*Games and Players to Approve Tables*/
 .dojang-table-to-approve tbody td{
   border: 1px black solid;
@@ -90,18 +89,8 @@ a.dojang-anchor{
   background: lightgray;
   padding: 3px;
 }
-.dojang-result-to-approve-winner {
-  font-weight: bold;
-}
+.dojang-result-to-approve-winner { font-weight: bold; }
 /*Results table place highlight*/
-.dojang-place-1 {
-  background: #ffd700;
-}
-
-.dojang-place-2 {
-  background: #c0c0c0;
-}
-
-.dojang-place-3 {
-  background: #cd7f32;
-}
+.dojang-place-1 { background: #ffd700; }
+.dojang-place-2 { background: #c0c0c0; }
+.dojang-place-3 { background: #cd7f32; }
