@@ -124,7 +124,6 @@ class Dojang_Renderer{
                        <th>Approved?</th>
                        <th>League Points</th></tr></thead><tbody>';
     foreach($playersData as $p){
-      $ppoints  = isset($scoreboard[$p['playerId']]) ? '' : $scoreboard[$p['playerId']];
       $html.='<tr x-player-id="'.$p['playerId'].'">';
       $html.='<td><a name="pid-'.$p['playerId'].'"></a>'.$p['playerId'].'</td>';
       $html.= $this->renderEditableCell($p['playerName'], 'playerName');
@@ -134,7 +133,7 @@ class Dojang_Renderer{
       $html.= $this->renderEditableCell($p['playerEmail'], 'playerEmail');
       $html.= $this->renderEditableCell($p['playerTimezone'], 'playerTimezone');
       $html.= $this->renderEditableCell($p['playerApproved'], 'playerApproved');
-      $html.='<td>'.$ppoints.'</td>';
+      $html.='<td>'.$scoreboard[$p['playerId']]['playerPoints'].'</td>';
       $html.='</tr>';
     }
     $html.='</tbody></table>';
