@@ -225,7 +225,13 @@ class Dojang_Admin {
 		global $wpdb;
 		$pid= $_POST['player_id'];
 		$wpdb->update("{$wpdb->prefix}players", array('playerApproved' => 1), array('playerId' => $pid));
-		echo 'Ajax Approve Player Id= '.$_POST['player_id'];
+
+		$options= get_option('dojangoptions');
+		$msg= $options['dojang_welcome'];
+		$player= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}players WHERE playerId = $pid")[0];
+		$email= $player->playerEmail;
+		wp_mail($email,'Your registration was approved!',$msg);
+		echo 'Ajax Approve Player Id= '.$pid.' Player email= '.$email;
 		wp_die();
 	}
 	public function ajax_remove_player(){
