@@ -51,8 +51,8 @@ class Dojang_Renderer_Public{
     $playerCountry= $player->playerDetails->playerCountry;
     $playerKgs= $player->playerDetails->playerKgs;
     $playerRank= $player->playerDetails->playerRank;
-    $html.='<td>'.$i++.'</td><td>'.$playerName.'</td><td>'.$playerCountry.'</td><td>'.$playerKgs.'</td><td>'.$playerRank.'</td><td>'.$playerGroupName.'</td>';
-    return '<tr>'.$html.'</tr>';
+    $html.='<td>'.$playerName.'</td><td>'.$playerCountry.'</td><td>'.$playerKgs.'</td><td>'.$playerRank.'</td><td>'.$playerGroupName.'</td>';
+    return $html;
   }
   public function renderCurrentPlayers(){
     $league= new Dojang_League();
@@ -66,7 +66,7 @@ class Dojang_Renderer_Public{
       $players= $group->groupPlayers;
       $groupName= $group->groupDetails->groupName;
       foreach($players as $player)
-        $html.= $this->renederPlayerRow($player, $groupName);
+        $html.= '<tr>'.'<td>'.$i++.'</td>'.$this->renederPlayerRow($player, $groupName).'</tr>';
     }
     $html.='</tbody></table>';
     return $html;

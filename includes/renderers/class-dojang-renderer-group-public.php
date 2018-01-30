@@ -26,8 +26,8 @@ class Dojang_Renderer_Group_Public{
     $html.= ' <th><span class="dashicons dashicons-awards"></span></th></tr>';
     return '<thead>'.$html.'</thead>';
   }
-  private function renderPlayerDetailsCells($player){
-    $html.='<td>'.($player->tableOrder+1).'</td>';
+  private function renderPlayerDetailsCells($player,$i){
+    $html.='<td>'.($i).'</td>';
     $html.='<td>'.($player->playerDetails->playerName).'</td>';
     $html.='<td>'.($player->playerDetails->playerKgs).'</td>';
     return $html;
@@ -46,14 +46,17 @@ class Dojang_Renderer_Group_Public{
     $html.= '<td class="dojang-place-'.$player->place.'">#'.$player->place.'</td>';
     return $html;
   }
-  private function renderPlayerRow($player){
-    $html.= $this->renderPlayerDetailsCells($player);
+  private function renderPlayerRow($player, $i){
+    $html.= $this->renderPlayerDetailsCells($player, $i);
     $html.= $this->renderPlayerResultsCells($player);
     return '<tr>'.$html.'</tr>';
   }
   private function renderPlayersResults(){
-    foreach($this->groupPlayers as $p)
-      $html.= $this->renderPlayerRow($p);
+    $i=1;
+    foreach($this->groupPlayers as $p){
+      $html.= $this->renderPlayerRow($p,$i);
+      $i++;
+    }
     return '<tbody>'.$html.'</tbody>';
   }
 }
