@@ -59,7 +59,8 @@ class Dojang_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/dojang-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name.'w2ui', plugin_dir_url( __FILE__ ) . 'css/w2ui.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name.'main', plugin_dir_url( __FILE__ ) . 'css/dojang-admin.css', array(), $this->version, 'all' );
 	}
 
 	/**
@@ -68,7 +69,10 @@ class Dojang_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/dojang-admin.js', array( 'jquery' ), $this->version, false );
+		wp_add_inline_script( 'jquery-core', '$ = jQuery;' );
+		wp_enqueue_script( $this->plugin_name.'w2ui', plugin_dir_url( __FILE__ ) . 'js/w2ui.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name.'main', plugin_dir_url( __FILE__ ) . 'js/dojang-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name.'editor', plugin_dir_url( __FILE__ ) . 'js/dojang-admin-editor.js', array( 'jquery' ), $this->version, false );
 	}
 /**
 	 * Add an options page under the Settings submenu
