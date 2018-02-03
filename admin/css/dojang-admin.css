@@ -97,3 +97,8 @@ h3.dojang-results-archive {cursor: pointer;}
 .dojang-place-1 { background: #ffd700; }
 .dojang-place-2 { background: #c0c0c0; }
 .dojang-place-3 { background: #cd7f32; }
+
+/*Dojang League Editor App*/
+#dojang-editor {border: 1px black solid;}
+#dojang-toolbar{border: 1px black solid; background: rgba(211,211,211,0.9); }
+#dojang-workspace {border: 1px black solid; height: 500px; background: rgba(191,172,172,0.75);}
