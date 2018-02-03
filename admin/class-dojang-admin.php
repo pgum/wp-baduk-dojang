@@ -93,8 +93,8 @@ class Dojang_Admin {
 		//Sub-menus: Players Mgmt, Leagues Mgmt, New League
 		$this->plugin_screen_hook_suffix_submenu = add_submenu_page(
 		$this->plugin_name,
-		"Players Management",
-		"Players Mgmt",
+			__( 'Players Management', 'baduk-dojang' ),
+			__( 'Players Mgmt', 'baduk-dojang' ),
 		'manage_options',
 		$this->plugin_name.'players',
 		array( $this, 'display_options_page_players' ),
@@ -103,8 +103,8 @@ class Dojang_Admin {
 
 		$this->plugin_screen_hook_suffix_submenu = add_submenu_page(
 		$this->plugin_name,
-		"Previous Leagues Management",
-		"Leagues Mgmt",
+			__( 'Previous Leagues Management', 'baduk-dojang' ),
+			__( 'Leagues Mgmt', 'baduk-dojang' ),
 		'manage_options',
 		$this->plugin_name.'leagues',
 		array( $this, 'display_options_page_leagues' ),
@@ -113,8 +113,8 @@ class Dojang_Admin {
 
 		$this->plugin_screen_hook_suffix_submenu = add_submenu_page(
 		$this->plugin_name,
-		"Create New League",
-		"New League",
+			__( 'Create New League', 'baduk-dojang' ),
+			__( 'New League', 'baduk-dojang' ),
 		'manage_options',
 		$this->plugin_name.'newleague',
 		array( $this, 'display_options_page_newleague' ),
@@ -123,8 +123,8 @@ class Dojang_Admin {
 
 		$this->plugin_screen_hook_suffix_submenu = add_submenu_page(
 		$this->plugin_name,
-		"Dojang Settings",
-		"Settings",
+			__( 'Dojang Settings', 'baduk-dojang' ),
+			__( 'Settings', 'baduk-dojang' ),
 		'manage_options',
 		'dojangoptions',
 		array( $this, 'display_options_page_options' ),
