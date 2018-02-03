@@ -99,6 +99,21 @@ h3.dojang-results-archive {cursor: pointer;}
 .dojang-place-3 { background: #cd7f32; }
 
 /*Dojang League Editor App*/
+.dojang-toolbar-input{ border-radius: 2px; border: 1px solid silver;}
 #dojang-editor {border: 1px black solid;}
 #dojang-toolbar{border: 1px black solid; background: rgba(211,211,211,0.9); }
 #dojang-workspace {border: 1px black solid; height: 500px; background: rgba(191,172,172,0.75);}
+#dojang-sortable li {
+    float: left;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+#dojang-sortable:after {content: ""; clear: both;}
+.dojang_group {
+    width: 100px;
+    height: 100px;
+    background: black;
+    margin: 5px;
+    padding: 5px;
+}
