@@ -110,10 +110,11 @@ h3.dojang-results-archive {cursor: pointer;}
     margin: 0;
 }
 #dojang-sortable:after {content: ""; clear: both;}
-.dojang_group {
+.dojang-group, .dojang-group-placeholder {
     width: 100px;
     height: 100px;
-    background: black;
     margin: 5px;
     padding: 5px;
 }
+.dojang-group {background: black; color: white;}
+.dojang-group-placeholder {background: gray;}
