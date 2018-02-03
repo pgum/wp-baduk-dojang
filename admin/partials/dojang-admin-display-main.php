@@ -27,5 +27,4 @@ echo $renderer->renderGamesToApproveTable();
 echo $renderer->renderGroupsTable();
 echo "<br/>";
 ?>
-<span class="dojang-footer">Made with <span class="dashicons dashicons-heart" style="color: red"></span> by Piotr</span>
 </div>
