@@ -19,25 +19,7 @@
 	    <h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 			<div id="dojang-editor">
 				<div id="dojang-toolbar"></div>
-				<div id="dojang-workspace">
-					<ul id="dojang-sortable">
-						<li>
-							<div class="dojang_group"></div>
-						</li>
-						<li>
-							<div class="dojang_group"></div>
-						</li>
-						<li>
-							<div class="dojang_group"></div>
-						</li>
-						<li>
-							<div class="dojang_group"></div>
-						</li>
-						<li>
-							<div class="dojang_group"></div>
-						</li>
-					</ul>
-				</div>
+				<div id="dojang-workspace"><ul id="dojang-sortable"></ul></div>
 			</div>
 </div>
 <?php
