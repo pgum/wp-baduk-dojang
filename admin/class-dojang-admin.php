@@ -134,15 +134,19 @@ class Dojang_Admin {
 	 */
 	public function display_options_page_main() {
 		include_once 'partials/dojang-admin-display-main.php';
+		$this->render_dojang_footer();
 	}
 	public function display_options_page_players() {
 		include_once 'partials/dojang-admin-display-players.php';
+		$this->render_dojang_footer();
 	}
 	public function display_options_page_leagues() {
 		include_once 'partials/dojang-admin-display-leagues.php';
+		$this->render_dojang_footer();
 	}
 	public function display_options_page_newleague() {
 		include_once 'partials/dojang-admin-display-newleague.php';
+		$this->render_dojang_footer();
 	}
 	public function display_options_page_options() {
 		$this->options = get_option('dojangoptions');
@@ -155,11 +159,13 @@ class Dojang_Admin {
 				do_settings_sections( 'dojangoptions');
 				submit_button();
 			?></form>
-			<span class="dojang-footer">Made with <span class="dashicons dashicons-heart" style="color: red"></span> by Piotr</span>
 		</div>
 		<?php
+		$this->render_dojang_footer();
 	}
-
+  public function render_dojang_footer(){
+		echo '<div class="dojang-footer">Made with <span class="dojang-love"></span> by Piotr</div>'	;
+	}
 	public function dojang_register_settings(){
 	// Add a General section
 	register_setting('dojangoptions', 'dojangoptions');
