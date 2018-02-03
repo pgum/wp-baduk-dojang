@@ -70,8 +70,10 @@ class Dojang_Admin {
 	 */
 	public function enqueue_scripts() {
 		wp_add_inline_script( 'jquery-core', '$ = jQuery;' );
-		wp_enqueue_script( $this->plugin_name.'w2ui', plugin_dir_url( __FILE__ ) . 'js/w2ui.js', array( 'jquery' ), $this->version, false );
-		wp_enqueue_script( $this->plugin_name.'main', plugin_dir_url( __FILE__ ) . 'js/dojang-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name.'w2ui', plugin_dir_url( __FILE__ ) . 'js/w2ui.js',
+			array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name.'main', plugin_dir_url( __FILE__ ) . 'js/dojang-admin.js',
+			array( 'jquery', 'jquery-ui-sortable'), $this->version, false );
 	}
 /**
 	 * Add an options page under the Settings submenu
