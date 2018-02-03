@@ -2,13 +2,13 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
-.dojang-group-table, .dojang-table-to-approve, .dojang-player-list { border-collapse: collapse; }
-.dojang-group-table tbody td, .dojang-player-list tbody td{
+.dojang-group-table, .dojang-table-to-approve, .dojang-player-list, .dojang-table { border-collapse: collapse; }
+.dojang-group-table tbody td, .dojang-player-list tbody td, .dojang-table tbody td {
   border: 1px black solid;
   min-width: 30px;
   padding: 3px;
 }
-.dojang-group-table thead th, .dojang-player-list thead th{
+.dojang-group-table thead th, .dojang-table thead th, .dojang-player-list thead th{
   border: 1px black solid;
   min-width: 30px;
   background: lightgray;
@@ -74,7 +74,7 @@ a.dojang-anchor{
 50%  {background: green;}
 100% {background: lightgray;}
 }
-
+.dojang-love:after {font-family: 'dashicons'; content: '\f487'; color: #f44040; }
 h3.dojang-collapse:after {font-family: 'dashicons'; content: '\f506'; margin-left:10px;}
 h3.dojang-expand:after {font-family: 'dashicons'; content: '\f211'; margin-left:10px;}
 .dojang-hidden {display:none;}
