@@ -102,8 +102,8 @@ h3.dojang-results-archive {cursor: pointer;}
 .dojang-toolbar-input{ border-radius: 2px; border: 1px solid silver;}
 #dojang-editor {border: 1px black solid;}
 #dojang-toolbar{border: 1px black solid; background: rgba(211,211,211,0.9); }
-#dojang-workspace {border: 1px black solid; height: 500px; background: rgba(191,172,172,0.75);}
-#dojang-sortable li {
+#dojang-workspace {border: 1px black solid; height: 700px; background: #03aa7b;}
+#dojang-sortable .dojang-group-object, .dojang-group-placeholder{
     float: left;
     list-style-type: none;
     padding: 0;
@@ -111,10 +111,50 @@ h3.dojang-results-archive {cursor: pointer;}
 }
 #dojang-sortable:after {content: ""; clear: both;}
 .dojang-group, .dojang-group-placeholder {
-    width: 100px;
-    height: 100px;
-    margin: 5px;
-    padding: 5px;
+    width: 200px;
+    height: 320px;
+    margin: 2px;
+    padding: 2px;
+    border: 1px solid black;
 }
-.dojang-group {background: black; color: white;}
+.dojang-group {background: #0073aa; color: white;}
 .dojang-group-placeholder {background: gray;}
+
+label.dojang-editor-description { display: none; }
+/*li.dojang-editor-player { display: inline-block; }*/
+.dojang-editor-remove-group {
+/*    text-align: right;
+    position: relative;
+    top: -20px;
+    left: +2px;*/
+    width: 100%;
+    margin-top: 5px !important;
+}
+select.dojang-player-select {
+    height: 18px;
+    font-size: 10px;
+    font-size: 8pt;
+    width: 90%;
+}
+li.dojang-editor-player { margin-bottom: 1px; height: 20px; color: white;}
+ol.dojang-editor-group-players {
+    list-style-type: hangul;
+    color: white;
+    width: 195px;
+    margin-left: 20px;
+}
+input.dojang-editor-group-name {
+    width: 170px;
+}
+
+input.dojang-editor-group-order {
+    width: 20px;
+}
+.chosen-container-single .chosen-single {height: 20px !important;}
+.dojang-editor-remove-group:before {
+    content: "\f182";
+    font: normal 30px/1 'dashicons';
+    height: 18px;
+    font-size: 26px;
+    vertical-align: middle;
+}
