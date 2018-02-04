@@ -292,4 +292,26 @@ class Dojang_Admin {
 		echo 'Im gunna update league ('.$_POST['league_id'].') points multiplier= '.$_POST['multiplier'];
 		wp_die();
 	}
+  public function ajax_create_league(){
+		global $wpdb;
+    $object= json_decode(stripslashes($_POST['league_data']), true);
+    $saveAs= $object['save'] == 'draft' ? '1' : '0';
+    $league= $object['league'];
+    $groups= $league['groups'];
+    $response=array();
+    $response[]='Create New League: name='.$league['name'].' multiplier='.$league['multiplier'];
+    $response[]='Number of groups='.count($groups);
+    foreach($groups as $g)
+      $response[]='#'.$g['order'].' name='.$g['name'].' players'.implode(',',$g['players']);
+    $response[]="{$wpdb->prefix}leagues, array('leagueName' => $league['name'],
+                                                'hidden' => 0,
+                                                'closed' => 0,
+                                                'multiplier' => $league['multiplier'],
+                                                'pointsDistributed' => 0,
+                                                'draft' => $saveAs)";
+    $response[]='$newLeagueId= $wpdb->insert_id;';
+    $response[]='$i=0; foreach($groups as $g){$gpid=$newLeagueId*10+$i; }';
+    print_r($response);
+		wp_die();
+  }
 }
