@@ -58,4 +58,8 @@ class Dojang_Players {
 		uasort($scoreboard, array($this, 'playerScoreComparator'));
 		return $scoreboard;
 	}
+  public function getAllPlayersIdNameRank(){
+		global $wpdb;
+    return $wpdb->get_results("SELECT playerId, playerName, playerRank FROM {$wpdb->prefix}players WHERE playerApproved = 1 ORDER BY playerName ASC", ARRAY_A);
+  }
 }
