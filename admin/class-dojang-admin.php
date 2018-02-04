@@ -60,6 +60,7 @@ class Dojang_Admin {
 	 */
 	public function enqueue_styles() {
 		wp_enqueue_style( $this->plugin_name.'w2ui', plugin_dir_url( __FILE__ ) . 'css/w2ui.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name.'chosen', plugin_dir_url( __FILE__ ) . 'css/chosen.css', array(), $this->version, 'all' );
 		wp_enqueue_style( $this->plugin_name.'main', plugin_dir_url( __FILE__ ) . 'css/dojang-admin.css', array(), $this->version, 'all' );
 	}
 
@@ -71,6 +72,8 @@ class Dojang_Admin {
 	public function enqueue_scripts() {
 		wp_add_inline_script( 'jquery-core', '$ = jQuery;' );
 		wp_enqueue_script( $this->plugin_name.'w2ui', plugin_dir_url( __FILE__ ) . 'js/w2ui.js',
+			array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name.'chosen', plugin_dir_url( __FILE__ ) . 'js/chosen.js',
 			array( 'jquery' ), $this->version, false );
 		wp_enqueue_script( $this->plugin_name.'main', plugin_dir_url( __FILE__ ) . 'js/dojang-admin.js',
 			array( 'jquery', 'jquery-ui-sortable'), $this->version, false );
