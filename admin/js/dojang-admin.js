@@ -181,7 +181,7 @@ $(function(){
     $(this).w2menu({
       items: [{ text: 'Update Result',},
               { id: 'update:'+r.rid+':'+r.pr.id, text: r.pr.name+' won', icon: 'dashicons dashicons-star-filled', disabled: (r.pr.id == r.pw)},
-              { id: 'update:'+r.rid+':'+r.pc.id, text: r.pc.name+' won', icon: 'dashicons dashicons-star-empty', disabled: (r.pc.id == r.pc)},
+              { id: 'update:'+r.rid+':'+r.pc.id, text: r.pc.name+' won', icon: 'dashicons dashicons-star-empty', disabled: (r.pc.id == r.pw)},
               { id: 'remove:'+r.rid, text: 'Remove Result', icon: 'dashicons dashicons-trash'},
               { text: 'Refresh the site to see update!'}, ],
       onSelect: function(event){
