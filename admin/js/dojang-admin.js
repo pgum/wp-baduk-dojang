@@ -183,9 +183,12 @@ $(function(){
               { id: 'update:'+r.rid+':'+r.pr.id, text: r.pr.name+' won', icon: 'dashicons dashicons-star-filled', disabled: (r.pr.id == r.pw)},
               { id: 'update:'+r.rid+':'+r.pc.id, text: r.pc.name+' won', icon: 'dashicons dashicons-star-empty', disabled: (r.pc.id == r.pw)},
               { id: 'remove:'+r.rid, text: 'Remove Result', icon: 'dashicons dashicons-trash'},
-              { text: 'Refresh the site to see update!'}, ],
+              { id: 'refresh', text: 'Refresh the site to see update!'}, ],
       onSelect: function(event){
     	  var iid= event.item.id;
+
+        if(iid=='refresh'){ location.reload(false); return; }
+
     	  var action= iid.split(':')[0];
     	  var resultId= iid.split(':')[1];
     	  if(action=='update'){
@@ -214,16 +217,19 @@ $(function(){
       items: [{ text: 'Create Result',},
               { id: 'create:'+r.pr.id+':'+r.pc.id+':'+r.gid, text: r.pr.name+' won', icon: 'dashicons dashicons-star-filled'},
               { id: 'create:'+r.pc.id+':'+r.pr.id+':'+r.gid, text: r.pc.name+' won', icon: 'dashicons dashicons-star-empty'},
-              { text: 'Refresh the site to see update!'}],
+              { id: 'refresh', text: 'Refresh the site to see update!'}],
       onSelect: function(event){
   	     var iid= event.item.id;
+
+         if(iid=='refresh'){ location.reload(false); return; }
+
   	     var playerWinner= iid.split(':')[1];
   	     var playerLoser=  iid.split(':')[2];
   	     var groupId=  iid.split(':')[3];
   	     //console.log('Create game result for group '+groupId+' between players '+playerWinner+' and '+playerLoser+' where winner was:'+playerWinner);
          $.post({
            url: ajaxurl,
-           data: {'action': 'dojang_create_result', 'group_id': groupId, 'playerW': playerWinner, playerL: playerLoser},
+           data: {'action': 'dojang_create_result', 'group_id': groupId, 'playerW': playerWinner, 'playerL': playerLoser},
            success: function(data){ console.log(data);	}
          });
       }});
