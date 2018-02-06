@@ -189,6 +189,10 @@ class Dojang {
 		$this->loader->add_action('wp_ajax_dojang_update_player_field', $plugin_admin, 'ajax_update_player_field' );
 		$this->loader->add_action('wp_ajax_dojang_league_points_update', $plugin_admin, 'ajax_league_points_update' );
     $this->loader->add_action('wp_ajax_dojang_create_league', $plugin_admin, 'ajax_create_league');
+
+    $this->loader->add_action('wp_ajax_dojang_create_result', $plugin_admin, 'ajax_create_result');
+    $this->loader->add_action('wp_ajax_dojang_update_result', $plugin_admin, 'ajax_update_result');
+    $this->loader->add_action('wp_ajax_dojang_remove_result', $plugin_admin, 'ajax_remove_result');
 		//TODO: Adding action to footer is not working
 		//$this->loader->add_action('admin_footer', $plugin_admin, 'render_dojang_footer' );
 	}

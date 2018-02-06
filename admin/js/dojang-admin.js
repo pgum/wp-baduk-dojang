@@ -152,7 +152,82 @@
 				});
 		});
 	});
+//w2ui overlay menu to update remove and create game results
+$(function(){
+  function getResultsPlayers(resultCell){
+  	var col = resultCell.parent().children().index(resultCell);
+  	var playerId_col = resultCell.parents('table').find('thead th:eq('+col+')').attr('x-player-id');
+  	var playerName_col= $('td[x-player-id='+playerId_col+']').text();
+  	var row = resultCell.parent().parent().children().index(resultCell.parent());
+  	var playerId_row = resultCell.parents('tr').attr('x-player-id');
+  	var playerName_row= $('td[x-player-id='+playerId_row+']').text();
+  	var playerRow_result= null;
+  	if(resultCell.attr('x-result') != " "){
+  		playerRow_result= resultCell.attr('x-result') == 'W' ? playerId_row : playerId_col;
+  	}
+  	var resultId= resultCell.attr('x-result-id');
+    var groupId= resultCell.parents('table').attr('x-group-id');
+  	return {pr: {id: playerId_row, name: playerName_row},
+            pc: {id: playerId_col, name: playerName_col},
+            pw: playerRow_result,
+            rid: resultId,
+            gid: groupId}
+  }
 
+  $('.dojang-league-groups-results-tables .dojang-result-approved').on('click', function(){
+  	var r= getResultsPlayers($(this));
 
+    console.log(r);
+    $(this).w2menu({
+      items: [{ text: 'Update Result',},
+              { id: 'update:'+r.rid+':'+r.pr.id, text: r.pr.name+' won', icon: 'dashicons dashicons-star-filled', disabled: (r.pr.id == r.pw)},
+              { id: 'update:'+r.rid+':'+r.pc.id, text: r.pc.name+' won', icon: 'dashicons dashicons-star-empty', disabled: (r.pc.id == r.pc)},
+              { id: 'remove:'+r.rid, text: 'Remove Result', icon: 'dashicons dashicons-trash'},
+              { text: 'Refresh the site to see update!'}, ],
+      onSelect: function(event){
+    	  var iid= event.item.id;
+    	  var action= iid.split(':')[0];
+    	  var resultId= iid.split(':')[1];
+    	  if(action=='update'){
+    		  var playerId= iid.split(':')[2];
+    		  console.log('Update winner of game resultId='+resultId+' to playerId='+playerId);
+          $.post({
+  					url: ajaxurl,
+  					data: {'action': 'dojang_update_result', 'result_id': resultId, 'playerW': playerId},
+  					success: function(data){ console.log(data);	}
+  				});
+    	  }
+    	  if(action=='remove'){
+    		  console.log('Remove game resultId='+resultId);
+          $.post({
+            url: ajaxurl,
+            data: {'action': 'dojang_remove_result', 'result_id': resultId},
+            success: function(data){ console.log(data);	}
+          });
+    	  }
+    }});
+  });
+  $('.dojang-league-groups-results-tables .dojang-result-none').on('click', function(){
+  	var r= getResultsPlayers($(this));
+    console.log(r);
+    $(this).w2menu({
+      items: [{ text: 'Create Result',},
+              { id: 'create:'+r.pr.id+':'+r.pc.id+':'+r.gid, text: r.pr.name+' won', icon: 'dashicons dashicons-star-filled'},
+              { id: 'create:'+r.pc.id+':'+r.pr.id+':'+r.gid, text: r.pc.name+' won', icon: 'dashicons dashicons-star-empty'},
+              { text: 'Refresh the site to see update!'}],
+      onSelect: function(event){
+  	     var iid= event.item.id;
+  	     var playerWinner= iid.split(':')[1];
+  	     var playerLoser=  iid.split(':')[2];
+  	     var groupId=  iid.split(':')[3];
+  	     console.log('Create game result for group '+groupId+' between players '+playerWinner+' and '+playerLoser+' where winner was:'+playerWinner);
+         $.post({
+           url: ajaxurl,
+           data: {'action': 'dojang_create_result', 'group_id': groupId, 'playerW': playerWinner, playerL: playerLoser},
+           success: function(data){ console.log(data);	}
+         });
+      }});
+  });
+});
 
 })( jQuery );

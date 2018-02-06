@@ -18,18 +18,18 @@ class Dojang_Renderer_Group{
   public function renderGroupTable(){
     $html.= $this->renderResultsHeader();
     $html.= $this->renderPlayersResults();
-    return '<table class="dojang-group-table">'.$html.'</table>';//.print_r($this->groupResults,true);
+    return '<table class="dojang-group-table" x-group-id="'.$this->groupDetails->id.'">'.$html.'</table>';//.print_r($this->groupResults,true);
   }
   private function renderResultsHeader(){
     $html.= '<tr><th>#</th><th>Name</th><th>Nick</th> ';
     foreach($this->groupPlayers as $p)
-      $html.= '<th class="dojang-resultColumn">'.$p->playerDetails->playerInitials.'</th>';
+      $html.= '<th class="dojang-resultColumn" x-player-id="'.$p->playerId.'">'.$p->playerDetails->playerInitials.'</th>';
     $html.= ' <th><span class="dashicons dashicons-thumbs-up"></span></th><th><span class="dashicons dashicons-thumbs-down"></span></th>';
     $html.= ' <th><span class="dashicons dashicons-awards"></span></th><th><span class="dashicons dashicons-welcome-learn-more"></span></th><th>Score</th></tr>';
     return '<thead>'.$html.'</thead>';
   }
   private function renderPlayerDetailsCells($player){
-    $html.='<td>'.($player->playerDetails->playerName).'</td>';
+    $html.='<td class="dojang-player-name" x-player-id="'.$player->playerId.'">'.($player->playerDetails->playerName).'</td>';
     $html.='<td>'.($player->playerDetails->playerKgs).'</td>';
     return $html;
   }
@@ -52,7 +52,7 @@ class Dojang_Renderer_Group{
   private function renderPlayersResults(){
     $i=0;
     foreach($this->groupPlayers as $p)
-      $html.='<tr>'.'<td>'.++$i.'</td>'.$this->renderPlayerRow($p).'</tr>';
+      $html.='<tr x-player-id="'.$p->playerId.'">'.'<td>'.++$i.'</td>'.$this->renderPlayerRow($p).'</tr>';
     return '<tbody>'.$html.'</tbody>';
   }
 }

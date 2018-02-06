@@ -313,4 +313,13 @@ class Dojang_Admin {
     print_r($response);
 		wp_die();
   }
+  public function ajax_create_result(){
+    print_r($_POST);
+  }
+  public function ajax_update_result(){
+    print_r($_POST);
+  }
+  public function ajax_remove_result(){
+    print_r($_POST);
+  }
 }

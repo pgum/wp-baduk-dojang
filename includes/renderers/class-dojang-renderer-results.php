@@ -38,13 +38,13 @@ class Dojang_Renderer_Results{
       $returnClass= $classResultApproved;
     else
       $returnClass= $classResultNotApproved;
-    return '<td class="'.$returnClass.'" x-result-id="'.$result->id.'">';
+    return '<td class="'.$returnClass.'" x-result-id="'.$result->id.'" ';
   }
   private function htmlResultWon(){
-    return '<span class="dashicons dashicons-marker"></span>';
+    return 'x-result="W"><span class="dashicons dashicons-marker"></span>';
   }
   private function htmlResultLost(){
-    return '<span class="dashicons dashicons-no"></span>';
+    return 'x-result="L"><span class="dashicons dashicons-no"></span>';
   }
   private function htmlResultGray(){
     return '<td class="dojang-result-own" style="background:gray"></td>';
