@@ -319,7 +319,4 @@ class Dojang_Admin {
   public function ajax_update_result(){
     print_r($_POST);
   }
-  public function ajax_remove_result(){
-    print_r($_POST);
-  }
 }
