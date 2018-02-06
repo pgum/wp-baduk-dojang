@@ -314,9 +314,28 @@ class Dojang_Admin {
 		wp_die();
   }
   public function ajax_create_result(){
-    print_r($_POST);
+		global $wpdb;
+    $gid= $_POST['group_id'];
+    $pidw= $_POST['playerW'];
+    $pidl= $_POST['playerL'];
+    $query="INSERT INTO {$wpdb->prefix}results (groupId, playerIdWhite, playerIdBlack, playerIdWinner, addDate, isApproved) VALUES (
+          '".$gid."',
+          '".$pidw."',
+          '".$pidl."',
+          '".$pidw."',
+          NOW(),
+          1);";
+
+    $wpdb->query($query);
+		echo 'Ajax Create Result group='.$gid.' playerWinner='.$pidw.' playerLoser='.$pidl;
+		wp_die();
   }
   public function ajax_update_result(){
-    print_r($_POST);
+		global $wpdb;
+		$rid= $_POST['result_id'];
+    $pid= $_POST['playerW'];
+		$wpdb->update("{$wpdb->prefix}results",array('playerIdWinner' => $pid) ,array('id' => $rid));
+		echo 'Ajax Remove Result Id= '.$_POST['result_id'];
+		wp_die();
   }
 }

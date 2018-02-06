@@ -51,7 +51,7 @@ class Dojang_Public {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-
+    require_once( ABSPATH . 'wp-includes/option.php' );
 	}
 
 	/**
@@ -195,7 +195,7 @@ class Dojang_Public {
 			$returnArray['dwinner']= 1;
 			$returnResult= 0;
 		}
-		$options= get_options('dojangoptions');
+		$options= get_option('dojangoptions');
 		$pass= $options['dojang_pass'];
 		if($data['dojang-game-pass'] != $pass){
 			$returnArray['dpassword']= 1;
@@ -243,6 +243,7 @@ class Dojang_Public {
 						'".intval(($data['dojang-game-winner'] == 0 ? $data['dojang-game-black'] : $data['dojang-game-white']))."',
 						NOW(),
 						0);";
+      $wpdb->query($query);
 		}
 		wp_safe_redirect(add_query_arg( $validation_result, home_url('/league-results')));
 		exit;
