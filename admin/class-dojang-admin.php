@@ -295,14 +295,13 @@ class Dojang_Admin {
   public function ajax_create_league(){
 		global $wpdb;
     $object= json_decode(stripslashes($_POST['league_data']), true);
-    $saveAs= $object['save'] == 'draft' ? '1' : '0';
     $league= $object['league'];
     $groups= $league['groups'];
     $response=array();
     $response[]='Create New League: name='.$league['name'].' multiplier='.$league['multiplier'];
     $response[]='Number of groups='.count($groups);
     foreach($groups as $g)
-      $response[]='#'.$g['order'].' name='.$g['name'].' players'.implode(',',$g['players']);
+      $response[]='#'.$g['order'].' name='.$g['name'].' players='.implode(',',$g['players']);
     $response[]="{$wpdb->prefix}leagues, array('leagueName' => $league['name'],
                                                 'hidden' => 0,
                                                 'closed' => 0,

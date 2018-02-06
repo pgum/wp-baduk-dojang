@@ -65,7 +65,12 @@ function renderGroupObject(){
 }
 ?>
 <script>
-
+function groupObjectHtml(){
+  return <?php echo renderGroupObject(); ?>;
+}
+function lastGroupsDataHtml(){
+  return <?php echo renderLastGroupsData(); ?>;
+}
 var monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
@@ -96,13 +101,13 @@ function getUrlParameters(){
 }
 
 function createNewGroup(gid=null){
-  var last_groups= <?php echo renderLastGroupsData(); ?>;
-  var group= $('<div></div>').addClass('dojang-group');
   var group_name_array=['Group A','Group B','Group C','Group D','Group E','Group F','Group G','Group H'];
+  var last_groups= lastGroupsDataHtml();
+  var group= $('<div></div>').addClass('dojang-group');
   var num= $('#dojang-sortable .dojang-group-object').length;
   var group_name= group_name_array[num];
   var element= $('<li class="dojang-group-object"></li>').attr('x-group-order',num);
-  var group_object= <?php echo renderGroupObject(); ?>;
+  var group_object= groupObjectHtml();
 
   group.append(group_object);
   if(gid){
@@ -117,7 +122,26 @@ function createNewGroup(gid=null){
       var pid = playersToSelect[index] != undefined ? playersToSelect[index] : -1;
       $(this).val(pid);
     });
-  } else{ console.log('new group'); }
+  }
+  group.find('.dojang-editor-group-name').val(group_name);
+  group.find('.dojang-editor-group-order').val(num);
+  element.append(group);
+  element.appendTo($('#dojang-sortable'));
+  $('.dojang-player-select').chosen();
+  $( "#dojang-sortable" ).sortable( "refresh" );
+}
+function groupFromJson(jsonGroup){
+  var group= $('<div></div>').addClass('dojang-group');
+  var num= $('#dojang-sortable .dojang-group-object').length;
+  var group_name= jsonGroup.name;
+  var element= $('<li class="dojang-group-object"></li>').attr('x-group-order',jsonGroup.order);
+  var group_object= groupObjectHtml();
+  group.append(group_object);
+  var playersToSelect=jsonGroup.players;
+  group.find('.dojang-player-select').each(function(index){
+    var pid = playersToSelect[index] != undefined ? playersToSelect[index] : -1;
+    $(this).val(pid);
+  });
   group.find('.dojang-editor-group-name').val(group_name);
   group.find('.dojang-editor-group-order').val(num);
   element.append(group);
@@ -135,19 +159,34 @@ function convertGroupObjectToJsObject(node){
   });
   return {name: g_name, order: g_order, players: g_players};
 }
-function saveButtonHandler(save_type, l_name, l_multiplier){
+function projectFromJson(jsonProject){
+  w2ui.toolbar.get('league_name').value = jsonProject.name;
+  w2ui.toolbar.get('league_multiplier').value = jsonProject.multiplier;
+  w2ui['toolbar'].refresh('league_name');
+  w2ui['toolbar'].refresh('league_multiplier');
+  for(g in jsonProject.groups) groupFromJson(jsonProject.groups[g]);
+}
+
+function projectToJson(){
   var league_obj= {
-    name: l_name,
-    multiplier: l_multiplier,
+    name: w2ui.toolbar.get('league_name').value,
+    multiplier: w2ui.toolbar.get('league_multiplier').value
   };
   var l_groups = [];
   $('.dojang-group').each(function(){ l_groups.push(convertGroupObjectToJsObject($(this))); });
   league_obj['groups']= l_groups;
-  var dataToSend= {
-    save: save_type,
-    league: league_obj,
-    url: getUrlParameters()
-  }
+  return league_obj;
+}
+
+function projectFromDraft(did){
+  var drafts= JSON.parse(localStorage.getItem('drafts'));
+  $('#dojang-sortable').text('');
+  projectFromJson(drafts[did].league);
+}
+
+function saveLeague(){
+  var league_obj= projectToJson();
+  var dataToSend= { league: league_obj };
   /* show debug info */
   $('#dojang-debug-container').removeClass('dojang-hidden');
   var dataToSendJson= JSON.stringify(dataToSend,null, 2);
@@ -156,7 +195,10 @@ function saveButtonHandler(save_type, l_name, l_multiplier){
     url: ajaxurl,
     //dataType: 'json',
     data: {'action': 'dojang_create_league', 'league_data': dataToSendJson},
-    success: function(data){ console.log('ajax send!'); $('#dojang-debug').append(data); }
+    success: function(data){
+      console.log('ajax send!');
+      $('#dojang-debug').append(data);
+      $('#dojang-notification').val('League'+dataToSend.league.name+' Published!'); }
   });
 }
 /* remove group button functionality */
@@ -169,21 +211,29 @@ $('#dojang-workspace').on('click', '.dojang-editor-remove-group', function(){
 $('#dojang-toolbar').w2toolbar({
   name: 'toolbar',
   items: [
+  { type: 'menu', id: 'saved_drafts', caption: 'Saved Drafts', disabled:1, icon: 'dashicons dashicons-admin-page',
+    items: [ /* This gets populated from separate handler, and enabled */ ] },
+  { type: 'break' },
   { type: 'button', id: 'new_group', text: 'New Group', icon: 'dashicons dashicons-plus' },
   { type: 'menu', id: 'new_from_current', caption: 'Current Groups', icon: 'dashicons dashicons-forms',
     items: [ <?php echo renderLastGroups();  ?> ] },
   { type: 'break' },
-  { type: 'html',  id: 'league_multiplier', value: 1,
+  { type: 'html',  id: 'league_multiplier', value: 1, icon: 'dashicons dashicons-no-alt',
     html: function (item) {
     return '<div><span class="dashicons dashicons-no-alt"></span>Multiplier:'+
      '<input class="dojang-toolbar-input" onchange="var el = w2ui.toolbar.set(\'league_multiplier\', { value: this.value });" '+
      'size="3" placeholder="1,2,.." value="'+item.value+'"/></div>'; } },
   { type: 'break' },
-  { type: 'html',  id: 'league_name', value: monthNames[d.getMonth()],
+  { type: 'html',  id: 'league_name', value: monthNames[d.getMonth()], icon: 'dashicons dashicons-format-quote',
     html: function (item) {
-      return'<div><span class="dashicons dashicons-format-quote"></span>Name:'+
-            '<input class="dojang-toolbar-input" onchange="var el = w2ui.toolbar.set(\'league_name\', { value: this.value });" '+
-            'value="'+item.value+'" size="20" placeholder="eg. January..."/></div>'; } },
+      return '<div><span class="dashicons dashicons-format-quote"></span>Name:'+
+             '<input class="dojang-toolbar-input" onchange="var el = w2ui.toolbar.set(\'league_name\', { value: this.value });" '+
+             'value="'+item.value+'" size="20" placeholder="eg. January..."/></div>'; } },
+  { type: 'break' },
+  { type: 'html', id:'dojang_notification', icon: 'dashicons dashicons-admin-tools',
+    html: function (item) {
+      return '<div><span class="dashicons dashicons-admin-tools"></span>'+
+             '<input class="dojang-toolbar-input" size="20" id="dojang-notification" disabled/></div>'; } },
   { type: 'spacer' },
   { type: 'html', html: 'Save:'},
   { type: 'radio', id: 'save_as_draft', group: '1', text: 'as Draft', icon: 'dashicons dashicons-edit', checked: true },
@@ -192,29 +242,84 @@ $('#dojang-toolbar').w2toolbar({
   { type: 'button',  id: 'save_button',  text: '<b>Confirm</b>', icon: 'dashicons dashicons-plus-alt' }
   ]
 });
-
 w2ui.toolbar.on('click', function (event) {
   //console.log('EVENT: '+ event.type + ' TARGET: '+ event.target, event);
   if(event.target == 'new_group'){
-    console.log('Create New Group');
     createNewGroup();
     recalculate_order();
   }
   if(event.target.match(/new_from_current:[0-9]*/)){
     var group_id=event.target.split(':')[1];
-    console.log('Group Id to Clone= '+group_id);
 
     createNewGroup(group_id);
     recalculate_order();
   }
-  if(event.target == 'save_button'){
+  if(event.target.match(/saved_drafts:restore_[0-9]*/)){
+    var draft_id=event.target.split(':restore_')[1];
+    projectFromDraft(draft_id);
+  }
+  if(event.target.match(/saved_drafts:remove_[0-9]*/)){
+    var draft_id=event.target.split(':remove_')[1];
+    removeDraft(draft_id);
+  }
+    if(event.target == 'save_button'){
     var league_multiplier= w2ui.toolbar.get('league_multiplier').value;
     var league_name= w2ui.toolbar.get('league_name').value;
-    var draft_or_publish= w2ui.toolbar.get('save_as_draft').checked ? 'draft' : 'publish';
-    saveButtonHandler(draft_or_publish, league_name, league_multiplier);
+    var saveAsDraft= w2ui.toolbar.get('save_as_draft').checked;
+    if(saveAsDraft) saveDraft();
+    else saveLeague();
   }
 });
-$('#dojang-sortable').sortable({placeholder: 'dojang-group-placeholder'});
-$('#dojang-sortable').on('sortupdate',function( event, ui){console.log('something changed!'); recalculate_order();});
+function refreshDraftsMenu(){
+  var drafts= JSON.parse(localStorage.getItem('drafts'));
+  var r= [];
+  var i=0;
+  if(drafts != null){
+    for(did in drafts){
+      var d= drafts[did].league;
+      r.push({id: ('restore_'+i), text: d.name, icon: 'dashicons dashicons-external'});
+      r.push({id: ('remove_'+i), text: 'Remove Draft: "'+d.name+'"', icon: 'dashicons dashicons-trash'});
+      i++;
+    }
+    w2ui.toolbar.get('saved_drafts').items=r;
+    w2ui.toolbar.enable('saved_drafts');
+  }else{
+    w2ui.toolbar.disable('saved_drafts');
+  }
+  w2ui.toolbar.refresh('saved_drafts');
+}
+function removeDraft(draft_id){
+  var draftsArray=JSON.parse(localStorage.getItem('drafts'));
+  draftsArray.splice(draft_id,1);
+  localStorage.setItem('drafts',JSON.stringify(draftsArray));
+  refreshDraftsMenu();
+}
+function saveDraft(){
+  var league_obj= projectToJson();
+  var dataToSave= { league: league_obj };
+  var draftsArray=JSON.parse(localStorage.getItem('drafts'));
+  if(draftsArray != null){
+    var dii=draftsArray.length;
+    for(did in draftsArray){
+      if(draftsArray[did].league.name == dataToSave.league.name){
+        draftsArray[did] = dataToSave;
+        break;
+      }
+      dii--;
+    }
+    if(dii == 0) draftsArray.push(dataToSave);
+  }
+  else draftsArray= [ dataToSave, ];
+  localStorage.setItem('drafts',JSON.stringify(draftsArray));
+  $('#dojang-notification').val('Draft '+dataToSave.league.name+' saved!');
+  refreshDraftsMenu();
+}
+refreshDraftsMenu();
 
+
+$('#dojang-sortable').sortable({placeholder: 'dojang-group-placeholder'});
+$('#dojang-sortable').on('sortupdate',function( event, ui){recalculate_order();});
+
+$(function(){
+});
 </script>
