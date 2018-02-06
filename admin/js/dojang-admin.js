@@ -177,7 +177,7 @@ $(function(){
   $('.dojang-league-groups-results-tables .dojang-result-approved').on('click', function(){
   	var r= getResultsPlayers($(this));
 
-    console.log(r);
+    //console.log(r);
     $(this).w2menu({
       items: [{ text: 'Update Result',},
               { id: 'update:'+r.rid+':'+r.pr.id, text: r.pr.name+' won', icon: 'dashicons dashicons-star-filled', disabled: (r.pr.id == r.pw)},
@@ -190,7 +190,7 @@ $(function(){
     	  var resultId= iid.split(':')[1];
     	  if(action=='update'){
     		  var playerId= iid.split(':')[2];
-    		  console.log('Update winner of game resultId='+resultId+' to playerId='+playerId);
+    		  //console.log('Update winner of game resultId='+resultId+' to playerId='+playerId);
           $.post({
   					url: ajaxurl,
   					data: {'action': 'dojang_update_result', 'result_id': resultId, 'playerW': playerId},
@@ -198,7 +198,7 @@ $(function(){
   				});
     	  }
     	  if(action=='remove'){
-    		  console.log('Remove game resultId='+resultId);
+    		  //console.log('Remove game resultId='+resultId);
           $.post({
             url: ajaxurl,
             data: {'action': 'dojang_remove_result', 'result_id': resultId},
@@ -209,7 +209,7 @@ $(function(){
   });
   $('.dojang-league-groups-results-tables .dojang-result-none').on('click', function(){
   	var r= getResultsPlayers($(this));
-    console.log(r);
+  //  console.log(r);
     $(this).w2menu({
       items: [{ text: 'Create Result',},
               { id: 'create:'+r.pr.id+':'+r.pc.id+':'+r.gid, text: r.pr.name+' won', icon: 'dashicons dashicons-star-filled'},
@@ -220,7 +220,7 @@ $(function(){
   	     var playerWinner= iid.split(':')[1];
   	     var playerLoser=  iid.split(':')[2];
   	     var groupId=  iid.split(':')[3];
-  	     console.log('Create game result for group '+groupId+' between players '+playerWinner+' and '+playerLoser+' where winner was:'+playerWinner);
+  	     //console.log('Create game result for group '+groupId+' between players '+playerWinner+' and '+playerLoser+' where winner was:'+playerWinner);
          $.post({
            url: ajaxurl,
            data: {'action': 'dojang_create_result', 'group_id': groupId, 'playerW': playerWinner, playerL: playerLoser},
