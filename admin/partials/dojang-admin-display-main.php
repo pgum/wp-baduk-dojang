@@ -26,7 +26,7 @@ echo $renderer->renderLeagueInfo();
 echo $renderer->renderGamesToApproveTable();
 echo '<div class="dojang-league-groups-results-tables" x-league-id="'.$leagueId.'">';
 echo $renderer->renderGroupsTable();
-echo '</div>'
+echo '</div>';
 echo "<br/>";
 ?>
 </div>
