@@ -1,13 +1,14 @@
 <?php
 class Dojang_Renderer_Submit_Game{
-  private function renderLeagueGroups($prev){
-    $html='<option value="-1">Select Group</option>';
+  private function renderLeagueGroups($prev = -1){
+    $s= ($prev > 0 ? 'selected="selected"' : '');
+    $html='<option value="-1" '.$s.'>Select Group</option>';
     $league= new Dojang_League();
     $groups = $league->getGroupsDetails();
     foreach($groups as $g){
       $gId= $g->groupDetails->playerGroupId;
       $gName= $g->groupDetails->groupName;
-      $s= ($prev == $grId ? 'selected="selected"' : '');
+      $s= ($prev == $gId ? 'selected="selected"' : '');
       $html.='<option value="'.$gId.'" '.$s.'>'.$gName.'</option>';
     }
     return $html;
@@ -69,7 +70,7 @@ class Dojang_Renderer_Submit_Game{
   <input type="hidden" name="action" value="dojang_submit_game" />
   <fieldset>
     <div class="dojang-form-label"><label for="dojang-game-group">Choose Group<span class="dojang-required">*</span></label></div>
-    <div class="dojang-form-input"><select name="dojang-game-group">'.$this->renderLeagueGroups($prev_group).'</select></div>
+    <div class="dojang-form-input"><select name="dojang-game-group">'.$this->renderLeagueGroups($prev_gr).'</select></div>
 
     <div class="dojang-form-label"><label for="dojang-game-white">Who played as White<span class="dojang-required">*</span></label></div>
     <div class="dojang-form-input"><select class="dojang-game-player-list" id="dojang-pw" name="dojang-game-white">'.$this->renderLeaguePlayers($prev_wh).'</select></div>
