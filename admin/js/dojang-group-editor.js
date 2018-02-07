@@ -119,7 +119,9 @@
     $('#dojang-sortable').sortable({placeholder: 'dojang-group-placeholder'});
     $('#dojang-sortable').on('sortupdate',function( event, ui){recalculate_order();});
     */
+    //just for tests
     $(function(){
+      $('#dojang-workspace').text(JSON.stringify(MyScriptParams));
     });
 	});
 

@@ -23,7 +23,9 @@
     <div id="dojang-debug-container" class="dojang-hidden"><pre id="dojang-debug"></pre></div>
   </div>
 </div>
-<script>
-/*toolbox handlers*/
-
-</script>
+<?php
+$jsonToSend = json_encode(array(1,2,3));
+$params= array('t1'=>'test number one',
+               't2'=> $jsonToSend);
+wp_localize_script( 'dojanggroup_editor', 'MyScriptParams', $params );
+ ?>
