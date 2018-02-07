@@ -24,6 +24,8 @@
   </div>
 </div>
 <?php
+//TODO: use wp_localize_script('name', 'object_name', $phpvar);
+//TODO: refactor to split js from html
 function renderLastGroups(){
   $currentLeague = new Dojang_League();
   $groups = $currentLeague->getGroupsDetails();
