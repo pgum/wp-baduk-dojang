@@ -24,8 +24,4 @@
   </div>
 </div>
 <?php
-$jsonToSend = json_encode(array(1,2,3));
-$params= array('t1'=>'test number one',
-               't2'=> $jsonToSend);
-wp_localize_script( 'dojanggroup_editor', 'MyScriptParams', $params );
  ?>

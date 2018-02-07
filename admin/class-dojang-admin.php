@@ -79,6 +79,12 @@ class Dojang_Admin {
 			array( 'jquery', 'jquery-ui-sortable'), $this->version, false );
 		wp_enqueue_script( $this->plugin_name.'group_editor', plugin_dir_url( __FILE__ ) . 'js/dojang-group-editor.js',
 			array( 'jquery', 'jquery-ui-sortable'), $this->version, false );
+    $jsonToSend = json_encode(array(1,2,3));
+    $params= array('t1'=>'test number one',
+                   't2'=> $jsonToSend,
+                   't3'=> $this->plugin_name.'group_editor');
+    wp_localize_script( 'dojanggroup_editor', 'MyScriptParams', $params );
+
 	}
 /**
 	 * Add an options page under the Settings submenu
