@@ -77,6 +77,8 @@ class Dojang_Admin {
 			array( 'jquery' ), $this->version, false );
 		wp_enqueue_script( $this->plugin_name.'main', plugin_dir_url( __FILE__ ) . 'js/dojang-admin.js',
 			array( 'jquery', 'jquery-ui-sortable'), $this->version, false );
+		wp_enqueue_script( $this->plugin_name.'group_editor', plugin_dir_url( __FILE__ ) . 'js/dojang-group-editor.js',
+			array( 'jquery', 'jquery-ui-sortable'), $this->version, false );
 	}
 /**
 	 * Add an options page under the Settings submenu
@@ -117,6 +119,16 @@ class Dojang_Admin {
 
 		$this->plugin_screen_hook_suffix_submenu = add_submenu_page(
 		$this->plugin_name,
+			__( 'Edit Existing Group', 'baduk-dojang' ),
+			__( 'Edit Group', 'baduk-dojang' ),
+		'manage_options',
+		$this->plugin_name.'editgroup',
+		array( $this, 'display_options_page_editgroup' ),
+		'dashicons-plus-alt'
+		);
+
+		$this->plugin_screen_hook_suffix_submenu = add_submenu_page(
+		$this->plugin_name,
 			__( 'Create New League', 'baduk-dojang' ),
 			__( 'New League', 'baduk-dojang' ),
 		'manage_options',
@@ -150,6 +162,10 @@ class Dojang_Admin {
 	}
 	public function display_options_page_leagues() {
 		include_once 'partials/dojang-admin-display-leagues.php';
+		$this->render_dojang_footer();
+	}
+	public function display_options_page_editgroup() {
+		include_once 'partials/dojang-admin-display-group-editor.php';
 		$this->render_dojang_footer();
 	}
 	public function display_options_page_newleague() {

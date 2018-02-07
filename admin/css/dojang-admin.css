@@ -100,8 +100,8 @@ h3.dojang-results-archive {cursor: pointer;}
 
 /*Dojang League Editor App*/
 .dojang-toolbar-input{ border-radius: 2px; border: 1px solid silver;}
-#dojang-editor {border: 1px black solid;}
-#dojang-toolbar{border: 1px black solid; background: rgba(211,211,211,0.9); }
+#dojang-editor, #dojang-group-editor{border: 1px black solid;}
+#dojang-toolbar, #dojang-group-toolbar{border: 1px black solid; background: rgba(211,211,211,0.9); }
 #dojang-workspace {border: 1px black solid; height: 700px; background: #03aa7b;}
 #dojang-sortable .dojang-group-object, .dojang-group-placeholder{
     float: left;
