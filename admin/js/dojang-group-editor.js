@@ -3,7 +3,7 @@
 
   $(function(){
     $('#dojang-group-toolbar').w2toolbar({
-      name: 'toolbar',
+      name: 'dojang_group_toolbar',
       items: [
       { type: 'menu-radio',
         id: 'league_selector',
@@ -40,7 +40,7 @@
       { type: 'button',  id: 'save_button',  text: '<b>Confirm</b>', icon: 'dashicons dashicons-plus-alt' }
       ]
     });
-    w2ui.toolbar.on('click', function (event) {
+    w2ui.dojang_group_toolbar.on('click', function (event) {
       console.log('EVENT: '+ event.type + ' TARGET: '+ event.target, event);
     /*  if(event.target == 'new_group'){
         createNewGroup();
