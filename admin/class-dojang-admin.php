@@ -375,7 +375,7 @@ class Dojang_Admin {
     $leagueName= $league['name'];
     $leagueMultiplier= $league['multiplier'];
     $response=array();
-    $leagueQuery="INSERT INTO ${wpdb->prefix}leagues` (leagueName, closed, multiplier, pointsDistributed) VALUES ($leagueName, '0', $leagueMultiplier, '0')";
+    $leagueQuery="INSERT INTO {$wpdb->prefix}leagues (leagueName, closed, multiplier, pointsDistributed) VALUES ($leagueName, '0', $leagueMultiplier, '0')";
     $wpdb->query($leagueQuery);
     $newLeagueId = $wpdb->insert_id;
     $i=0;
