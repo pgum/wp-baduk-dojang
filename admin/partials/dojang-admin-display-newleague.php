@@ -50,7 +50,7 @@ function renderPlayerSelectOptions(){
   $players= new Dojang_Players();
   $plist= $players->getAllPlayersIdNameRank();
   //print_r($plist);
-  $html='<option value="-1"></option>';
+  $html='<option value="-1">No Player</option>';
   foreach($plist as $p)
     $html.= '<option value="'.$p['playerId'].'">'.$p['playerName'].' - '.$p['playerRank'].'</option>';
   return $html;
