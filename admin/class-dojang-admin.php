@@ -261,7 +261,7 @@ class Dojang_Admin {
 	add_settings_field( 'dojang_email',	__('Notice Email', 'baduk-dojang'),	array($this, 'render_dojang_email'),'dojangoptions','dojang_section_id');
 	add_settings_field( 'dojang_welcome',	__('Approved Player Welcome Message', 'baduk-dojang'),	array($this, 'render_dojang_welcome'),'dojangoptions','dojang_section_id');
 	add_settings_field( 'dojang_points',	__('League Points Distribution', 'baduk-dojang'),	array($this, 'render_dojang_points'),'dojangoptions','dojang_section_id');
-	add_settings_field( 'dojang_bonus',	__('Won With Teacher Bonus', 'baduk-dojang'),	array($this, 'render_dojang_bonus'),'dojangoptions','dojang_section_id');
+	add_settings_field( 'dojang_bonus',	__('Won Against Teacher Bonus', 'baduk-dojang'),	array($this, 'render_dojang_bonus'),'dojangoptions','dojang_section_id');
 	add_settings_field( 'dojang_eligable',	__('Points for prize', 'baduk-dojang'),	array($this, 'render_dojang_eligable'),'dojangoptions','dojang_section_id');
 	add_settings_field( 'dojang_pass',	__('Submit Game Password', 'baduk-dojang'),	array($this, 'render_dojang_pass'),'dojangoptions','dojang_section_id');
 	}
@@ -410,7 +410,7 @@ class Dojang_Admin {
 		$rid= $_POST['result_id'];
     $pid= $_POST['playerW'];
 		$wpdb->update("{$wpdb->prefix}results",array('playerIdWinner' => $pid) ,array('id' => $rid));
-		echo 'Ajax Remove Result Id= '.$_POST['result_id'];
+		echo 'Ajax Update Result Id= '.$rid.' playerWinner= '.$pid;
 		wp_die();
   }
   public function ajax_update_group(){
@@ -433,4 +433,20 @@ class Dojang_Admin {
     print_r($response);
 		wp_die();
   }
+  public function ajax_register_player(){
+    $data = $_POST;
+    global $wpdb;
+    $dataToInsert= array(	'studentId' => '',
+                          'playerName' => $data['name'],
+                          'playerEmail' => $data['email'],
+                          'playerKgs' => $data['kgs'],
+                          'playerRank' => $data['rank'],
+                          'playerCountry' => $data['country'],
+                          'playerTimezone' => $data['timezone'],
+                          'playerApproved' => $data['approved']);
+    //$wpdb->insert("{$wpdb->prefix}players", $dataToInsert);
+    print_r($dataToInsert);
+    wp_die();
+  }
+
 }

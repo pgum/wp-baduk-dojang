@@ -18,7 +18,8 @@ class Dojang_Renderer_Group{
   public function renderGroupTable(){
     $html.= $this->renderResultsHeader();
     $html.= $this->renderPlayersResults();
-    return '<table class="dojang-group-table" x-group-id="'.$this->groupDetails->playerGroupId.'">'.$html.'</table>';//.print_r($this->groupResults,true);
+    $cls= 'dojang-group-table'.($this->pointsDistributed != 0 ? '-readonly' : '');
+    return '<table class="'.$cls.'" x-group-id="'.$this->groupDetails->playerGroupId.'">'.$html.'</table>';//.print_r($this->groupResults,true);
   }
   private function renderResultsHeader(){
     $html.= '<tr><th>#</th><th>Name</th><th>Nick</th> ';

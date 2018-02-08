@@ -58,6 +58,7 @@
       group.find('.dojang-editor-remove-group').hide();
       group.find('.dojang-editor-group-order').hide();
       $('#dojang-workspace').html(group);
+      $('.dojang-player-select option[value=-1]').text('No Player');
       $('.dojang-player-select').chosen();
       $( ".dojang-group-editor-group-players" ).sortable();
     }

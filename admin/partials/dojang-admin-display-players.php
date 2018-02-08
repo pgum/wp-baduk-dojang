@@ -19,7 +19,7 @@
 	    <h2><span class="dashicons dashicons-groups"></span><?php echo esc_html( get_admin_page_title() ); ?></h2>
 	    <?php
 				$renderer= new Dojang_Renderer();
-        echo '<h3>Add new Player</h3>';
+        echo '<h3 class="button button-secondary dojang-toggle-add">Add new Player</h3><br/>';
         echo $renderer->renderAddPlayer();
         echo '<h3>Players Edit List</h3>';
 				echo $renderer->renderPlayersMgmt();

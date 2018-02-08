@@ -2,13 +2,13 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
-.dojang-group-table, .dojang-table-to-approve, .dojang-player-list, .dojang-table { border-collapse: collapse; }
-.dojang-group-table tbody td, .dojang-player-list tbody td, .dojang-table tbody td {
+.dojang-group-table, .dojang-table-to-approve, .dojang-player-list, .dojang-group-table-readonly, .dojang-table { border-collapse: collapse; }
+.dojang-group-table tbody td, .dojang-player-list tbody td, .dojang-table tbody td , .dojang-group-table-readonly tbody td{
   border: 1px black solid;
   min-width: 30px;
   padding: 3px;
 }
-.dojang-group-table thead th, .dojang-table thead th, .dojang-player-list thead th{
+.dojang-group-table thead th, .dojang-table thead th, .dojang-player-list thead th, .dojang-group-table-readonly thead th{
   border: 1px black solid;
   min-width: 30px;
   background: lightgray;
@@ -29,7 +29,7 @@
   -webkit-animation:update-pulse-animation 2s; /* Safari and Chrome */
 
 }
-.dojang-league-properties { border: 1px solid black; }
+.dojang-league-properties { border: 1px solid black; width: 800px; padding: 5px; }
 .dojang-league-info::after {  content: '\A'; }
 .dojang-editable-cell{ background: #d5d5d5; }
 .dojang-editable-cell div{
@@ -86,6 +86,8 @@ h3.dojang-results-archive {cursor: pointer;}
   min-width: 30px;
   padding: 3px;
 }
+.dojang-add { display:none; margin-top: 10px; }
+.dojnag-create-player { margin: 2px; }
 .dojang-table-to-approve thead th{
   border: 1px black solid;
   min-width: 30px;

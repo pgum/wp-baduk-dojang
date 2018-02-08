@@ -89,17 +89,30 @@
 	});
 	/*Table editable cell UI and ajax call on button OK click*/
 	$(function(){
-    //TODO: send ajax to create player with these values (from public ajax copy-paste first iteration)
+    $('.dojang-toggle-add').on('click', function(){ $('.dojang-add').toggle(); });
     $('.dojang-create-player').click(function(){
       console.log('Create Player!');
-      var pName = $('dojang-add-player-playerName').val();
-      var pCountry= $('dojang-add-player-playerCountry').val();
-      var pKgs = $('dojang-add-player-playerKgs').val();
-      var pRank = $('dojang-add-player-playerRank').val();
-      var pEmail = $('dojang-add-player-playerEmail').val();
-      var pTimezone = $('dojang-add-player-playerTimezone').val();
-      var pApproved = $('dojang-add-player-playerApproved').val();
+      var pName = $('.dojang-add-player-playerName').val();
+      var pCountry= $('.dojang-add-player-playerCountry').val();
+      var pKgs = $('.dojang-add-player-playerKgs').val();
+      var pRank = $('.dojang-add-player-playerRank').val();
+      var pEmail = $('.dojang-add-player-playerEmail').val();
+      var pTimezone = $('.dojang-add-player-playerTimezone').val();
+      var pApproved = $('.dojang-add-player-playerApproved').val();
       console.log([pName,pCountry,pKgs,pRank,pEmail,pTimezone,pApproved]);
+			$.post({
+				url: ajaxurl,
+				data: {'action': 'dojang_register_player_admin','name': pName,
+                                                        'country': pCountry,
+                                                        'rank': pRank,
+                                                        'kgs': pKgs,
+                                                        'email': pEmail,
+                                                        'timezone': pTimezone,
+                                                        'approved': pApproved },
+				success: function(data){
+          console.log(data);
+        }
+      });
     });
 		$('.dojang-editable-cell').each(function(){
 			var editedCell= $(this);
@@ -169,10 +182,13 @@ $(function(){
   function getResultsPlayers(resultCell){
   	var col = resultCell.parent().children().index(resultCell);
   	var playerId_col = resultCell.parents('table').find('thead th:eq('+col+')').attr('x-player-id');
-  	var playerName_col= $('td[x-player-id='+playerId_col+']').text();
+  	var playerName_col= $('td[x-player-id='+playerId_col+']').first().text();
   	var row = resultCell.parent().parent().children().index(resultCell.parent());
+  	var playerId_row2 = resultCell.parent().attr('x-player-id');
   	var playerId_row = resultCell.parents('tr').attr('x-player-id');
-  	var playerName_row= $('td[x-player-id='+playerId_row+']').text();
+    console.log('playerId', playerId_row);
+    console.log('playerId_2', playerId_row2);
+  	var playerName_row= $('td[x-player-id='+playerId_row+']').first().text();
   	var playerRow_result= null;
   	if(resultCell.attr('x-result') != " "){
   		playerRow_result= resultCell.attr('x-result') == 'W' ? playerId_row : playerId_col;
@@ -186,7 +202,7 @@ $(function(){
             gid: groupId}
   }
 
-  $('.dojang-league-groups-results-tables .dojang-result-approved').on('click', function(){
+  $('.dojang-group-table .dojang-result-approved').on('click', function(){
   	var r= getResultsPlayers($(this));
 
     //console.log(r);
@@ -222,7 +238,7 @@ $(function(){
     	  }
     }});
   });
-  $('.dojang-league-groups-results-tables .dojang-result-none').on('click', function(){
+  $('.dojang-group-table .dojang-result-none').on('click', function(){
   	var r= getResultsPlayers($(this));
   //  console.log(r);
     $(this).w2menu({
