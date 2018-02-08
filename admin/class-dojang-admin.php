@@ -372,17 +372,27 @@ class Dojang_Admin {
     $object= json_decode(stripslashes($_POST['league_data']), true);
     $league= $object['league'];
     $groups= $league['groups'];
+    $leagueName= $league['name'];
+    $leagueMultiplier= $league['multiplier'];
     $response=array();
-    $response[]='Create New League: name='.$league['name'].' multiplier='.$league['multiplier'];
-    $response[]='Number of groups='.count($groups);
-    foreach($groups as $g)
-      $response[]='#'.$g['order'].' name='.$g['name'].' players='.implode(',',$g['players']);
-    $response[]="{$wpdb->prefix}leagues, array('leagueName' => ".$league['name'].",
-                                                'closed' => 0,
-                                                'multiplier' => ".$league['multiplier'].",
-                                                'pointsDistributed' => 0)";
-    $response[]='$newLeagueId= $wpdb->insert_id;';
-    $response[]='$i=0; foreach($groups as $g){$gpid=$newLeagueId*10+$i; }';
+    $leagueQuery="INSERT INTO ${wpdb->prefix}leagues` (leagueName, closed, multiplier, pointsDistributed) VALUES ($leagueName, '0', $leagueMultiplier, '0')";
+    $wpdb->query($leagueQuery);
+    $newLeagueId = $wpdb->insert_id;
+    $i=0;
+    foreach($groups as $g){
+      $gOrder= $g['order'];
+      $gName= $g['name'];
+      $gPlayers= $g['players'];
+      $gLeagueId= $newLeagueId;
+      $playerGroupId= ($newLeagueId*10)+$i;
+      $response[]="INSERT INTO {$wpdb->prefix}groups (groupName, groupLeagueId, playerGroupId, groupOrder) VALUES ($gName, $gLeagueId, $playerGroupId, ".($i++).")";
+      $pi=0;
+      foreach($gPlayers as $p)
+        $response[]="INSERT INTO {$wpdb->prefix}groupplayers (playerGroupId, playerId, tableOrder, wonAgainstTeacher, isPaidMember, leaguePoints) VALUES ($playerGroupId, $p, ".($pi++).", '0', '1', '0')";
+    }
+    foreach($response as $query){
+      $wpdb->query($query);
+    }
     print_r($response);
 		wp_die();
   }
@@ -412,22 +422,21 @@ class Dojang_Admin {
 		wp_die();
   }
   public function ajax_update_group(){
-    //TODO: insert proper wpdb
 		global $wpdb;
     $object= json_decode(stripslashes($_POST['group_data']), true);
     $groupId=$object['group_id'];
     $groupName=$object['group_name'];
     $groupPlayers=$object['group_players'];
     $response=array();
-    $response[]='Id: '.$groupId;
-    $response[]='Name: '.$groupName;
-    $response[]='Players: '.implode(',',$groupPlayers);
-    $response[]='Update groups groupName to '.$groupName.' where playerGroupId = '.$groupId;
-    $response[]='Remove all rows from groupplayers where playerGroupId = '.$groupId;
-    $response[]='Insert rows for each playerId:';
-    $i=1;
+    $response[]="UPDATE {$wpdb->prefix}groups SET groupName = $groupName WHERE playerGroupId = ".$groupId;
+    $response[]="DELETE FROM {$wpdb->prefix}groupplayers WHERE playerGroupId = ".$groupId;
+    $i=0;
     foreach($groupPlayers as $p)
-      $response[]='playerGroupId: '.$groupId.' playerId:'.$p.' tableOrder:'.($i++).' playedWithTeacher:0 wonAgainstTeacher:0 isPaidMember:1 leaguePoints:0';
+      $response[]="INSERT INTO {$wpdb->prefix}groupplayers (playerGroupId, playerId, tableOrder, wonAgainstTeacher, isPaidMember, leaguePoints) VALUES ($groupId, $p, ".($i++).", '0', '1', '0')";
+
+    foreach($response as $query){
+      $wpdb->query($query);
+    }
     print_r($response);
 		wp_die();
   }
@@ -442,7 +451,7 @@ class Dojang_Admin {
                           'playerCountry' => $data['country'],
                           'playerTimezone' => $data['timezone'],
                           'playerApproved' => $data['approved']);
-    //$wpdb->insert("{$wpdb->prefix}players", $dataToInsert);
+    $wpdb->insert("{$wpdb->prefix}players", $dataToInsert);
     print_r($dataToInsert);
     wp_die();
   }
