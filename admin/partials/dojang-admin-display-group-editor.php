@@ -23,5 +23,3 @@
     <div id="dojang-debug-container" class="dojang-hidden"><pre id="dojang-debug"></pre></div>
   </div>
 </div>
-<?php
- ?>
