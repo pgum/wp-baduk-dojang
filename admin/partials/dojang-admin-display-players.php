@@ -19,6 +19,9 @@
 	    <h2><span class="dashicons dashicons-groups"></span><?php echo esc_html( get_admin_page_title() ); ?></h2>
 	    <?php
 				$renderer= new Dojang_Renderer();
+        echo '<h3>Add new Player</h3>';
+        echo $renderer->renderAddPlayer();
+        echo '<h3>Players Edit List</h3>';
 				echo $renderer->renderPlayersMgmt();
 			 ?>
 </div>

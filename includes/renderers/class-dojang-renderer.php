@@ -109,6 +109,36 @@ class Dojang_Renderer{
     $val = $rawVal == '' ? '&nbsp;' : $rawVal;
     return '<td class="dojang-editable-cell"><div class="dojang-editable-div" x-field="'.$fieldName.'">'.$val.'</div></td>';
   }
+  public function renderAddPlayerInput($type){
+    if($type == 'submit'){return '<a class="button button-secondary dojang-create-player" href="#"><span class="dashicons dashicons-admin-users"></span>Create Player</a>';}
+    if($type == 'playerApproved'){return '<select class="dojang-add-player dojang-add-player-'.$type.'"><option value="0">Not Approved</option><option value="1" selected>Approved</option></select>';}
+    return '<input type="text" size="50" class="dojang-add-player dojang-add-player-'.$type.'" />';
+  }
+  public function renderAddPlayer(){
+    $html.='<table class="dojang-table dojang-player-list dojang-editable dojang-add">';
+    $html.='<thead><tr><th>Player Name</th>
+                       <th>Country</th>
+                       <th>Nickname</th>
+                       <th>Rank</th>
+                       <th>E-mail</th>
+                       <th>Timezone</th>
+                       <th>Approved?</th>
+                       <th>Submit</th>
+                       </tr></thead><tbody>';
+      $html.='<tr>';
+      $html.='<td>'.$this->renderAddPlayerInput('playerName').'</td>';
+      $html.='<td>'.$this->renderAddPlayerInput('playerCountry').'</td>';
+      $html.='<td>'.$this->renderAddPlayerInput('playerKgs').'</td>';
+      $html.='<td>'.$this->renderAddPlayerInput('playerRank').'</td>';
+      $html.='<td>'.$this->renderAddPlayerInput('playerEmail').'</td>';
+      $html.='<td>'.$this->renderAddPlayerInput('playerTimezone').'</td>';
+      $html.='<td>'.$this->renderAddPlayerInput('playerApproved').'</td>';
+      $html.='<td>'.$this->renderAddPlayerInput('submit').'</td>';
+      $html.='</tr>';
+    }
+    $html.='</tbody></table>';
+    return $html;
+  }
   public function renderPlayersMgmt(){
     $players= new Dojang_Players();
     $playersData= $players->getAllPlayersData();

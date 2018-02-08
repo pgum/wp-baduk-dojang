@@ -89,6 +89,18 @@
 	});
 	/*Table editable cell UI and ajax call on button OK click*/
 	$(function(){
+    //TODO: send ajax to create player with these values (from public ajax copy-paste first iteration)
+    $('.dojang-create-player').click(function(){
+      console.log('Create Player!');
+      var pName = $('dojang-add-player-playerName').val();
+      var pCountry= $('dojang-add-player-playerCountry').val();
+      var pKgs = $('dojang-add-player-playerKgs').val();
+      var pRank = $('dojang-add-player-playerRank').val();
+      var pEmail = $('dojang-add-player-playerEmail').val();
+      var pTimezone = $('dojang-add-player-playerTimezone').val();
+      var pApproved = $('dojang-add-player-playerApproved').val();
+      console.log([pName,pCountry,pKgs,pRank,pEmail,pTimezone,pApproved]);
+    });
 		$('.dojang-editable-cell').each(function(){
 			var editedCell= $(this);
 			$(this).on('click', '.dojang-update-btn', function(){
