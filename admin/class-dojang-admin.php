@@ -375,7 +375,9 @@ class Dojang_Admin {
     $leagueName= $league['name'];
     $leagueMultiplier= $league['multiplier'];
     $response=array();
-    $leagueQuery="INSERT INTO {$wpdb->prefix}leagues (leagueName, closed, multiplier, pointsDistributed) VALUES ($leagueName, '0', $leagueMultiplier, '0')";
+    $lastLeagueId= $wpdb->get_var("SELECT MAX(id) AS currentLeague FROM {$wpdb->prefix}leagues");
+    $wpdb->update("{$wpdb->prefix}leagues", array('closed' => 1), array('id' => $lastLeagueId));
+    $leagueQuery="INSERT INTO {$wpdb->prefix}leagues (leagueName, closed, multiplier, pointsDistributed) VALUES ('$leagueName', '0', $leagueMultiplier, '0')";
     $wpdb->query($leagueQuery);
     $newLeagueId = $wpdb->insert_id;
     $i=0;
@@ -385,7 +387,7 @@ class Dojang_Admin {
       $gPlayers= $g['players'];
       $gLeagueId= $newLeagueId;
       $playerGroupId= ($newLeagueId*10)+$i;
-      $response[]="INSERT INTO {$wpdb->prefix}groups (groupName, groupLeagueId, playerGroupId, groupOrder) VALUES ($gName, $gLeagueId, $playerGroupId, ".($i++).")";
+      $response[]="INSERT INTO {$wpdb->prefix}groups (groupName, groupLeagueId, playerGroupId, groupOrder) VALUES ('$gName', $gLeagueId, $playerGroupId, ".($i++).")";
       $pi=0;
       foreach($gPlayers as $p)
         $response[]="INSERT INTO {$wpdb->prefix}groupplayers (playerGroupId, playerId, tableOrder, wonAgainstTeacher, isPaidMember, leaguePoints) VALUES ($playerGroupId, $p, ".($pi++).", '0', '1', '0')";
@@ -428,7 +430,7 @@ class Dojang_Admin {
     $groupName=$object['group_name'];
     $groupPlayers=$object['group_players'];
     $response=array();
-    $response[]="UPDATE {$wpdb->prefix}groups SET groupName = $groupName WHERE playerGroupId = ".$groupId;
+    $response[]="UPDATE {$wpdb->prefix}groups SET groupName = '$groupName' WHERE playerGroupId = ".$groupId;
     $response[]="DELETE FROM {$wpdb->prefix}groupplayers WHERE playerGroupId = ".$groupId;
     $i=0;
     foreach($groupPlayers as $p)
