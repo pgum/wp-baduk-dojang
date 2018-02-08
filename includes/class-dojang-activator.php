@@ -46,7 +46,6 @@ class Dojang_Activator {
 		  playerGroupId int(11) NOT NULL,
 		  playerId int(11) NOT NULL,
 		  tableOrder int(11) NOT NULL COMMENT 'Lower number is higher in results table for group',
-		  playedWithTeacher smallint(6) NOT NULL,
 		  wonAgainstTeacher smallint(6) NOT NULL,
 		  isPaidMember int(11) NOT NULL,
 			leaguePoints int(11),
@@ -63,7 +62,6 @@ class Dojang_Activator {
   		  groupLeagueId int(11) NOT NULL,
   		  playerGroupId int(11) NOT NULL,
   		  groupOrder int(11) NOT NULL,
-  		  isGroupLocked int(11) NOT NULL,
   		  PRIMARY KEY  (id)
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 		";
@@ -74,11 +72,9 @@ class Dojang_Activator {
 		CREATE TABLE IF NOT EXISTS $table_name (
   		  id int(11) NOT NULL AUTO_INCREMENT,
   		  leagueName text NOT NULL,
-  		  hidden tinyint(1) NOT NULL,
   		  closed tinyint(1) NOT NULL,
   		  multiplier int(11) DEFAULT 1,
   		  pointsDistributed int(11) NOT NULL COMMENT 'if > 0 then points were distributed to players and league is completed',
-  		  draft tinyint(1),
     		PRIMARY KEY  (id)
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 		";
