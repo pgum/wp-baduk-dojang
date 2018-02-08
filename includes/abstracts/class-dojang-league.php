@@ -38,7 +38,7 @@ class Dojang_League {
   }
   public function getCurrentLeagueId(){
   global $wpdb;
-	return $wpdb->get_var("SELECT MAX(id) AS currentLeague FROM {$wpdb->prefix}leagues WHERE draft = 0");
+	return $wpdb->get_var("SELECT MAX(id) AS currentLeague FROM {$wpdb->prefix}leagues");
   }
   public function getLeagueGroupIds(){
     global $wpdb;
@@ -77,10 +77,9 @@ class Dojang_League {
     $gamesToApprove=array();
     foreach($this->groupIds as $gid)
       $gamesToApprove[]= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}results WHERE groupId= $gid->playerGroupId AND isApproved = 0");
-    $merged= call_user_func_array('array_merge', $gamesToApprove);
-      if(count($merged)>0)
-        foreach($merged as $game)
-          $game= $this->fillGamePlayerDetails($game);
+    $merged= array();
+    if(count($gamesToApprove)>0) $merged= call_user_func_array('array_merge', $gamesToApprove);
+    if(count($merged)>0) foreach($merged as $game) $game= $this->fillGamePlayerDetails($game);
     return $merged;
     }
 
