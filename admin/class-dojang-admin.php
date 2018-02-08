@@ -77,15 +77,68 @@ class Dojang_Admin {
 			array( 'jquery' ), $this->version, false );
 		wp_enqueue_script( $this->plugin_name.'main', plugin_dir_url( __FILE__ ) . 'js/dojang-admin.js',
 			array( 'jquery', 'jquery-ui-sortable'), $this->version, false );
+
+
 		wp_enqueue_script( $this->plugin_name.'group_editor', plugin_dir_url( __FILE__ ) . 'js/dojang-group-editor.js',
 			array( 'jquery', 'jquery-ui-sortable'), $this->version, false );
-    $jsonToSend = json_encode(array(1,2,3));
-    $params= array('t1'=>'test number one',
-                   't2'=> $jsonToSend,
-                   't3'=> $this->plugin_name.'group_editor');
-    wp_localize_script( 'dojanggroup_editor', 'MyScriptParams', $params );
+    $groupEditorVars= array('leagues_items'=> json_encode($this->getLeaguesListItems()),
+                            'groups_items'=> json_encode($this->getGroupsListItems()),
+                            'group_object'=> $this->renderGroupEditorObject());
+    wp_localize_script( $this->plugin_name.'group_editor', 'dojang_editor', $groupEditorVars );
 
 	}
+  public function getLeaguesListItems(){
+    global $wpdb;
+    $leagues= $wpdb->get_results("SELECT id, leagueName FROM {$wpdb->prefix}leagues WHERE pointsDistributed = 0");
+    $itemsList=array();
+    foreach($leagues as $l) $itemsList[]= array('id'=> $l->id,
+                                                'text'=> $l->leagueName,
+                                                'icon'=> 'dashicons dashicons-admin-page');
+    return $itemsList;
+  }
+  public function getGroupsListItems(){
+    global $wpdb;
+    $leagues= $wpdb->get_results("SELECT id, leagueName FROM {$wpdb->prefix}leagues WHERE pointsDistributed = 0");
+    $itemsList=array();
+    foreach($leagues as $l){
+      $groups= $wpdb->get_results("SELECT playerGroupId, groupName FROM {$wpdb->prefix}groups WHERE groupLeagueId = {$l->id}");
+      foreach($groups as $g){
+        $groupPlayers= $wpdb->get_results("SELECT playerId FROM {$wpdb->prefix}groupplayers WHERE playerGroupId = {$g->playerGroupId} ORDER BY tableOrder ASC");
+        $groupPlayersData=array();
+        foreach($groupPlayers as $p){
+          $groupPlayerDetails= $wpdb->get_row("SELECT playerName, playerRank FROM {$wpdb->prefix}players WHERE playerId = {$p->playerId}");
+          $groupPlayersData[]= array('id'=> $p->id, 'playerName'=> $groupPlayerDetails->playerName, 'playerRank'=> $groupPlayerDetails->playerRank);
+        }
+        $itemsList[]= array('id'=> $g->playerGroupId,
+                            'league'=> $l->id,
+                            'players'=> $groupPlayers,
+                            'text'=> $g->groupName,
+                            'icon'=> 'dashicons dashicons-forms',
+                            'hidden' => true);
+      }
+    }
+    return $itemsList;
+  }
+
+  public function renderPlayerSelectOptions(){
+    $players= new Dojang_Players();
+    $plist= $players->getAllPlayersIdNameRank();
+    //print_r($plist);
+    $html='<option value="-1"></option>';
+    foreach($plist as $p)
+      $html.= '<option value="'.$p['playerId'].'">'.$p['playerName'].' - '.$p['playerRank'].'</option>';
+    return $html;
+  }
+  public function renderGroupEditorObject(){
+    $html.='<ol class="dojang-group-editor-group-players">';
+    $maxPlayersInGroup=10;
+    for($i=0; $i<$maxPlayersInGroup; ++$i)
+      $html.='<li class="dojang-editor-player"><div class="dojang-group-player-sortable"><span class="dashicons dashicons-menu"></span><select data-placeholder="Choose a player..." name="player-'.$i.'" class="dojang-player-select">'.$this->renderPlayerSelectOptions().'</select></div></li>';
+    $html.='</ol>';
+    $html.='<a class="dojang-editor-remove-group button button-secondary">Remove Group</a>';
+    return $html;
+  }
+
 /**
 	 * Add an options page under the Settings submenu
 	 *
@@ -358,6 +411,26 @@ class Dojang_Admin {
     $pid= $_POST['playerW'];
 		$wpdb->update("{$wpdb->prefix}results",array('playerIdWinner' => $pid) ,array('id' => $rid));
 		echo 'Ajax Remove Result Id= '.$_POST['result_id'];
+		wp_die();
+  }
+  public function ajax_update_group(){
+    //TODO: insert proper wpdb
+		global $wpdb;
+    $object= json_decode(stripslashes($_POST['group_data']), true);
+    $groupId=$object['group_id'];
+    $groupName=$object['group_name'];
+    $groupPlayers=$object['group_players'];
+    $response=array();
+    $response[]='Id: '.$groupId;
+    $response[]='Name: '.$groupName;
+    $response[]='Players: '.implode(',',$groupPlayers);
+    $response[]='Update groups groupName to '.$groupName.' where playerGroupId = '.$groupId;
+    $response[]='Remove all rows from groupplayers where playerGroupId = '.$groupId;
+    $response[]='Insert rows for each playerId:';
+    $i=1;
+    foreach($groupPlayers as $p)
+      $response[]='playerGroupId: '.$groupId.' playerId:'.$p.' tableOrder:'.($i++).' playedWithTeacher:0 wonAgainstTeacher:0 isPaidMember:1 leaguePoints:0';
+    print_r($response);
 		wp_die();
   }
 }

@@ -13,7 +13,7 @@
           return 'Select League'},
         disabled:0,
         icon: 'dashicons dashicons-admin-page',
-        items: [ /* This gets populated from separate handler, and enabled */ ] },
+        items: JSON.parse(dojang_editor.leagues_items) },
       { type: 'break' },
       { type: 'menu-radio',
         id: 'group_selector',
@@ -23,12 +23,12 @@
           return 'Select League Group'},
         disabled:0,
         icon: 'dashicons dashicons-admin-page',
-        items: [ /* This gets populated from separate handler, and enabled */ ] },
+        items: JSON.parse(dojang_editor.groups_items) },
       { type: 'break' },
       { type: 'html',  id: 'group_name', value: '', icon: 'dashicons dashicons-format-quote',
         html: function (item) {
           return '<div><span class="dashicons dashicons-format-quote"></span>Group Name:'+
-                 '<input class="dojang-toolbar-input" onchange="var el = w2ui.toolbar.set(\'group_name\', { value: this.value });" '+
+                 '<input class="dojang-toolbar-input" onchange="var el = w2ui.dojang_group_toolbar.set(\'group_name\', { value: this.value });" '+
                  'value="'+item.value+'" size="20" placeholder="Group A,B..."/></div>'; } },
       { type: 'break' },
       { type: 'html', id:'dojang_notification', icon: 'dashicons dashicons-admin-tools',
@@ -40,88 +40,80 @@
       { type: 'button',  id: 'save_button',  text: '<b>Confirm</b>', icon: 'dashicons dashicons-plus-alt' }
       ]
     });
+
+    function createGroup(gid, gName, playerList){
+      console.log(gid);
+      console.log(playerList);
+      var group= $('<div></div>').addClass('dojang-editor-group');
+      var num=0;
+      console.log(gName);
+      var group_object= dojang_editor.group_object;
+
+      group.append(group_object);
+      group.find('.dojang-player-select').each(function(index){
+          var pid = playerList[index] != undefined ? playerList[index].playerId : -1;
+          $(this).val(pid);
+        });
+      group.find('.dojang-editor-group-order').val(num);
+      group.find('.dojang-editor-remove-group').hide();
+      group.find('.dojang-editor-group-order').hide();
+      $('#dojang-workspace').html(group);
+      $('.dojang-player-select').chosen();
+      $( ".dojang-group-editor-group-players" ).sortable();
+    }
+    function showGroupsFromLeague(leagueId){
+        var groupItems=w2ui.dojang_group_toolbar.get('group_selector').items;
+        for(var i=0; i< groupItems.length; i++){
+          if(groupItems[i].league == leagueId) w2ui.dojang_group_toolbar.show('group_selector:'+groupItems[i].id);
+          else w2ui.dojang_group_toolbar.hide('group_selector:'+groupItems[i].id);
+        }
+    }
+    function showGroupToWorkspace(groupId, groupName, groupPlayers){
+        createGroup(groupId, groupName, groupPlayers);
+    }
+    function convertGroupObjectToJsObject(){
+      var g_players= [];
+      $('.dojang-player-select').each(function(){
+        var pid= $(this).val();
+        if(pid != -1) g_players.push(pid);
+      });
+      return {players: g_players};
+    }
+
     w2ui.dojang_group_toolbar.on('click', function (event) {
-      console.log('EVENT: '+ event.type + ' TARGET: '+ event.target, event);
-    /*  if(event.target == 'new_group'){
-        createNewGroup();
-        recalculate_order();
-      }*/
-    //  if(event.target.match(/new_from_current:[0-9]*/)){
-    /*    var group_id=event.target.split(':')[1];
-
-        createNewGroup(group_id);
-        recalculate_order();
-      }*/
-    //  if(event.target.match(/saved_drafts:restore_[0-9]*/)){
-    /*    var draft_id=event.target.split(':restore_')[1];
-        projectFromDraft(draft_id);
-      }*/
-    //  if(event.target.match(/saved_drafts:remove_[0-9]*/)){
-    /*    var draft_id=event.target.split(':remove_')[1];
-        removeDraft(draft_id);
+      if(event.target.match(/league_selector:[0-9]*/)){
+        var league_id=event.target.split(':')[1];
+        showGroupsFromLeague(league_id);
       }
-        if(event.target == 'save_button'){
-        var league_multiplier= w2ui.toolbar.get('league_multiplier').value;
-        var league_name= w2ui.toolbar.get('league_name').value;
-        var saveAsDraft= w2ui.toolbar.get('save_as_draft').checked;
-        if(saveAsDraft) saveDraft();
-        else saveLeague();
-      }*/
+      if(event.target.match(/group_selector:[0-9]*/)){
+        var group_id= event.target.split(':')[1];
+        var group_obj= w2ui.dojang_group_toolbar.get(event.target);
+        w2ui.dojang_group_toolbar.set('group_name', {value: group_obj.text});
+        showGroupToWorkspace(group_id, group_obj.text, group_obj.players);
+      }
+      if(event.target == 'save_button'){
+      //console.log('EVENT: '+ event.type + ' TARGET: '+ event.target, event);
+      var group_obj= w2ui.dojang_group_toolbar.get('group_selector');
+      var g_name= w2ui.dojang_group_toolbar.get('group_name').value;
+      var g_id= group_obj.selected;
+      var g_players= convertGroupObjectToJsObject().players;
+      var dataToSend= {group_id: g_id, group_name: g_name, group_players: g_players};
+      var dataToSendJson= JSON.stringify(dataToSend, null, 2);
+      $('#dojang-debug').text(dataToSendJson).show();
+      $.post({
+        url: ajaxurl,
+        //dataType: 'json',
+        data: {'action': 'dojang_update_group', 'group_data': dataToSendJson},
+        success: function(data){
+          console.log('ajax send!');
+          $('#dojang-debug').append(data);
+          $('#dojang-notification').val('Group'+dataToSend.group_name+' Updated!'); }
+      });
+      }
     });
-    /*
-    function refreshDraftsMenu(){
-      var drafts= JSON.parse(localStorage.getItem('drafts'));
-      var r= [];
-      var i=0;
-      if(drafts != null){
-        for(did in drafts){
-          var d= drafts[did].league;
-          r.push({id: ('restore_'+i), text: d.name, icon: 'dashicons dashicons-external'});
-          r.push({id: ('remove_'+i), text: 'Remove Draft: "'+d.name+'"', icon: 'dashicons dashicons-trash'});
-          i++;
-        }
-        w2ui.toolbar.get('saved_drafts').items=r;
-        w2ui.toolbar.enable('saved_drafts');
-      }else{
-        w2ui.toolbar.disable('saved_drafts');
-      }
-      w2ui.toolbar.refresh('saved_drafts');
-    }
-    function removeDraft(draft_id){
-      var draftsArray=JSON.parse(localStorage.getItem('drafts'));
-      draftsArray.splice(draft_id,1);
-      localStorage.setItem('drafts',JSON.stringify(draftsArray));
-      refreshDraftsMenu();
-    }
-    function saveDraft(){
-      var league_obj= projectToJson();
-      var dataToSave= { league: league_obj };
-      var draftsArray=JSON.parse(localStorage.getItem('drafts'));
-      if(draftsArray != null){
-        var dii=draftsArray.length;
-        for(did in draftsArray){
-          if(draftsArray[did].league.name == dataToSave.league.name){
-            draftsArray[did] = dataToSave;
-            break;
-          }
-          dii--;
-        }
-        if(dii == 0) draftsArray.push(dataToSave);
-      }
-      else draftsArray= [ dataToSave, ];
-      localStorage.setItem('drafts',JSON.stringify(draftsArray));
-      $('#dojang-notification').val('Draft '+dataToSave.league.name+' saved!');
-      refreshDraftsMenu();
-    }
-    refreshDraftsMenu();
 
-
-    $('#dojang-sortable').sortable({placeholder: 'dojang-group-placeholder'});
-    $('#dojang-sortable').on('sortupdate',function( event, ui){recalculate_order();});
-    */
-    //just for tests
     $(function(){
-      $('#dojang-workspace').text(JSON.stringify(MyScriptParams));
+      $('#dojang-debug').text(JSON.stringify(dojang_editor));
     });
 	});
 

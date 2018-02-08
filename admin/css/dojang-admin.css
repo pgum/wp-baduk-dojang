@@ -110,14 +110,22 @@ h3.dojang-results-archive {cursor: pointer;}
     margin: 0;
 }
 #dojang-sortable:after {content: ""; clear: both;}
-.dojang-group, .dojang-group-placeholder {
-    width: 200px;
+.dojang-group, .dojang-group-placeholder { width: 200px; }
+.dojang-editor-group {
+    width: 300px;
+    height: 230px !important;
+    margin: 2px;
+    padding: 2px;
+    border: 1px solid black;
+}
+.dojang-group, .dojang-group-placeholder, .dojang-editor-group {
     height: 320px;
     margin: 2px;
     padding: 2px;
     border: 1px solid black;
 }
-.dojang-group {background: #0073aa; color: white;}
+.dojang-group, .dojang-editor-group {background: #0073aa; color: white;}
+
 .dojang-group-placeholder {background: gray;}
 
 label.dojang-editor-description { display: none; }
