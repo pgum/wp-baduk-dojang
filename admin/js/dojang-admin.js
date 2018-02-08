@@ -205,6 +205,35 @@ $(function(){
             gid: groupId}
   }
 
+  $('.dojang-group-table .dojang-result-not-approved').on('click', function(){
+    var r= $(this).attr('x-result-id');
+    $(this).w2menu({
+      items: [{ text: 'Approve Result',},
+              { id: 'approve:'+r, text: 'Approve Result', icon: 'dashicons dashicons-star-filled'},
+              { id: 'remove:'+r, text: 'Reject Result', icon: 'dashicons dashicons-trash'},
+              { id: 'refresh', text: 'Refresh the site to see update!'}, ],
+      onSelect: function(event){
+    	  var iid= event.item.id;
+        if(iid=='refresh'){ location.reload(false); return; }
+    	  var action= iid.split(':')[0];
+    	  var resultId= iid.split(':')[1];
+    	  if(action=='approve'){
+          $.post({
+  					url: ajaxurl,
+  					data: {'action': 'dojang_approve_result', 'result_id': resultId},
+  					success: function(data){ console.log(data);	}
+  				});
+    	  }
+    	  if(action=='remove'){
+          $.post({
+            url: ajaxurl,
+            data: {'action': 'dojang_remove_result', 'result_id': resultId},
+            success: function(data){ console.log(data);	}
+          });
+    	  }
+    }});
+  });
+
   $('.dojang-group-table .dojang-result-approved').on('click', function(){
   	var r= getResultsPlayers($(this));
 
