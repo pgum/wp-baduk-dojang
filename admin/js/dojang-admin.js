@@ -11,9 +11,12 @@
 				else if($(this).hasClass('dojang-expand')){
 					$(this).removeClass('dojang-expand').addClass('dojang-collapse');
 					$('.dojang-league-groups-results-tables-archive[x-league-id='+leagueId+']').removeClass('dojang-hidden');
+          window.location.hash=leagueId;
 				}
 			});
 		});
+    var leagueOpened= window.location.hash.split('#')[1];
+    $('.dojang-results-archive[x-league-id='+leagueOpened+']').click();
 	});
 	$(function() {
 		/*Baduk Dojank Main View, change not approved results in table when hover over Games to Approve list*/
