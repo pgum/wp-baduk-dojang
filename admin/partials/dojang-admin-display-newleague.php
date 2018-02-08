@@ -190,7 +190,7 @@ function saveLeague(){
   var league_obj= projectToJson();
   var dataToSend= { league: league_obj };
   /* show debug info */
-  $('#dojang-debug-container').removeClass('dojang-hidden');
+  //$('#dojang-debug-container').removeClass('dojang-hidden');
   var dataToSendJson= JSON.stringify(dataToSend,null, 2);
   $('#dojang-debug').text(dataToSendJson);
   $.post({
