@@ -165,7 +165,6 @@ class Dojang_Public {
 		$returnResult=1;
 		//TODO: isPlayerInLeague use to see if both players selected belong to same group
 		//TODO: see if player winner and player loser are selected players (ie player 64 vs 105 and won 126)
-		//TODO: obvious password should be set in options not hardcoded...
 		if($data['dojang-game-w-group'] != $data['dojang-game-b-group']){
 			$returnArray['dmismatch']= 1;
 			$returnResult= 0;
