@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Baduk Dojang
  * Plugin URI:        https://github.com/pgum/wp-baduk-dojang
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Use Baduk Dojang as League/School management with groups of players playing with each other for points
  * Version:           1.0.0
  * Author:            Piotr Jacek Gumulka
  * Author URI:        https://www.linkedin.com/in/piotr-jacek-gumulka/
