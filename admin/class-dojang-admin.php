@@ -378,11 +378,9 @@ class Dojang_Admin {
     foreach($groups as $g)
       $response[]='#'.$g['order'].' name='.$g['name'].' players='.implode(',',$g['players']);
     $response[]="{$wpdb->prefix}leagues, array('leagueName' => ".$league['name'].",
-                                                'hidden' => 0,
                                                 'closed' => 0,
                                                 'multiplier' => ".$league['multiplier'].",
-                                                'pointsDistributed' => 0,
-                                                'draft' => ".$saveAs.")";
+                                                'pointsDistributed' => 0)";
     $response[]='$newLeagueId= $wpdb->insert_id;';
     $response[]='$i=0; foreach($groups as $g){$gpid=$newLeagueId*10+$i; }';
     print_r($response);
