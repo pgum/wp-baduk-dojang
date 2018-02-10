@@ -221,14 +221,17 @@ $(function(){
           $.post({
   					url: ajaxurl,
   					data: {'action': 'dojang_approve_result', 'result_id': resultId},
-  					success: function(data){ console.log(data);	}
+  					success: function(data){
+              console.log(data);	}
   				});
     	  }
     	  if(action=='remove'){
           $.post({
             url: ajaxurl,
             data: {'action': 'dojang_remove_result', 'result_id': resultId},
-            success: function(data){ console.log(data);	}
+            success: function(data){
+              $('[x-result-id='+r+'] span').removeClass('dashicons-marker').removeClass('dashicons-no');
+              console.log(data);	}
           });
     	  }
     }});
@@ -257,7 +260,16 @@ $(function(){
           $.post({
   					url: ajaxurl,
   					data: {'action': 'dojang_update_result', 'result_id': resultId, 'playerW': playerId},
-  					success: function(data){ console.log(data);	}
+  					success: function(data){
+              $('[x-result-id='+r+'] span').each(function(){
+                if($(this).hasClass('dashicons-marker')){
+                  $(this).removeClass('dashicons-marker').addClass('dashicons-no');
+                }
+                else{
+                  $(this).removeClass('dashicons-no').addClass('dashicons-marker');
+                }
+              });
+              console.log(data);	}
   				});
     	  }
     	  if(action=='remove'){
@@ -290,7 +302,17 @@ $(function(){
          $.post({
            url: ajaxurl,
            data: {'action': 'dojang_create_result', 'group_id': groupId, 'playerW': playerWinner, 'playerL': playerLoser},
-           success: function(data){ console.log(data);	}
+           success: function(data){
+             var prc=$('th[x-player-id='+r.pr.id+']').index();
+             var pcc=$('th[x-player-id='+r.pc.id+']').index();
+             if(r.pr.id == playerWinner){
+               $('.dojang-group-table[x-group-id='+r.gid+'] tr:eq('+(1-3 + prc)+') td:eq('+pcc+')').removeClass('dojang-result-none').html('<span class="dashicons dashicons-marker"></span>');
+               $('.dojang-group-table[x-group-id='+r.gid+'] tr:eq('+(1-3 + pcc)+') td:eq('+prc+')').removeClass('dojang-result-none').html('<span class="dashicons dashicons-no"></span>');
+             }else{
+               $('.dojang-group-table[x-group-id='+r.gid+'] tr:eq('+(1-3 + prc)+') td:eq('+pcc+')').removeClass('dojang-result-none').html('<span class="dashicons dashicons-no"></span>');
+               $('.dojang-group-table[x-group-id='+r.gid+'] tr:eq('+(1-3 + pcc)+') td:eq('+prc+')').removeClass('dojang-result-none').html('<span class="dashicons dashicons-marker"></span>');
+             }
+             console.log(data);	}
          });
       }});
   });

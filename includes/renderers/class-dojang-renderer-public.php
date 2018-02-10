@@ -58,9 +58,14 @@ class Dojang_Renderer_Public{
     $league= new Dojang_League();
     $groupArray= $league->getGroupsDetails();
     $leagueName= $league->getLeagueInfo()->leagueName;
-    $html.='<h3 class="dojang-players">'.$leagueName.' League Players List</h3>';
     $html.='<table class="dojang-table dojang-player-list">';
-    $html.='<thead><tr><th>#</th><th>Player Name</th><th>Country</th><th>Nickname</th><th>Rank</th><th>Group</th></tr></thead><tbody>';
+    $html.='<thead><tr><th>#</th>';
+    $html.='<th>Player Name</th>';
+    $html.='<th>Country</th>';
+    $html.='<th>Nickname</th>';
+    $html.='<th>Rank</th>';
+    $html.='<th>Group</th>';
+    $html.='</tr></thead><tbody>';
     $i=1;
     foreach ($groupArray as $group){
       $players= $group->groupPlayers;
@@ -77,9 +82,13 @@ class Dojang_Renderer_Public{
     $eligable_points = $options['dojang_eligable'] != '' ? $options['dojang_eligable'] : 100;
     $players= new Dojang_Players();
     $scoreboard= $players->getScoreboard();
-    $html.= '<h3 class="dojang-scoreboard">Players Scoreboard</h3>';
     $html.='<table class="dojang-table dojang-player-list">';
-    $html.='<thead><tr><th>#</th><th>Player Name</th><th>Country</th><th>Nickname</th><th>Rank</th><th>Points</th></tr></thead><tbody>';
+    $html.='<thead><tr><th class="dojang-num">#</th>';
+    $html.='<th class="dojang-playerName">Player Name</th>';
+    $html.='<th class="dojang-playerCountry">Country</th>';
+    $html.='<th class="dojang-playerKgs">Nickname</th>';
+    $html.='<th class="dojang-playerRank">Rank</th>';
+    $html.='<th class="dojang-playerPoints">Points</th></tr></thead><tbody>';
     $i=1;
     foreach($scoreboard as $s){
       $html.='<tr '.($s['playerPoints'] >= $eligable_points ? 'class="dojang-eligable"' : '').'><td>'.$i++.'</td><td>'.$s['playerName'].'</td><td>'.$s['playerCountry'].'</td>';

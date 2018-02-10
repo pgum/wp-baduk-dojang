@@ -93,6 +93,7 @@
         showGroupToWorkspace(group_id, group_obj.text, group_obj.players);
       }
       if(event.target == 'save_button'){
+      w2ui.dojang_group_toolbar.disable('save_button');
       //console.log('EVENT: '+ event.type + ' TARGET: '+ event.target, event);
       var group_obj= w2ui.dojang_group_toolbar.get('group_selector');
       var g_name= w2ui.dojang_group_toolbar.get('group_name').value;
@@ -106,7 +107,8 @@
         //dataType: 'json',
         data: {'action': 'dojang_update_group', 'group_data': dataToSendJson},
         success: function(data){
-          console.log('ajax send!');
+          w2alert('Group'+dataToSend.group_name+' Updated!');
+          w2ui.dojang_group_toolbar.enable('save_button');
           $('#dojang-debug').append(data);
           $('#dojang-notification').val('Group'+dataToSend.group_name+' Updated!'); }
       });

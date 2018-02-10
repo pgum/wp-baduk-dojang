@@ -19,7 +19,7 @@ class Dojang_Renderer_Group_Public{
     return '<table class="dojang-table dojang-group-table">'.$html.'</table>';
   }
   private function renderResultsHeader(){
-    $html.= '<tr><th>#</th><th>Name</th><th>Nick</th> ';
+    $html.= '<tr><th class="dojang-resultNum">#</th><th class="dojang-resultName">Name</th><th class="dojang-resultNick">Nick</th> ';
     foreach($this->groupPlayers as $p)
       $html.= '<th class="dojang-resultColumn">'.$p->playerDetails->playerInitials.'</th>';
     $html.= ' <th><span class="dashicons dashicons-thumbs-up"></span></th><th><span class="dashicons dashicons-thumbs-down"></span></th>';

@@ -26,8 +26,29 @@ h3.dojang-nok {color: red;}
 h3.dojang-collapse:after {font-family: 'dashicons'; content: '\f506'; margin-left:10px;}
 h3.dojang-expand:after {font-family: 'dashicons'; content: '\f211'; margin-left:10px;}
 .dojang-hidden {display:none;}
-.dojang-eligable {background: chartreuse;}
+.dojang-eligable {background: lightgreen; /*chartreuse;*/}
 /*Results table place highlight*/
 .dojang-place-1 { background: #ffd700; }
 .dojang-place-2 { background: #c0c0c0; }
 .dojang-place-3 { background: #cd7f32; }
+
+.dojang-table th.dojang-resultColumn {
+    min-width: 30px;
+    width: 30px;
+}
+.dojang-table th:first-child {
+    width: 20px;
+}
+.dojang-table {
+    zoom: 0.7;}
+.dojang-table td {
+    border: 1px solid black;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+	[class*="dojang-league-groups-results-tables"] {
+  		overflow-x: scroll;
+	}
+}
+.dojang-group-table{width: 100%;}
