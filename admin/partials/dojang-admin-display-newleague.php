@@ -187,6 +187,7 @@ function projectFromDraft(did){
 }
 
 function saveLeague(){
+  w2ui.toolbar.disable('save_button');
   var league_obj= projectToJson();
   var dataToSend= { league: league_obj };
   /* show debug info */
@@ -198,7 +199,8 @@ function saveLeague(){
     //dataType: 'json',
     data: {'action': 'dojang_create_league', 'league_data': dataToSendJson},
     success: function(data){
-      console.log('ajax send!');
+      w2alert('Group'+dataToSend.group_name+' Updated!');
+      w2ui.toolbar.enable('save_button');
       $('#dojang-debug').append(data);
       $('#dojang-notification').val('League'+dataToSend.league.name+' Published!'); }
   });
