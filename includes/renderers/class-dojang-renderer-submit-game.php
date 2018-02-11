@@ -61,8 +61,7 @@ class Dojang_Renderer_Submit_Game{
     $prev_wg= isset($_GET['prev-wg']) ? $_GET['prev-wg'] : '';
     $prev_bg= isset($_GET['prev-bg']) ? $_GET['prev-bg'] : '';
 
-    $html.= '<h3 class="dojang-submit">Submit League game result</h3>';
-    $html.= '<p>Please fill out form below. All fields marked with <span class="dojang-required">*</span> are required for your form to be submitted.</p>';
+    $html.= '<p>Please fill out the form below. All fields marked with <span class="dojang-required">*</span> are required for your form to be submitted.</p>';
     $html.= '<p>Please note that your submit will be reviewed before it appears on results page.</p>';
     $html.='<form class="dojang-submit-game-form" action="'.get_admin_url().'admin-post.php" method="post">
   <input type="hidden" id="dojang-wg" name="dojang-game-w-group" value="'.$prev_wg.'" />
