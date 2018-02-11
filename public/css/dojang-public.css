@@ -16,6 +16,7 @@ h3.dojang-submit:before {font-family: 'dashicons'; content: '\f157';}
   color: white;
 }
 /*Registration Notices*/
+
 .dojang-notice {border: 1px solid black}
 .dojang-notice div {margin: 5px;}
 .dojang-required {color: red;}
