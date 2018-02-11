@@ -341,7 +341,7 @@ class Dojang_Admin {
 	public function ajax_close_league_distribute_points(){
 		$leagueId = $_POST['league_id'];
 		global $wpdb;
-		$result= $wpdb->update("{$pwdb->prefix}leagues", array('pointsDistributed' => 1, 'closed' => 1), array('id' => $leagueId));
+		$result= $wpdb->update("{$wpdb->prefix}leagues", array('pointsDistributed' => 1, 'closed' => 1), array('id' => $leagueId));
 		$league= new Dojang_League($leagueId);
 		$groups= $league->getGroupsDetails();
 		foreach($groups as $g)
