@@ -91,8 +91,10 @@ class Dojang_Renderer_Public{
     $html.='<th class="dojang-playerPoints">Points</th></tr></thead><tbody>';
     $i=1;
     foreach($scoreboard as $s){
-      $html.='<tr '.($s['playerPoints'] >= $eligable_points ? 'class="dojang-eligable"' : '').'><td>'.$i++.'</td><td>'.$s['playerName'].'</td><td>'.$s['playerCountry'].'</td>';
-      $html.='<td>'.$s['playerKgs'].'</td><td>'.$s['playerRank'].'</td><td>'.$s['playerPoints'].'</td></tr>';
+      if($s['playerPoints'] > 0) {
+        $html.='<tr '.($s['playerPoints'] >= $eligable_points ? 'class="dojang-eligable"' : '').'><td>'.$i++.'</td><td>'.$s['playerName'].'</td><td>'.$s['playerCountry'].'</td>';
+        $html.='<td>'.$s['playerKgs'].'</td><td>'.$s['playerRank'].'</td><td>'.$s['playerPoints'].'</td></tr>';
+      }
     }
     $html.='</tbody></table>';
     return $html;
