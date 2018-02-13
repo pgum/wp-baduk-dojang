@@ -28,7 +28,7 @@
       if($playerOneResults['win'] == $playerTwoResults['win'])
         if($playerOneResults['loss'] < $playerTwoResults['loss'])
           return $players_have_equal_results;
-        else return ($playerOneResults['loss'] < $playerTwoResults['loss']) ? $playerOne_has_better_results : $playerTwo_has_better_results;
+        else return ($playerOneResults['loss'] > $playerTwoResults['loss']) ? $playerOne_has_better_results : $playerTwo_has_better_results; //player one played more games
       return ($playerOneResults['win'] > $playerTwoResults['win']) ? $playerOne_has_better_results : $playerTwo_has_better_results;
     }
 
