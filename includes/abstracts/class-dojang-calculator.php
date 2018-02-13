@@ -26,7 +26,7 @@
       $playerTwo_has_better_results= 1;
       $playerOne_has_better_results=-1;
       if($playerOneResults['win'] == $playerTwoResults['win'])
-        if($playerOneResults['loss'] < $playerTwoResults['loss'])
+        if($playerOneResults['loss'] == $playerTwoResults['loss'])
           return $players_have_equal_results;
         else return ($playerOneResults['loss'] > $playerTwoResults['loss']) ? $playerOne_has_better_results : $playerTwo_has_better_results; //player one played more games
       return ($playerOneResults['win'] > $playerTwoResults['win']) ? $playerOne_has_better_results : $playerTwo_has_better_results;
@@ -56,6 +56,7 @@
       $lastResult= array('win' => -1, 'loss' => -1);
       foreach($playersResults as $playerId => $playerResult){
         if(!$this->isSameResult($playerResult, $lastResult)){
+          $rank=$rank+$count;
           $count= 0;
           $lastResult= $playerResult;
           $playersPlace[$playerId]= $rank;
