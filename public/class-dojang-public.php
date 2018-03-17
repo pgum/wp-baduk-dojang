@@ -244,7 +244,7 @@ class Dojang_Public {
 						0);";
       $wpdb->query($query);
 		}
-		wp_safe_redirect(add_query_arg( $validation_result, home_url('/league-results')));
+		wp_safe_redirect(add_query_arg( $validation_result, home_url('/submit-game-result')));
 		exit;
 	}
 	private function validate_post_register($dataToValidate){
