@@ -91,6 +91,7 @@ class Dojang_Activator {
 			  playerRank varchar(10) NOT NULL,
 			  playerCountry varchar(50) NOT NULL,
 			  playerTimezone text NOT NULL COMMENT 'timezone i.e. +2 or -6 in relation to GMT',
+        playerType int(11) NOT NULL,
 			  playerApproved int(11) NOT NULL COMMENT 'approval means that player will be visible in creation of new league group',
 			  PRIMARY KEY  (playerId)
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8;

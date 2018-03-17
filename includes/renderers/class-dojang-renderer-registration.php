@@ -36,6 +36,7 @@ class Dojang_Renderer_Registration{
     $prev_kgs=    isset($_GET['prev-kgs'])    ? $_GET['prev-kgs']     : "";
     $prev_country=isset($_GET['prev-country'])? $_GET['prev-country'] : "";
     $prev_rank=   isset($_GET['prev-rank'])   ? $_GET['prev-rank']    : "";
+    $prev_type=   isset($_GET['prev-type'])   ? $_GET['prev-type']    : "";
 
     $html = '<h3 class="dojang-register">Registration Form</h3>';
     $html.= '<p>Please fill out form below. All fields marked with <span class="dojang-required">*</span> are required for your form to be submitted.</p>';
@@ -56,6 +57,12 @@ class Dojang_Renderer_Registration{
 
         <div class="dojang-form-label"><label for="dojang-player-country">Country <span class="dojang-required">*</span></label></div>
         <div class="dojang-form-input"><input name="dojang-player-country" type="text" value="'.$prev_country.'" placeholder="What country are you from"></div>
+
+        <div class="dojang-form-label"><label for="dojang-player-type">Registration Type:<span class="dojang-required">*</span></label></div>
+        <div class="dojang-form-input"><select name="dojang-player-type">
+          <option value="full" '.($prev_type == 'full' ? 'selected="selected"' : '').'>Full Member</option>
+          <option value="obs" '.($prev_type == 'obs' ? 'selected="selected"' : '').'>Observer</option>
+          </select></div>
       </fieldset>
       <fieldset>
         <div class="dojang-form-submit">

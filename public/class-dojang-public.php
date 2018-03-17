@@ -288,6 +288,7 @@ class Dojang_Public {
 														'playerKgs' => $data['dojang-player-kgs-account'],
 														'playerRank' => $data['dojang-player-rank'],
 														'playerCountry' => $data['dojang-player-country'],
+                            'playerType' => $data['dojang-player-type'],
 														'playerTimezone' => '',
 														'playerApproved' => 0);
 			$wpdb->insert("{$wpdb->prefix}players", $dataToInsert);
