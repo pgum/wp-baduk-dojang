@@ -427,15 +427,15 @@ class Dojang_Admin {
   public function ajax_toggle_result(){
 		global $wpdb;
 		$rid= $_POST['result_id'];
-    $reviewState= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}results WHERE id => $rid");
+    $reviewState= $wpdb->get_var("SELECT isReviewed FROM {$wpdb->prefix}results WHERE id = $rid");
 		//$queryResult= $wpdb->query("UPDATE {$wpdb->prefix}results SET isReviewed = ".($reviewState == 0 ? 1 : 0)." WHERE id => $rid");
-    $reviewState2= $wpdb->get_results("SELECT * FROM {$wpdb->prefix}results WHERE id => $rid");
+    $reviewState2= $wpdb->get_var("SELECT isReviewed FROM {$wpdb->prefix}results WHERE id = $rid");
 		echo 'Ajax Toggle Result Reviewed Result Id= '.$rid.' Query Result: '.(false===$queryResult);
     //echo '\n';
     //echo print_r($queryResult,true);
-    echo '\n Kurwa1:';
+    echo '\n Kurwa10:';
     echo print_r($reviewState,true);
-    echo '\n Kurwa2:';
+    echo '\n Kurwa20:';
     echo print_r($reviewState2,true);
 		wp_die();
   }
