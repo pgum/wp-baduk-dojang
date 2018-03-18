@@ -247,7 +247,7 @@ $(function(){
               { id: 'update:'+r.rid+':'+r.pc.id, text: r.pc.name+' won', icon: 'dashicons dashicons-star-empty', disabled: (r.pc.id == r.pw)},
               { id: 'remove:'+r.rid, text: 'Remove Result', icon: 'dashicons dashicons-trash'},
               { text: '--' },
-              { id: 'toggle_review:'+r.rid, text: "Toggle Reviewed Game", icon: 'dashicons dashicons-welcome-view-site'}
+              { id: 'toggle_review:'+r.rid, text: "Toggle Reviewed Game", icon: 'dashicons dashicons-welcome-view-site'},
               { text: '--' },
               { id: 'refresh', text: 'Refresh the site to see update!'}, ],
       onSelect: function(event){
