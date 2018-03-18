@@ -289,6 +289,7 @@ $(function(){
       items: [{ text: 'Create Result',},
               { id: 'create:'+r.pr.id+':'+r.pc.id+':'+r.gid, text: r.pr.name+' won', icon: 'dashicons dashicons-star-filled'},
               { id: 'create:'+r.pc.id+':'+r.pr.id+':'+r.gid, text: r.pc.name+' won', icon: 'dashicons dashicons-star-empty'},
+              { text: '--' },
               { id: 'refresh', text: 'Refresh the site to see update!'}],
       onSelect: function(event){
   	     var iid= event.item.id;
