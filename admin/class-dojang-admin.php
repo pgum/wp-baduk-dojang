@@ -103,7 +103,7 @@ class Dojang_Admin {
     foreach($leagues as $l){
       $groups= $wpdb->get_results("SELECT playerGroupId, groupName FROM {$wpdb->prefix}groups WHERE groupLeagueId = {$l->id}");
       foreach($groups as $g){
-        $groupPlayers= $wpdb->get_results("SELECT playerId FROM {$wpdb->prefix}groupplayers WHERE playerGroupId = {$g->playerGroupId} ORDER BY tableOrder ASC");
+        $groupPlayers= $wpdb->get_results("SELECT id, playerId FROM {$wpdb->prefix}groupplayers WHERE playerGroupId = {$g->playerGroupId} ORDER BY tableOrder ASC");
         $groupPlayersData=array();
         foreach($groupPlayers as $p){
           $groupPlayerDetails= $wpdb->get_row("SELECT playerName, playerRank FROM {$wpdb->prefix}players WHERE playerId = {$p->playerId}");
