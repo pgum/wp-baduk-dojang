@@ -413,6 +413,7 @@ class Dojang_Admin {
 
     $queryResult= $wpdb->query($query);
 		echo 'Ajax Create Result group='.$gid.' playerWinner='.$pidw.' playerLoser='.$pidl.' result '.(false === $queryResult).' affected rows: '.$queryResult;
+    echo $query;
 		wp_die();
   }
   public function ajax_update_result(){
