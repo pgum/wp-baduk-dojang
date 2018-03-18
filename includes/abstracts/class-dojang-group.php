@@ -51,7 +51,7 @@ class Dojang_Group {
     $this->leaguePointsMultiplier = $leaguePointsMultiplier;
     $this->groupDetails= $wpdb->get_row("SELECT * FROM {$wpdb->prefix}groups WHERE id = $groupId");
     $this->groupPlayers= $wpdb->get_results("SELECT id, playerId, tableOrder, wonAgainstTeacher, isPaidMember FROM {$wpdb->prefix}groupplayers WHERE playerGroupId = {$this->groupDetails->playerGroupId} ORDER BY tableOrder ASC");
-    $this->groupResults= $wpdb->get_results("SELECT id, playerIdBlack, playerIdWhite, playerIdWinner, isApproved FROM {$wpdb->prefix}results WHERE groupId = {$this->groupDetails->playerGroupId}");
+    $this->groupResults= $wpdb->get_results("SELECT id, playerIdBlack, playerIdWhite, playerIdWinner, isApproved, isReviewed FROM {$wpdb->prefix}results WHERE groupId = {$this->groupDetails->playerGroupId}");
     $playersResultsArray= $this->calculatePlayerResults($this->groupPlayers, $this->groupResults);
     $leaguePointsArray= $this->calculateLeaguePoints($this->groupPlayers, $this->groupResults);
     $playersPlaceArray= $this->calculatePlayerPlaceInGroup($this->groupPlayers, $this->groupResults);

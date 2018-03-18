@@ -34,10 +34,13 @@ class Dojang_Renderer_Results{
   private function htmlOpenTdResultTag($result){
     $classResultNotApproved= 'dojang-result-not-approved';
     $classResultApproved= 'dojang-result-approved';
+    $returnClass='';
     if($result->isApproved)
       $returnClass= $classResultApproved;
     else
       $returnClass= $classResultNotApproved;
+    if($result->isReviewed)
+      $returnClass.=' dojang_reviewed';
     return '<td class="'.$returnClass.'" x-result-id="'.$result->id.'" ';
   }
   private function htmlResultWon(){
