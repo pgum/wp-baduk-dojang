@@ -424,6 +424,14 @@ class Dojang_Admin {
 		echo 'Ajax Update Result Id= '.$rid.' playerWinner= '.$pid;
 		wp_die();
   }
+  public function ajax_toggle_result(){
+		global $wpdb;
+		$rid= $_POST['result_id'];
+		$wpdb->query("UPDATE {$wpdb->prefix}results SET isReviewed = IF(isReviewed = 1, 0, 1) WHERE 'id' => $rid");
+		echo 'Ajax Toggle Result Reviewed Result Id= '.$rid;
+		wp_die();
+  }
+
   public function ajax_update_group(){
 		global $wpdb;
     $object= json_decode(stripslashes($_POST['group_data']), true);

@@ -246,6 +246,9 @@ $(function(){
               { id: 'update:'+r.rid+':'+r.pr.id, text: r.pr.name+' won', icon: 'dashicons dashicons-star-filled', disabled: (r.pr.id == r.pw)},
               { id: 'update:'+r.rid+':'+r.pc.id, text: r.pc.name+' won', icon: 'dashicons dashicons-star-empty', disabled: (r.pc.id == r.pw)},
               { id: 'remove:'+r.rid, text: 'Remove Result', icon: 'dashicons dashicons-trash'},
+              { text: '--' },
+              { id: 'toggle_review:'+r.rid, text: "Toggle Reviewed Game", icon: 'dashicons dashicons-welcome-view-site'}
+              { text: '--' },
               { id: 'refresh', text: 'Refresh the site to see update!'}, ],
       onSelect: function(event){
     	  var iid= event.item.id;
@@ -280,6 +283,18 @@ $(function(){
             success: function(data){ console.log(data);	}
           });
     	  }
+      if(action=='toggle_review'){
+          $.post({
+            url: ajaxurl,
+            data: {'action': 'dojang_toggle_review', 'result_id': resultId},
+            success: function(data){
+              console.log(data);
+              $('[x-result-id='+r+'] span').each(function(){
+                $(this).toggleClass('dojang_reviewed');
+              });
+            }
+          });
+      }
     }});
   });
   $('.dojang-group-table .dojang-result-none').on('click', function(){

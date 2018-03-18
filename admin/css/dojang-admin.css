@@ -127,7 +127,6 @@ h3.dojang-results-archive {cursor: pointer;}
     border: 1px solid black;
 }
 .dojang-group, .dojang-editor-group {background: #0073aa; color: white;}
-
 .dojang-group-placeholder {background: gray;}
 
 label.dojang-editor-description { display: none; }
@@ -168,3 +167,4 @@ input.dojang-editor-group-order {
     font-size: 26px;
     vertical-align: middle;
 }
+.dojang_reviewed {background: #0073aa;}

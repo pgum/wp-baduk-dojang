@@ -113,7 +113,7 @@ class Dojang_Activator {
 			  isApproved tinyint(4) NOT NULL,
 			  result text NOT NULL,
 			  link mediumtext NOT NULL,
-			  oldResultId int(11) NOT NULL,
+			  isReviewed int(11) NOT NULL,
 			  PRIMARY KEY  (id)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 		";
