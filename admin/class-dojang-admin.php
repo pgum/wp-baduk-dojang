@@ -433,9 +433,9 @@ class Dojang_Admin {
 		echo 'Ajax Toggle Result Reviewed Result Id= '.$rid.' Query Result: '.(false===$queryResult);
     //echo '\n';
     //echo print_r($queryResult,true);
-    echo '\n';
+    echo '\n Kurwa1:';
     echo print_r($reviewState,true);
-    echo '\n';
+    echo '\n Kurwa2:';
     echo print_r($reviewState2,true);
 		wp_die();
   }
