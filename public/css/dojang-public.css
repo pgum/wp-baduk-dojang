@@ -35,10 +35,10 @@ h3.dojang-expand:after {font-family: 'dashicons'; content: '\f211'; margin-left:
 
 .dojang-table th.dojang-resultColumn { min-width: 30px;  width: 30px; }
 .dojang-table th:first-child { width: 20px; }
-.dojang-table {
-    zoom: 0.7;}
-.dojang-table td {
-    border: 1px solid black;
+
+.dojang-table td, .dojang-table th {
+  border: 1px solid black;
+  padding: 0px;
 }
 
 @media only screen and (max-width: 768px) {
