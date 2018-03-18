@@ -289,7 +289,7 @@ $(function(){
             data: {'action': 'dojang_toggle_review', 'result_id': resultId},
             success: function(data){
               console.log(data);
-              $('[x-result-id='+r+'] span').each(function(){
+              $('[x-result-id='+resultId+'] span').each(function(){
                 $(this).toggleClass('dojang_reviewed');
               });
             }
