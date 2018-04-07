@@ -10,7 +10,7 @@ class Dojang_Renderer_Group{
     $this->groupPlayers= $groupObject->groupPlayers;
     $this->groupResults= $groupObject->groupResults;
     $this->pointsDistributed = $pointsDistributed;
-    $this->groupResultsRenderer= new Dojang_Renderer_Results($this->groupPlayers, $this->groupResults);
+    $this->groupResultsRenderer= new Dojang_Renderer_Results($this->groupPlayers, $this->groupResults, 'admin');
   }
   public function renderGroupInfo(){
     return '<h4>'.$this->groupDetails->groupName.'</h4>';

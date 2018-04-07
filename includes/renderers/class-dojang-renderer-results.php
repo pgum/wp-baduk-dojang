@@ -2,19 +2,21 @@
 class Dojang_Renderer_Results{
   private $p;
   private $r;
+  private $isAdmin;
   private function ifPlayerWonGame($p, $r){
-    return ($p->playerId == $r->playerIdWinner and $r->isApproved > 0);
+    return ($p->playerId == $r->playerIdWinner and ($r->isApproved > 0 or $this->isAdmin));
   }
   private function ifPlayerPlayedGame($p, $r){
-    return ($r->playerIdWhite == $p->playerId or $r->playerIdBlack == $p->playerId) and $r->isApproved > 0;
+    return ($r->playerIdWhite == $p->playerId or $r->playerIdBlack == $p->playerId) and ($r->isApproved > 0 or $this->isAdmin);
   }
   private function ifPlayerPlayedOpponent($p, $o, $r){
     return (($r->playerIdWhite == $p->playerId and $r->playerIdBlack == $o->playerId) or
-            ($r->playerIdBlack == $p->playerId and $r->playerIdWhite == $o->playerId)) and $r->isApproved > 0;
+            ($r->playerIdBlack == $p->playerId and $r->playerIdWhite == $o->playerId)) and ($r->isApproved > 0 or $this->isAdmin);
   }
-  public function __construct($players, $results){
+  public function __construct($players, $results, $adminView=0){
     $this->p= $players;
     $this->r= $results;
+    $this->isAdmin= ($isAdmin != 0);
   }
   public function getWinCount($player){
     $count=0;
