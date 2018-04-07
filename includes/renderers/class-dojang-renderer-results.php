@@ -16,7 +16,7 @@ class Dojang_Renderer_Results{
   public function __construct($players, $results, $adminView=0){
     $this->p= $players;
     $this->r= $results;
-    $this->isAdmin= ($isAdmin != 0);
+    $this->isAdmin= ($adminView != 0);
   }
   public function getWinCount($player){
     $count=0;
