@@ -205,12 +205,26 @@ class Dojang_Admin {
 		array( $this, 'display_options_page_options' ),
 		'dashicons-plus-alt'
 		);
+
+		$this->plugin_screen_hook_suffix_submenu = add_submenu_page(
+		$this->plugin_name,
+			__( 'Dojang Debug', 'baduk-dojang' ),
+			__( 'Debug', 'baduk-dojang' ),
+		'manage_options',
+		'dojangdebug',
+		array( $this, 'display_debug_screen' ),
+		'dashicons-plus-alt'
+		);
 	}
 /**
 	 * Render the options page for plugin
 	 *
 	 * @since  1.0.0
 	 */
+	public function display_debug_screen() {
+		include_once 'partials/dojang-admin-debug.php';
+		$this->render_dojang_footer();
+	}
 	public function display_options_page_main() {
 		include_once 'partials/dojang-admin-display-main.php';
 		$this->render_dojang_footer();
