@@ -3,14 +3,14 @@ class Dojang_Renderer_Results{
   private $p;
   private $r;
   private function ifPlayerWonGame($p, $r){
-    return ($p->playerId == $r->playerIdWinner);
+    return ($p->playerId == $r->playerIdWinner and $r->isApproved > 0);
   }
   private function ifPlayerPlayedGame($p, $r){
-    return ($r->playerIdWhite == $p->playerId or $r->playerIdBlack == $p->playerId);
+    return ($r->playerIdWhite == $p->playerId or $r->playerIdBlack == $p->playerId) and $r->isApproved > 0;
   }
   private function ifPlayerPlayedOpponent($p, $o, $r){
     return (($r->playerIdWhite == $p->playerId and $r->playerIdBlack == $o->playerId) or
-            ($r->playerIdBlack == $p->playerId and $r->playerIdWhite == $o->playerId));
+            ($r->playerIdBlack == $p->playerId and $r->playerIdWhite == $o->playerId)) and $r->isApproved > 0;
   }
   public function __construct($players, $results){
     $this->p= $players;
