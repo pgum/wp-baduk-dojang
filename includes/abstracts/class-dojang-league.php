@@ -22,6 +22,7 @@
 //require_once('class-dojang-group.php');
 class Dojang_League {
   public $groupIds;
+  public $observerGroupIds;
   public $leagueId;
   public $pointsMultiplier;
   public function __construct($leagueId = NULL){
@@ -30,6 +31,7 @@ class Dojang_League {
     else
       $this->leagueId= $leagueId;
     $this->groupIds= $this->getLeagueGroupIds();
+    $this->observerGroupIds= $this->getLeagueObserverGroupIds();
     $this->pointsMultiplier= $this->getLeagueMultiplier();
   }
   public function getLeagueMultiplier(){
@@ -42,8 +44,19 @@ class Dojang_League {
   }
   public function getLeagueGroupIds(){
     global $wpdb;
-    $groupIds= $wpdb->get_results("SELECT id, playerGroupId FROM {$wpdb->prefix}groups WHERE groupLeagueId= $this->leagueId ORDER BY playerGroupId ASC");
+    $groupIds= $wpdb->get_results("SELECT id, playerGroupId FROM {$wpdb->prefix}groups WHERE groupLeagueId = $this->leagueId AND isObserverGroup = 0 ORDER BY playerGroupId ASC");
     return $groupIds;
+  }
+  public function getLeagueObserverGroupIds(){
+    global $wpdb;
+    $groupIds= $wpdb->get_results("SELECT id, playerGroupId FROM {$wpdb->prefix}groups WHERE groupLeagueId = $this->leagueId AND isObserverGroup = 1 ORDER BY playerGroupId ASC");
+    return $groupIds;
+  }
+  public function getObserverGroupsDetails(){
+    $groups= array();
+    foreach($this->observerGroupIds as $gid)
+      $groups[]= new Dojang_ObserverGroup($gid->id, $this->pointsMultiplier);
+    return $groups;
   }
   public function getGroupsDetails(){
     $groups= array();

@@ -26,6 +26,7 @@ class Dojang_Renderer_Public{
   }
   public function renderLeague($league){
     $groupArray= $league->getGroupsDetails();
+    $observerGroupArray= $league->getObserverGroupsDetails();
     $leagueName= $league->getLeagueInfo()->leagueName;
     $leagueClosed= $league->getLeagueInfo()->closed;
     $archiveClass= ($leagueClosed==1) ? '-archive dojang-expand' : '';
@@ -39,7 +40,14 @@ class Dojang_Renderer_Public{
       $html.= $gR->renderGroupTable();
       $html.='<br/>';
     }
+    foreach ($observerGroupArray as $group){
+      $gR = new Dojang_Renderer_ObserverGroup_Public($group);
+      $html.= $gR->renderGroupInfo();
+      $html.= $gR->renderGroupTable();
+      $html.='<br/>';
+    }
     $html.='</div>';
+
     return $html;
   }
   public function renderCurrentLeague(){
